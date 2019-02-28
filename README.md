@@ -2,12 +2,12 @@
 
 **Spis treści**
 
- 1. [Opis](README.md#opis)
+ 1. [Opis](#opis)
  2. [Instalacja](#Instalacja)
- 3. [Sposób użycia](README.md#sposób-użycia)
- 4. [Preferencje do współpracy](README.md#preferencje-do-współpracy)
- 5. [Autorzy](README.md#autorzy)
- 6. [Informacja o licencji](README.md#informacja-o-licencji)
+ 3. [Sposób użycia](#sposób-użycia)
+ 4. [Preferencje do współpracy](#preferencje-do-współpracy)
+ 5. [Autorzy](#autorzy)
+ 6. [Informacja o licencji](#informacja-o-licencji)
  
  
 ## Opis
