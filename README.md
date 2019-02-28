@@ -10,7 +10,7 @@
  6. [Informacja o licencji](README.md#informacja-o-licencji)
  
  
-##Opis
+## Opis
     Aplikacja umożliwiająca zarządzanie zakładem mechanicznym.
     
     Wyróżniamy 4 rodzaje dostępu użytkowników: admnistrator, mechanik, kieronik, recepcjonista.
