@@ -30,22 +30,22 @@
         4.	Kierownik
             • Przypisywaniu zadań mechanikom
     
-###Diagram przypadków użycia
+### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
     
-##Instalacja
+## Instalacja
 
-##Sposób użycia
+## Sposób użycia
 
-##Preferencje do współpracy
+## Preferencje do współpracy
     Kontakt mailowy na adres: filiprebizant@gmail.com
     
-##Autorzy
+## Autorzy
     Filip Rebizant
     Bartłomiej Kudełka
     Konrad Rejman
     Wojciech Olech
     Marek Wojdyła
      
-##Informacja o licencji    
+## Informacja o licencji    
     Kod źródłowy jest objęty licencją MIT.
