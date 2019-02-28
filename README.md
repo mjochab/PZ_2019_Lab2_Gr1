@@ -19,16 +19,16 @@
         1.	Administrator
             • Zakładanie kont użytkowników
         2.	Mechanik
-            • Akceptacji wykonania naprawy (usługi)
-            • Tworzenie raportu z naprawy (co zostało naprawione)
+            • Akceptacji wykonania napraw (usług)
+            • Tworzenie raportu z napraw (co zostało naprawione)
         3.	Recepcjonista
             • Dodanie klienta
-            • Przypisywanie samochodów do klienta
+            • Przypisywanie samochodu do klienta
             • Przyjęcie zlecenia
             • Finalizacja zlecenia 
-            • Wystawianiu faktury
+            • Wystawianie faktur
         4.	Kierownik
-            • Przypisywaniu zadań mechanikom
+            • Przypisywanie zadań mechanikom
     
 ### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
