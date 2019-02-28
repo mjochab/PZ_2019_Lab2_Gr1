@@ -3,7 +3,7 @@
 **Spis treści**
 
  1. [Opis](README.md#opis)
- 2. [Instalacja](README.md#Instalacja)
+ 2. [Instalacja](#Instalacja)
  3. [Sposób użycia](README.md#sposób-użycia)
  4. [Preferencje do współpracy](README.md#preferencje-do-współpracy)
  5. [Autorzy](README.md#autorzy)
