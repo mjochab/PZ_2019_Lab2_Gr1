@@ -4,8 +4,8 @@
 
  1. [Opis](README.md#opis)
  2. [Instalacja](README.md#Instalacja)
- 3. [Sposób użycia](README.md#sposb-uycia)
- 4. [Preferencje do współpracy](README.md#preferencje-do-wsppracy)
+ 3. [Sposób użycia](README.md#sposób-użycia)
+ 4. [Preferencje do współpracy](README.md#preferencje-do-współpracy)
  5. [Autorzy](README.md#autorzy)
  6. [Informacja o licencji](README.md#informacja-o-licencji)
  
