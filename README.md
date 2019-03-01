@@ -23,6 +23,7 @@
             • Tworzenie raportu z napraw (co zostało naprawione)
         3.	Recepcjonista
             • Dodanie klienta
+            • Dodanie samochodu
             • Przypisywanie samochodu do klienta
             • Przyjęcie zlecenia
             • Finalizacja zlecenia 
@@ -30,12 +31,39 @@
         4.	Kierownik
             • Przypisywanie zadań mechanikom
     
+    
+    Zakładamy, że klient chcący oddać samochód do naprawy może posiadać wiele samochodów.
+    
+    Zlecenie naprawy może przyjąć 4 stany: 
+        1. Oczekujące na serwis
+        2. W trakcie naprawy
+        3. Gotowy do obioru
+        4. Zakończone
+
 ### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
     
 ## Instalacja
-
+    Instalacja jest wykonywana przez instalator. 
+    Szczegóły pojawią się w późniejszej fazie projektu.
 ## Sposób użycia
+    Aby stworzyć zlecenie Recepcjonista klika przycisk "Dodaj zlecenie".
+    
+    W przypadku nowego klienta, recepcjonista naciska przycisk "Dodaj klienta" po czym wypełnia dane klienta po czym wprowadza dane samochodu.
+    W przypadku klienta, który jest juz w bazie danych recepcjonista może dodać nowy samochód lub wybrać z listy samochód już posiadany przez klienta.
+    
+    Podczas dodawania zlecenia recepcjonista wprowadza opis usterki natomiast dane klienta oraz samochodu są autouzupełniane przez system.
+    
+    Po wypełnieniu i zatwierdzeniu zgłoszenia zostaje ono dodane do kolejki oczekujących na serwis.
+    
+    Kierwonik widzi listę oczekujących zgłoszeń i przypisuje je kolejno mechanikom na określony dzień oraz godzinę.
+    
+    Mechanik zaznacza, że rozpoczyna naprawdę (przyjmuje zgłoszenie). Po wykonanej pracy tworzy raport z naprawy oraz zmienia stan na gotowy do odbioru.
+    Raport zawiera liste wymienionych części, wykonanych napraw oraz cenę za usługę.
+    
+    Recepcjonista posiada liste ze statusem napraw samochodów i może rozliczać pojazdy, po czym zmienia stan na "Zlecenie zakończone".
+    Klientowi może zostać wystawiona faktura VAT.
+    
 
 ## Preferencje do współpracy
     Kontakt mailowy na adres: filiprebizant@gmail.com
