@@ -12,8 +12,22 @@
  
 ## Opis
     Aplikacja umożliwiająca zarządzanie zakładem mechanicznym.
-    
-    Wyróżniamy 4 rodzaje dostępu użytkowników: admnistrator, mechanik, kieronik, recepcjonista.
+    System ma służyć do gromadzenia i zarządzania danymi o klientach
+    oraz historii napraw posiadanych przez nich samochodów.
+    System również zakłada możliwość rozdzielania zleceń przez kierownika zakładu.
+
+    Historia naprawy ułatwia mechanikowi rozpoznanie oraz naprawę samochodu.
+    Dostęp do bazy klientów usprawnia i przyśpiesza obsługę stałych klientów.
+    Możliwość przydzielania zleceń mechanikom przez przełożonego przy pomocy
+    systemu pozwala lepiej dysponować zasobami ludzkimi.
+
+    System jest przeznaczony dla czterech typów pracowników:
+
+    - Recepcjonista
+    - Mechanik
+    - Kierownik
+    - Administrator
+
     Każdy z nich ma unikalne prawa dostępu wypisane poniżej:
     
         1.	Administrator
@@ -31,8 +45,13 @@
         4.	Kierownik
             • Przypisywanie zadań mechanikom
     
-    
+    Gromadzone dane na temat klientów oraz samochodów są wprowadzana przez recepcjonistę.
     Zakładamy, że klient chcący oddać samochód do naprawy może posiadać wiele samochodów.
+    Dane pracowników (mechanik, recepcjonista, kierownik) są inicjowane przez administratora.
+    
+    Recepcjonista na życzenie klienta może wygenerować fakturę. Dane do faktury mają być
+    uzupełnione automatycznie.
+
     
     Zlecenie naprawy może przyjąć 4 stany: 
         1. Oczekujące na serwis
