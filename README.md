@@ -65,7 +65,7 @@
 ![Screenshot](diagrams/activity_diagram_1.PNG)
 ### Diagram Klas
 ![Screenshot](diagrams/class_diagram.PNG)
-### Diagram Klas
+### Diagram Stanów
 ![Screenshot](diagrams/state_diagram.PNG)
     
 ## Instalacja
