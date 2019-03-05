@@ -62,7 +62,7 @@
 ### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
 ### Diagram aktywności
-![Screenshot](diagrams/activity_diagram.png)
+![Screenshot](diagrams/activity_diagram.PNG)
     
 ## Instalacja
     Instalacja jest wykonywana przez instalator. 
