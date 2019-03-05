@@ -63,6 +63,8 @@
 ![Screenshot](diagrams/use_cases_diagram.png)
 ### Diagram aktywności
 ![Screenshot](diagrams/activity_diagram.PNG)
+### Diagram Klas
+![Screenshot](diagrams/class_diagram.png)
     
 ## Instalacja
     Instalacja jest wykonywana przez instalator. 
