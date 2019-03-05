@@ -32,6 +32,8 @@
     
 ### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
+### Diagram aktywności
+![Screenshot](diagrams/activity_diagram.png)
     
 ## Instalacja
 
