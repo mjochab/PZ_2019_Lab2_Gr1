@@ -67,6 +67,8 @@
 ![Screenshot](diagrams/class_diagram.PNG)
 ### Diagram Stanów
 ![Screenshot](diagrams/state_diagram.PNG)
+### Diagram ERD
+![Screenshot](diagrams/ERD_diagram.PNG)
     
 ## Instalacja
     Instalacja jest wykonywana przez instalator. 
