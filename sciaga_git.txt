@@ -1,5 +1,5 @@
 
-// Ga³êzie
+## Ga³êzie
 
 git branch // sprawdzanie na jakim branchu jestesmy
 
@@ -7,7 +7,7 @@ git checkout -b feature_nazwa_featura // Stworzenie nowego brancha i przejœcie n
 
 git checkout nazwa_brancha // Przejœcie na konkretn¹ ga³¹Ÿ
 
-// Pliki
+## Pliki
 
 git add . //Dodanie wszystkich nieœledzonych plikow
 
