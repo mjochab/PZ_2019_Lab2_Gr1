@@ -64,7 +64,7 @@
 ### Diagram aktywności
 ![Screenshot](diagrams/activity_diagram_1.PNG)
 ### Diagram Klas
-![Screenshot](diagrams/class_diagram.PNG)
+![Screenshot](diagrams/class_diagram2.PNG)
 ### Diagram Stanów
 ![Screenshot](diagrams/state_diagram.PNG)
 ### Diagram ERD
