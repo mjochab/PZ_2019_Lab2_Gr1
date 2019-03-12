@@ -62,7 +62,7 @@
 ### Diagram przypadków użycia
 ![Screenshot](diagrams/use_cases_diagram.png)
 ### Diagram aktywności
-![Screenshot](diagrams/activity_diagram_all.PNG)
+![Screenshot](diagrams/activity_diagram_all.png)
 ### Diagram Klas
 ![Screenshot](diagrams/class_diagram2.PNG)
 ### Diagram Stanów
