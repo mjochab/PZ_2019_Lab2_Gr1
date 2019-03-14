@@ -10,7 +10,18 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import myPck.Service;
 
+// tym enum potrzebny tylko do testowania widoku
+enum Type_of_account{
+    M,  //mechanik
+    R,  //recepcjonista
+    A,  //admin
+    K,  //kierownik
+};
+
 public class MainWindowController {
+
+    //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
+    Type_of_account ACCOUNT = Type_of_account.R;
 
     //lista zawierająca zlecenia
     private ObservableList<Service> servicesList;
@@ -100,6 +111,8 @@ public class MainWindowController {
         assert adminPanelTab != null : "fx:id=\"adminPanelTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert tasksTab != null : "fx:id=\"tasksTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
 
+        System.out.println("Wersja dla konta: "+ACCOUNT);
+
         servicesList = FXCollections.observableArrayList();
         //podpięcie listy do tabelki
         servicesTableView.setItems(this.servicesList);
@@ -110,6 +123,34 @@ public class MainWindowController {
 
         //zarządzanie dostępem przycisków
         buttonManagment();
+
+        //ukrywanie elementów dla kont bez uprawnień
+        switch (ACCOUNT){
+            case A:
+                sampleData();
+                tasksTab.setDisable(true);
+                addNewServiceButton.setVisible(false);
+                invoicePDFButton.setVisible(false);
+                break;
+            case K:
+                sampleData();
+                adminPanelTab.setDisable(true);
+                addNewServiceButton.setVisible(false);
+                invoicePDFButton.setVisible(false);
+                break;
+            case M:
+                sampleData();
+                tasksTab.setDisable(true);
+                adminPanelTab.setDisable(true);
+                addNewServiceButton.setVisible(false);
+                invoicePDFButton.setVisible(false);
+                break;
+            case R:
+                adminPanelTab.setDisable(true);
+                tasksTab.setDisable(true);
+                break;
+
+        }
 
     }
     //tylko do testów
