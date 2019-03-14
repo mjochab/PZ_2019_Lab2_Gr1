@@ -49,8 +49,16 @@ public class MainWindowController {
     private Tab tasksTab;
 
     @FXML
+    //ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
     void addServicesTest(ActionEvent event) {
+        //przykładowy obiekt
+        Service service = new Service("Fiat Multipla RZ746H"+Service.amount, "Jan Kowalski", "Waiting for assigment");
+        //dodanie do listy
+        servicesList.add(service);
 
+        System.out.println("Dodano do listy nowe zlecenie");
+        //zarządzanie widocznością przycisków
+        buttonManagment();
     }
 
     @FXML
