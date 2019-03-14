@@ -1,25 +1,34 @@
 package myPck.controllers;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import myPck.Service;
 
 public class MainWindowController {
 
+    //lista zawierająca zlecenia
+    private ObservableList<Service> servicesList;
     @FXML
-    private TableView<?> servicesTableView;
+    //tableka wyświetlająca dane z listy ze zleceniami
+    private TableView<Service> servicesTableView;
 
     @FXML
-    private TableColumn<?, ?> carColumn;
+    //kolumna zawierająca informacje o samochodzie
+    private TableColumn<Service, String> carColumn;
 
     @FXML
-    private TableColumn<?, ?> clientColumn;
+    //kolumna zawierająca informacje o klięcie
+    private TableColumn<Service, String> clientColumn;
 
     @FXML
-    private TableColumn<?, ?> statusColumn;
+    // kolumna zawierająca informacje o statusie zlecenia
+    private TableColumn<Service, String> statusColumn;
 
     @FXML
     private Button addNewServiceButton;
@@ -66,6 +75,14 @@ public class MainWindowController {
         assert profileTab != null : "fx:id=\"profileTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert adminPanelTab != null : "fx:id=\"adminPanelTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert tasksTab != null : "fx:id=\"tasksTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
+
+        servicesList = FXCollections.observableArrayList();
+        //podpięcie listy do tabelki
+        servicesTableView.setItems(this.servicesList);
+        //ustawienie wartości które mają się wyświetlać w poszczególnych kolumnach
+        carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
+        clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
+        statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
 
     }
 }
