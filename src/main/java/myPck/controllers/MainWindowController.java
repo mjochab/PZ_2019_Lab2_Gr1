@@ -12,12 +12,6 @@ import javafx.scene.control.TableView;
 public class MainWindowController {
 
     @FXML
-    private ResourceBundle resources;
-
-    @FXML
-    private URL location;
-
-    @FXML
     private TableView<?> servicesTableView;
 
     @FXML
