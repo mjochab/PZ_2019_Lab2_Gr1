@@ -62,13 +62,29 @@ public class MainWindowController {
     }
 
     @FXML
+    // generowanie faktury
     void invoicePDFTest(ActionEvent event) {
-
+        Service service;
+        try{
+            service = servicesTableView.getSelectionModel().getSelectedItem();
+            System.out.println("Generuje PDF dla:");
+            System.out.println(service.getCar());
+        }catch(Exception e){
+            System.out.println("Nie wybrano niczego");
+        }
     }
 
     @FXML
+    // ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
     void showDetailsTest(ActionEvent event) {
-
+        Service service;
+        try{
+            service = servicesTableView.getSelectionModel().getSelectedItem();
+            System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
+            System.out.println(service.getCar());
+        }catch(Exception e){
+            System.out.println("Nie wybrano niczego");
+        }
     }
 
     @FXML
@@ -91,6 +107,9 @@ public class MainWindowController {
         carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
         clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
         statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
+
+        //zarządzanie dostępem przycisków
+        buttonManagment();
 
     }
     //tylko do testów
