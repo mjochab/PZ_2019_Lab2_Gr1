@@ -85,4 +85,19 @@ public class MainWindowController {
         statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
 
     }
+    //tylko do testów
+    void sampleData(){
+        //dodanie przykładowego obiektu
+        //przykładowy obiekt
+        Service service1 = new Service("Jaguar XE", "Konrad Rejman", "Done");
+        Service service2 = new Service("Skoda Fabia", "Bartek Kudełka", "in Repair");
+        Service service3 = new Service("Opel Astra", "Filip Rebizant", "not allocated");
+        Service service4 = new Service("Toyota Auris", "Marek Wojdyła", "not allocated");
+        //dodanie do listy
+        servicesList.add(service1);
+        servicesList.add(service2);
+        servicesList.add(service3);
+        servicesList.add(service4);
+        //buttonManagment();
+    }
 }
