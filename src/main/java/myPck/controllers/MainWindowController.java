@@ -98,6 +98,17 @@ public class MainWindowController {
         servicesList.add(service2);
         servicesList.add(service3);
         servicesList.add(service4);
-        //buttonManagment();
+        buttonManagment();
+    }
+    //funkcja wyłącza dostęp do przycisków recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
+    void buttonManagment(){
+        if(servicesList.isEmpty()){
+            invoicePDFButton.setDisable(true);
+            showDetailsButton.setDisable(true);
+        }
+        else {
+            invoicePDFButton.setDisable(false);
+            showDetailsButton.setDisable(false);
+        }
     }
 }
