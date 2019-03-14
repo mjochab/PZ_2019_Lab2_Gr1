@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="module_mypro" default="compile.module.mypro">
+  <dirname property="module.mypro.basedir" file="${ant.file.module_mypro}"/>
+  
+  <property name="module.jdk.home.mypro" value="${project.jdk.home}"/>
+  <property name="module.jdk.bin.mypro" value="${project.jdk.bin}"/>
+  <property name="module.jdk.classpath.mypro" value="${project.jdk.classpath}"/>
+  
+  <property name="compiler.args.mypro" value="-encoding UTF-8 -source 5 -target 1.5 ${compiler.args}"/>
+  
+  <property name="mypro.output.dir" value="${module.mypro.basedir}/target/classes"/>
+  <property name="mypro.testoutput.dir" value="${module.mypro.basedir}/target/test-classes"/>
+  
+  <path id="mypro.module.bootclasspath">
+    <!-- Paths to be included in compilation bootclasspath -->
+  </path>
+  
+  <path id="mypro.module.production.classpath">
+    <path refid="${module.jdk.classpath.mypro}"/>
+  </path>
+  
+  <path id="mypro.runtime.production.module.classpath">
+    <pathelement location="${mypro.output.dir}"/>
+  </path>
+  
+  <path id="mypro.module.classpath">
+    <path refid="${module.jdk.classpath.mypro}"/>
+    <pathelement location="${mypro.output.dir}"/>
+  </path>
+  
+  <path id="mypro.runtime.module.classpath">
+    <pathelement location="${mypro.testoutput.dir}"/>
+    <pathelement location="${mypro.output.dir}"/>
+  </path>
+  
+  
+  <patternset id="excluded.from.module.mypro">
+    <patternset refid="ignored.files"/>
+  </patternset>
+  
+  <patternset id="excluded.from.compilation.mypro">
+    <patternset refid="excluded.from.module.mypro"/>
+  </patternset>
+  
+  <path id="mypro.module.sourcepath">
+    <dirset dir="${module.mypro.basedir}">
+      <include name="src/main/java"/>
+      <include name="src/main/resources"/>
+    </dirset>
+  </path>
+  
+  <path id="mypro.module.test.sourcepath">
+    <dirset dir="${module.mypro.basedir}">
+      <include name="src/test/java"/>
+    </dirset>
+  </path>
+  
+  
+  <target name="compile.module.mypro" depends="compile.module.mypro.production,compile.module.mypro.tests" description="Compile module MyPro"/>
+  
+  <target name="compile.module.mypro.production" depends="register.custom.compilers" description="Compile module MyPro; production classes">
+    <mkdir dir="${mypro.output.dir}"/>
+    <javac2 destdir="${mypro.output.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mypro}/javac">
+      <compilerarg line="${compiler.args.mypro}"/>
+      <bootclasspath refid="mypro.module.bootclasspath"/>
+      <classpath refid="mypro.module.production.classpath"/>
+      <src refid="mypro.module.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mypro"/>
+    </javac2>
+    
+    <copy todir="${mypro.output.dir}">
+      <fileset dir="${module.mypro.basedir}/src/main/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+      <fileset dir="${module.mypro.basedir}/src/main/resources">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="compile.module.mypro.tests" depends="register.custom.compilers,compile.module.mypro.production" description="compile module MyPro; test classes" unless="skip.tests">
+    <mkdir dir="${mypro.testoutput.dir}"/>
+    <javac2 destdir="${mypro.testoutput.dir}" debug="${compiler.debug}" nowarn="${compiler.generate.no.warnings}" memorymaximumsize="${compiler.max.memory}" fork="true" executable="${module.jdk.bin.mypro}/javac">
+      <compilerarg line="${compiler.args.mypro}"/>
+      <bootclasspath refid="mypro.module.bootclasspath"/>
+      <classpath refid="mypro.module.classpath"/>
+      <src refid="mypro.module.test.sourcepath"/>
+      <patternset refid="excluded.from.compilation.mypro"/>
+    </javac2>
+    
+    <copy todir="${mypro.testoutput.dir}">
+      <fileset dir="${module.mypro.basedir}/src/test/java">
+        <patternset refid="compiler.resources"/>
+        <type type="file"/>
+      </fileset>
+    </copy>
+  </target>
+  
+  <target name="clean.module.mypro" description="cleanup module">
+    <delete dir="${mypro.output.dir}"/>
+    <delete dir="${mypro.testoutput.dir}"/>
+  </target>
+</project>
