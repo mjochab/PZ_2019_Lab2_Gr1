@@ -4,11 +4,15 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.layout.StackPane;
 import myPck.Service;
+
+import java.io.IOException;
 
 // tym enum potrzebny tylko do testowania widoku
 enum Type_of_account{
@@ -22,6 +26,12 @@ public class MainWindowController {
 
     //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
     Type_of_account ACCOUNT = Type_of_account.R;
+
+    private MainStackPaneController mainStackPaneController;
+
+    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
+        this.mainStackPaneController = mainStackPaneController;
+    }
 
     //lista zawierająca zlecenia
     private ObservableList<Service> servicesList;
@@ -87,12 +97,15 @@ public class MainWindowController {
 
     @FXML
     // ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
-    void showDetailsTest(ActionEvent event) {
+    void showDetailsTest(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
+        StackPane stackPane = loader.load();
         Service service;
         try{
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
             System.out.println(service.getCar());
+            mainStackPaneController.setScreen(stackPane);
         }catch(Exception e){
             System.out.println("Nie wybrano niczego");
         }
