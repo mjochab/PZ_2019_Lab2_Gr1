@@ -11,15 +11,15 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.MainWindowController">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.MainWindowController">
     <children>
-        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="508.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Services">
                     <content>
                         <BorderPane>
                             <center>
-                                <TableView fx:id="servicesTableView" BorderPane.alignment="CENTER">
+                                <TableView fx:id="servicesTableView" prefWidth="700.0" BorderPane.alignment="CENTER">
                                     <columns>
                                         <TableColumn fx:id="carColumn" prefWidth="180.0" text="car" />
                                         <TableColumn fx:id="clientColumn" prefWidth="171.0" text="client" />

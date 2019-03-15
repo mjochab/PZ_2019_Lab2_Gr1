@@ -5,6 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import myPck.Service;
 
@@ -27,8 +28,8 @@ public class MainStackPaneController {
 
     }
 
-    public void setScreen(StackPane stackPane) {
+    public void setScreen(Pane pane) {
         mainStackPane.getChildren().clear();
-        mainStackPane.getChildren().add(stackPane);
+        mainStackPane.getChildren().add(pane);
     }
 }
