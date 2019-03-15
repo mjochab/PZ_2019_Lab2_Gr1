@@ -3,21 +3,47 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
 
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.ServiceDetailsController">
    <children>
-      <BorderPane>
-         <top>
-            <Label text="Service details:" BorderPane.alignment="CENTER" />
-         </top>
-         <bottom>
-            <GridPane BorderPane.alignment="CENTER">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+         <children>
+            <GridPane hgap="10.0" vgap="10.0">
+              <columnConstraints>
+                  <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="62.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="166.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="444.0" minWidth="10.0" prefWidth="141.0" />
+                <ColumnConstraints hgrow="SOMETIMES" maxWidth="583.0" minWidth="10.0" prefWidth="298.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints vgrow="SOMETIMES" />
+                  <RowConstraints vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label text="Car: " GridPane.columnIndex="2" />
+                  <Label text="Customer: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <TextField editable="false" GridPane.columnIndex="3" />
+                  <TextField editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <Label text="status: " />
+                  <Label text="Done" textFill="#11ee1c" GridPane.columnIndex="1" />
+               </children>
+               <padding>
+                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+               </padding>
+            </GridPane>
+            <Label text="Fault description:" />
+            <TextArea editable="false" promptText="no description" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non volutpat nibh, vel tempor dolor. In at dui nec mauris imperdiet dictum vitae ac odio. In quis nunc at quam rutrum placerat tristique sit amet turpis. Nulla facilisi. In ullamcorper vehicula est vel egestas. Quisque ac nibh eu velit volutpat luctus. Vivamus imperdiet est eget dolor interdum, nec maximus risus facilisis. Etiam auctor mi urna, id commodo ligula condimentum porttitor. Phasellus ut pharetra lectus, eget auctor elit. Donec eget semper dui. Sed ut justo consequat, consequat metus id, tincidunt quam. Suspendisse luctus ante sodales, euismod tellus fringilla, venenatis velit. Duis ex nulla, eleifend ac velit ac, porta sagittis orci. Sed quis dui nibh.Sed neque nisi, egestas sit amet venenatis eget, ultricies id felis. Etiam efficitur tortor eget nibh malesuada, vitae volutpat massa finibus. Pellentesque a sodales libero. Ut non lacinia nulla. Donec in dui ipsum. Pellentesque et viverra tortor. Curabitur posuere magna at suscipit aliquet. Duis risus tellus, laoreet id tempus a, vehicula sed enim. Nullam leo diam, imperdiet sed orci sit amet, convallis finibus tortor. Phasellus non tristique eros, sed malesuada dui. Duis scelerisque erat vel lectus tempor hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris dapibus dolor eget mauris placerat sollicitudin. Cras posuere mattis neque, vel finibus risus.Morbi ut justo porta, fermentum urna vitae, semper enim. Duis eu elementum felis. Cras dapibus augue at iaculis rhoncus. Donec eget augue risus. Morbi justo purus, gravida quis odio et, imperdiet pellentesque justo. Praesent sem ligula, ornare non ex id, placerat volutpat tortor. Morbi id tellus at tellus eleifend gravida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh." wrapText="true" />
+            <Label text="Repair description" />
+            <TextArea editable="false" promptText="no report" />
+            <GridPane>
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,14 +55,14 @@
                   <Button mnemonicParsing="false" text="Add Raport" GridPane.columnIndex="1" />
                   <Button mnemonicParsing="false" text="Back" />
                </children>
-               <BorderPane.margin>
-                  <Insets />
-               </BorderPane.margin>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
-         </bottom>
-      </BorderPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
    </children>
 </StackPane>
