@@ -59,5 +59,14 @@ public class ServiceDetailsController {
         assert addRaportButton != null : "fx:id=\"addRaportButton\" was not injected: check your FXML file 'ServiceDetails.fxml'.";
         assert backButton != null : "fx:id=\"backButton\" was not injected: check your FXML file 'ServiceDetails.fxml'.";
 
+        //ukrywanie elementów dla kont bez uprawnień
+        switch (mainStackPaneController.ACCOUNT){
+            case M:
+                addRaportButton.setVisible(true);
+                break;
+                default:
+                    addRaportButton.setVisible(false);
+        }
+
     }
 }
