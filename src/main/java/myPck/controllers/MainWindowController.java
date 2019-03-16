@@ -25,7 +25,7 @@ enum Type_of_account{
 public class MainWindowController {
 
     //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    Type_of_account ACCOUNT = Type_of_account.R;
+    Type_of_account ACCOUNT = Type_of_account.A;
 
     private MainStackPaneController mainStackPaneController;
 
