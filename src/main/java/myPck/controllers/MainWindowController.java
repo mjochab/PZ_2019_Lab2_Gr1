@@ -14,18 +14,11 @@ import myPck.Service;
 
 import java.io.IOException;
 
-// tym enum potrzebny tylko do testowania widoku
-enum Type_of_account{
-    M,  //mechanik
-    R,  //recepcjonista
-    A,  //admin
-    K,  //kierownik
-};
+
 
 public class MainWindowController {
 
-    //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    Type_of_account ACCOUNT = Type_of_account.A;
+
 
     private MainStackPaneController mainStackPaneController;
 
@@ -128,7 +121,7 @@ public class MainWindowController {
         assert adminPanelTab != null : "fx:id=\"adminPanelTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
         assert tasksTab != null : "fx:id=\"tasksTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
 
-        System.out.println("Wersja dla konta: "+ACCOUNT);
+        System.out.println("Wersja dla konta: "+mainStackPaneController.ACCOUNT);
 
         servicesList = FXCollections.observableArrayList();
         //podpięcie listy do tabelki
@@ -142,7 +135,7 @@ public class MainWindowController {
         buttonManagment();
 
         //ukrywanie elementów dla kont bez uprawnień
-        switch (ACCOUNT){
+        switch (mainStackPaneController.ACCOUNT){
             case A:
                 sampleData();
                 tasksTab.setDisable(true);

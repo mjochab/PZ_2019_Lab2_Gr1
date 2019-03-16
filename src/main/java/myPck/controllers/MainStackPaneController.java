@@ -9,8 +9,17 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import myPck.Service;
 
+// tym enum potrzebny tylko do testowania widoku
+enum Type_of_account{
+    M,  //mechanik
+    R,  //recepcjonista
+    A,  //admin
+    K,  //kierownik
+};
 public class MainStackPaneController {
 
+    //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
+    public static Type_of_account ACCOUNT = Type_of_account.A;
 
     @FXML
     private StackPane mainStackPane;
