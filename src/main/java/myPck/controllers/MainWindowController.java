@@ -105,6 +105,10 @@ public class MainWindowController {
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
             System.out.println(service.getCar());
+
+            ServiceDetailsController serviceDetailsController = loader.getController();
+            serviceDetailsController.setMainStackPaneController(mainStackPaneController);
+
             mainStackPaneController.setScreen(stackPane);
         }catch(Exception e){
             System.out.println("Nie wybrano niczego");

@@ -11,7 +11,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
 
-
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.ServiceDetailsController">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0">
@@ -30,19 +29,19 @@
                <children>
                   <Label text="Car: " GridPane.columnIndex="2" />
                   <Label text="Customer: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField editable="false" GridPane.columnIndex="3" />
-                  <TextField editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                  <TextField fx:id="carTextField" editable="false" GridPane.columnIndex="3" />
+                  <TextField fx:id="customerTextField" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Label text="status: " />
-                  <Label text="Done" textFill="#11ee1c" GridPane.columnIndex="1" />
+                  <Label fx:id="statusLabel" text="Done" textFill="#11ee1c" GridPane.columnIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
             <Label text="Fault description:" />
-            <TextArea editable="false" promptText="no description" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non volutpat nibh, vel tempor dolor. In at dui nec mauris imperdiet dictum vitae ac odio. In quis nunc at quam rutrum placerat tristique sit amet turpis. Nulla facilisi. In ullamcorper vehicula est vel egestas. Quisque ac nibh eu velit volutpat luctus. Vivamus imperdiet est eget dolor interdum, nec maximus risus facilisis. Etiam auctor mi urna, id commodo ligula condimentum porttitor. Phasellus ut pharetra lectus, eget auctor elit. Donec eget semper dui. Sed ut justo consequat, consequat metus id, tincidunt quam. Suspendisse luctus ante sodales, euismod tellus fringilla, venenatis velit. Duis ex nulla, eleifend ac velit ac, porta sagittis orci. Sed quis dui nibh.Sed neque nisi, egestas sit amet venenatis eget, ultricies id felis. Etiam efficitur tortor eget nibh malesuada, vitae volutpat massa finibus. Pellentesque a sodales libero. Ut non lacinia nulla. Donec in dui ipsum. Pellentesque et viverra tortor. Curabitur posuere magna at suscipit aliquet. Duis risus tellus, laoreet id tempus a, vehicula sed enim. Nullam leo diam, imperdiet sed orci sit amet, convallis finibus tortor. Phasellus non tristique eros, sed malesuada dui. Duis scelerisque erat vel lectus tempor hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris dapibus dolor eget mauris placerat sollicitudin. Cras posuere mattis neque, vel finibus risus.Morbi ut justo porta, fermentum urna vitae, semper enim. Duis eu elementum felis. Cras dapibus augue at iaculis rhoncus. Donec eget augue risus. Morbi justo purus, gravida quis odio et, imperdiet pellentesque justo. Praesent sem ligula, ornare non ex id, placerat volutpat tortor. Morbi id tellus at tellus eleifend gravida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh." wrapText="true" />
+            <TextArea fx:id="faultDescTextArea" editable="false" promptText="no description" text="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam non volutpat nibh, vel tempor dolor. In at dui nec mauris imperdiet dictum vitae ac odio. In quis nunc at quam rutrum placerat tristique sit amet turpis. Nulla facilisi. In ullamcorper vehicula est vel egestas. Quisque ac nibh eu velit volutpat luctus. Vivamus imperdiet est eget dolor interdum, nec maximus risus facilisis. Etiam auctor mi urna, id commodo ligula condimentum porttitor. Phasellus ut pharetra lectus, eget auctor elit. Donec eget semper dui. Sed ut justo consequat, consequat metus id, tincidunt quam. Suspendisse luctus ante sodales, euismod tellus fringilla, venenatis velit. Duis ex nulla, eleifend ac velit ac, porta sagittis orci. Sed quis dui nibh.Sed neque nisi, egestas sit amet venenatis eget, ultricies id felis. Etiam efficitur tortor eget nibh malesuada, vitae volutpat massa finibus. Pellentesque a sodales libero. Ut non lacinia nulla. Donec in dui ipsum. Pellentesque et viverra tortor. Curabitur posuere magna at suscipit aliquet. Duis risus tellus, laoreet id tempus a, vehicula sed enim. Nullam leo diam, imperdiet sed orci sit amet, convallis finibus tortor. Phasellus non tristique eros, sed malesuada dui. Duis scelerisque erat vel lectus tempor hendrerit. Interdum et malesuada fames ac ante ipsum primis in faucibus. Mauris dapibus dolor eget mauris placerat sollicitudin. Cras posuere mattis neque, vel finibus risus.Morbi ut justo porta, fermentum urna vitae, semper enim. Duis eu elementum felis. Cras dapibus augue at iaculis rhoncus. Donec eget augue risus. Morbi justo purus, gravida quis odio et, imperdiet pellentesque justo. Praesent sem ligula, ornare non ex id, placerat volutpat tortor. Morbi id tellus at tellus eleifend gravida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh." wrapText="true" />
             <Label text="Repair description" />
-            <TextArea editable="false" promptText="no report" />
+            <TextArea fx:id="repaiDescTextArea" editable="false" promptText="no report" />
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -52,8 +51,8 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button mnemonicParsing="false" text="Add Raport" GridPane.columnIndex="1" />
-                  <Button mnemonicParsing="false" text="Back" />
+                  <Button fx:id="addRaportButton" mnemonicParsing="false" onAction="#addRaport" text="Add Raport" GridPane.columnIndex="1" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToMainWindow" text="Back" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />

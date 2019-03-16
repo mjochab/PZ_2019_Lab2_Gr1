@@ -2,13 +2,22 @@ package myPck.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.StackPane;
+
+import java.io.IOException;
 
 public class ServiceDetailsController {
 
+    private MainStackPaneController mainStackPaneController;
+
+    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
+        this.mainStackPaneController = mainStackPaneController;
+    }
     @FXML
     private TextField carTextField;
 
@@ -36,8 +45,8 @@ public class ServiceDetailsController {
     }
 
     @FXML
-    void backToMainWindow(ActionEvent event) {
-
+    void backToMainWindow(ActionEvent event) throws IOException {
+        mainStackPaneController.loadMainWindow();
     }
 
     @FXML
