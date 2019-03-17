@@ -6,7 +6,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-//typ enum potrzebny tylko do testowania widoku
+/**
+ * typ enum potrzebny tylko do testowania widoku
+ */
 enum Type_of_account{
     M,  //mechanik
     R,  //recepcjonista
@@ -16,19 +18,25 @@ enum Type_of_account{
 public class MainStackPaneController {
 
     //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    public static Type_of_account ACCOUNT = Type_of_account.M;
+    public static Type_of_account ACCOUNT = Type_of_account.A;
 
     @FXML
     //instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
     private StackPane mainStackPane;
 
-    //funkcja wymieniająca okienka w mainStackPane
+     /**
+     * funkcja wymieniająca okienka w mainStackPane
+     * @param pane
+     */
     public void setScreen(Pane pane) {
         mainStackPane.getChildren().clear();
         mainStackPane.getChildren().add(pane);
     }
 
-    //funkcja ładująca główne okno aplikacji (MainWindow.fxml)
+    /**
+     * funkcja ładująca główne okno aplikacji (MainWindow.fxml)
+     * @throws IOException
+     */
     public void loadMainWindow() throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainWindow.fxml"));
         StackPane stackPane = loader.load();

@@ -18,7 +18,10 @@ public class MainWindowController {
 
     //instancja kontrolera zewnętrzenego okna (rodzica)
     private MainStackPaneController mainStackPaneController;
-    //funkcja ustawiająca kontroller
+    /**
+     * Ustawia kontroler
+     * @param mainStackPaneController
+     */
     public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
         this.mainStackPaneController = mainStackPaneController;
     }
@@ -57,8 +60,11 @@ public class MainWindowController {
     @FXML
     private Tab tasksTab;
 
+    /**
+     * ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
+     * @param event
+     */
     @FXML
-    //ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
     void addServicesTest(ActionEvent event) {
         //przykładowy obiekt
         Service service = new Service("Fiat Multipla RZ746H"+Service.amount, "Jan Kowalski", "Waiting for assigment");
@@ -71,8 +77,11 @@ public class MainWindowController {
         //po dodaniu serwisu do pustej listy, przyciski zmieniają stan (Disbale)
     }
 
+    /**
+     * generowanie faktury
+     * @param event
+     */
     @FXML
-    // generowanie faktury
     void invoicePDFTest(ActionEvent event) {
         Service service;
         try{
@@ -85,8 +94,12 @@ public class MainWindowController {
         }
     }
 
+    /**
+     * Otwiera okno ze szczególowymi informacjami o wybranym zleceniu
+     * @param event
+     * @throws IOException
+     */
     @FXML
-    //ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
     void showDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
@@ -149,8 +162,9 @@ public class MainWindowController {
                 break;
         }
     }
-    //tylko do testów
-    //wypełnienie listy przykładowymi zleceniami
+    /**
+     * wypełnienie listy przykładowymi zleceniami
+     */
     void sampleData(){
 
         Service service1 = new Service("Jaguar XE", "Konrad Rejman", "Done");
@@ -164,7 +178,9 @@ public class MainWindowController {
         servicesList.add(service4);
         buttonManagment();
     }
-    //funkcja wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
+    /**
+     * funkcja wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
+     */
     void buttonManagment(){
         if(servicesList.isEmpty()){
             invoicePDFButton.setDisable(true);

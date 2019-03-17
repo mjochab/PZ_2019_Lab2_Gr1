@@ -45,11 +45,20 @@ public class ServiceDetailsController {
     @FXML
     private Button backButton;
 
+    /**
+     *
+     * @param event
+     */
     @FXML
     void addRaport(ActionEvent event) {
 
     }
 
+    /**
+     * ładuje główne okno aplikacji
+     * @param event
+     * @throws IOException
+     */
     @FXML
     void backToMainWindow(ActionEvent event) throws IOException {
         //załadowanie głównego okna
@@ -71,6 +80,10 @@ public class ServiceDetailsController {
         }
 
     }
+
+    /**
+     * Wypełnia formatki w oknie przykładowymi danymi
+     */
     private void setSampleData(){
 
         String sampleDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
@@ -108,6 +121,9 @@ public class ServiceDetailsController {
         setCollorOfStatus();
     }
 
+    /**
+     * Ustawia kolor dla obiektu statusLabel
+     */
     private void setCollorOfStatus(){
         String s = statusLabel.getText();
 
