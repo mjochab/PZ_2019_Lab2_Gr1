@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 
-
 //typ enum potrzebny tylko do testowania widoku
 enum Type_of_account{
     M,  //mechanik

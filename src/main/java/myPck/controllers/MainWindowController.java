@@ -16,8 +16,9 @@ import java.io.IOException;
 
 public class MainWindowController {
 
+    //instancja kontrolera zewnętrzenego okna (rodzica)
     private MainStackPaneController mainStackPaneController;
-
+    //funkcja ustawiająca kontroller
     public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
         this.mainStackPaneController = mainStackPaneController;
     }
@@ -85,19 +86,21 @@ public class MainWindowController {
     }
 
     @FXML
-    // ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
+    //ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
     void showDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
         Service service;
         try{
+            //sprawdza czy zaznaczono jakieś zlecenie w TableView
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
             System.out.println(service.getCar());
 
+            //przekazanie kontrolera (głównego okna) do okienka serviceDetails
             ServiceDetailsController serviceDetailsController = loader.getController();
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
-
+            //ustawienie okna serviceDetails
             mainStackPaneController.setScreen(stackPane);
         }catch(Exception e){
             System.out.println("Nie wybrano niczego");
@@ -106,17 +109,6 @@ public class MainWindowController {
 
     @FXML
     void initialize() {
-        assert servicesTableView != null : "fx:id=\"servicesTableView\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert carColumn != null : "fx:id=\"carColumn\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert clientColumn != null : "fx:id=\"clientColumn\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert statusColumn != null : "fx:id=\"statusColumn\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert addNewServiceButton != null : "fx:id=\"addNewServiceButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert invoicePDFButton != null : "fx:id=\"invoicePDFButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert showDetailsButton != null : "fx:id=\"showDetailsButton\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert profileTab != null : "fx:id=\"profileTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert adminPanelTab != null : "fx:id=\"adminPanelTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
-        assert tasksTab != null : "fx:id=\"tasksTab\" was not injected: check your FXML file 'MainWindow.fxml'.";
-
         System.out.println("Wersja dla konta: "+mainStackPaneController.ACCOUNT);
 
         servicesList = FXCollections.observableArrayList();
@@ -155,9 +147,7 @@ public class MainWindowController {
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
                 break;
-
         }
-
     }
     //tylko do testów
     //wypełnienie listy przykładowymi zleceniami
