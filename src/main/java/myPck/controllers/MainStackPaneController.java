@@ -1,15 +1,13 @@
 package myPck.controllers;
 
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-import myPck.Service;
 
-// tym enum potrzebny tylko do testowania widoku
+
+//typ enum potrzebny tylko do testowania widoku
 enum Type_of_account{
     M,  //mechanik
     R,  //recepcjonista
@@ -22,16 +20,16 @@ public class MainStackPaneController {
     public static Type_of_account ACCOUNT = Type_of_account.M;
 
     @FXML
+    //instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
     private StackPane mainStackPane;
 
-    @FXML
-    void initialize() throws IOException {
-        assert mainStackPane != null : "fx:id=\"mainStackPane\" was not injected: check your FXML file 'MainStackPane.fxml'.";
-        //pobranie okna które wyświetli się jako pierwsze po uruchomieniu aplikacji
-        loadMainWindow();
-
+    //funkcja wymieniająca okienka w mainStackPane
+    public void setScreen(Pane pane) {
+        mainStackPane.getChildren().clear();
+        mainStackPane.getChildren().add(pane);
     }
 
+    //funkcja ładująca główne okno aplikacji (MainWindow.fxml)
     public void loadMainWindow() throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainWindow.fxml"));
         StackPane stackPane = loader.load();
@@ -40,9 +38,10 @@ public class MainStackPaneController {
         mainWindowController.setMainStackPaneController(this);
         setScreen(stackPane);
     }
-
-    public void setScreen(Pane pane) {
-        mainStackPane.getChildren().clear();
-        mainStackPane.getChildren().add(pane);
+    @FXML
+    void initialize() throws IOException {
+        //pierwsze okno wyświetlane podczas uruchomienia aplikacji
+        //w przyszłości będzie to prawdopodobnie okno logowania
+        loadMainWindow();
     }
 }
