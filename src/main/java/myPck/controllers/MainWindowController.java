@@ -14,11 +14,7 @@ import myPck.Service;
 
 import java.io.IOException;
 
-
-
 public class MainWindowController {
-
-
 
     private MainStackPaneController mainStackPaneController;
 
@@ -28,6 +24,7 @@ public class MainWindowController {
 
     //lista zawierająca zlecenia
     private ObservableList<Service> servicesList;
+
     @FXML
     //tableka wyświetlająca dane z listy ze zleceniami
     private TableView<Service> servicesTableView;
@@ -37,28 +34,25 @@ public class MainWindowController {
     private TableColumn<Service, String> carColumn;
 
     @FXML
-    //kolumna zawierająca informacje o klięcie
+    //kolumna zawierająca informacje o kliencie
     private TableColumn<Service, String> clientColumn;
 
     @FXML
-    // kolumna zawierająca informacje o statusie zlecenia
+    //kolumna zawierająca informacje o statusie zlecenia
     private TableColumn<Service, String> statusColumn;
-
+    //przyciski
     @FXML
     private Button addNewServiceButton;
-
     @FXML
     private Button invoicePDFButton;
-
     @FXML
     private Button showDetailsButton;
 
+    //zakładki
     @FXML
     private Tab profileTab;
-
     @FXML
     private Tab adminPanelTab;
-
     @FXML
     private Tab tasksTab;
 
@@ -73,6 +67,7 @@ public class MainWindowController {
         System.out.println("Dodano do listy nowe zlecenie");
         //zarządzanie widocznością przycisków
         buttonManagment();
+        //po dodaniu serwisu do pustej listy, przyciski zmieniają stan (Disbale)
     }
 
     @FXML
@@ -80,6 +75,7 @@ public class MainWindowController {
     void invoicePDFTest(ActionEvent event) {
         Service service;
         try{
+            //sprawdza czy zaznaczono jakiś element w TableView
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Generuje PDF dla:");
             System.out.println(service.getCar());
@@ -90,7 +86,7 @@ public class MainWindowController {
 
     @FXML
     // ta funkcja w przyszłości ma otwierać okno ze szczegółowymi informacjami o wybranym zleceniu
-    void showDetailsTest(ActionEvent event) throws IOException {
+    void showDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
         Service service;
@@ -164,9 +160,9 @@ public class MainWindowController {
 
     }
     //tylko do testów
+    //wypełnienie listy przykładowymi zleceniami
     void sampleData(){
-        //dodanie przykładowego obiektu
-        //przykładowy obiekt
+
         Service service1 = new Service("Jaguar XE", "Konrad Rejman", "Done");
         Service service2 = new Service("Skoda Fabia", "Bartek Kudełka", "in Repair");
         Service service3 = new Service("Opel Astra", "Filip Rebizant", "not allocated");
@@ -178,7 +174,7 @@ public class MainWindowController {
         servicesList.add(service4);
         buttonManagment();
     }
-    //funkcja wyłącza dostęp do przycisków recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
+    //funkcja wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
     void buttonManagment(){
         if(servicesList.isEmpty()){
             invoicePDFButton.setDisable(true);
