@@ -18,7 +18,7 @@ enum Type_of_account{
 public class MainStackPaneController {
 
     //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    public static Type_of_account ACCOUNT = Type_of_account.A;
+    public static Type_of_account ACCOUNT = Type_of_account.M;
 
     @FXML
     //instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
