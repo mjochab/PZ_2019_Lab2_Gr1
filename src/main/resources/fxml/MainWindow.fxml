@@ -18,15 +18,16 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.MainWindowController">
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.MainWindowController">
     <children>
-        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" tabClosingPolicy="UNAVAILABLE">
+        <TabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="508.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
             <tabs>
                 <Tab text="Services">
                     <content>
                         <BorderPane>
                             <center>
-                                <TableView fx:id="servicesTableView" BorderPane.alignment="CENTER">
+                                <TableView fx:id="servicesTableView" prefWidth="700.0" BorderPane.alignment="CENTER">
                                     <columns>
                                         <TableColumn fx:id="carColumn" prefWidth="180.0" text="car" />
                                         <TableColumn fx:id="clientColumn" prefWidth="171.0" text="client" />
@@ -42,7 +43,7 @@
                                     <children>
                                         <Button fx:id="addNewServiceButton" mnemonicParsing="false" onAction="#addServicesTest" text="Add new service" />
                               <Button fx:id="invoicePDFButton" mnemonicParsing="false" onAction="#invoicePDFTest" text="Invoice PDF" />
-                              <Button fx:id="showDetailsButton" mnemonicParsing="false" onAction="#showDetailsTest" text="Show details" />
+                              <Button fx:id="showDetailsButton" mnemonicParsing="false" onAction="#showDetails" text="Show details" />
                                     </children>
                                     <padding>
                                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
