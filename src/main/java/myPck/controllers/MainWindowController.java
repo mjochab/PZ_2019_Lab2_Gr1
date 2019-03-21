@@ -10,6 +10,8 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import myPck.Service;
 
+import java.util.ArrayList;
+
 // tym enum potrzebny tylko do testowania widoku
 enum Type_of_account{
     M,  //mechanik
@@ -20,8 +22,16 @@ enum Type_of_account{
 
 public class MainWindowController {
 
+    @FXML
+    public TableColumn<Service, String> loginColumn;
+    @FXML
+    public TableColumn<Service, String> firstNameColumn;
+    @FXML
+    public TableColumn<Service, String> lastNameColumn;
+    @FXML
+    public TableColumn<Service, String> roleColumn;
     //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    Type_of_account ACCOUNT = Type_of_account.R;
+    Type_of_account ACCOUNT = Type_of_account.A;
 
     //lista zawierająca zlecenia
     private ObservableList<Service> servicesList;
@@ -58,6 +68,12 @@ public class MainWindowController {
 
     @FXML
     private Tab tasksTab;
+
+    @FXML
+    public TableView<Service> usersTableView;
+
+    //lista zawierająca zlecenia
+    private ObservableList<Service> usersList;
 
     @FXML
     //ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
@@ -114,12 +130,21 @@ public class MainWindowController {
         System.out.println("Wersja dla konta: "+ACCOUNT);
 
         servicesList = FXCollections.observableArrayList();
+        usersList = FXCollections.observableArrayList();
         //podpięcie listy do tabelki
+
         servicesTableView.setItems(this.servicesList);
+        usersTableView.setItems(this.usersList);
+
         //ustawienie wartości które mają się wyświetlać w poszczególnych kolumnach
         carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
         clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
         statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
+
+        loginColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
+        firstNameColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
+        lastNameColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
+        roleColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
 
         //zarządzanie dostępem przycisków
         buttonManagment();
@@ -178,5 +203,15 @@ public class MainWindowController {
             invoicePDFButton.setDisable(false);
             showDetailsButton.setDisable(false);
         }
+    }
+
+    /**
+     * Metoda dodaje nowego użytkownika do listy.
+     * @param actionEvent
+     */
+    public void addUser(ActionEvent actionEvent) {
+        Service service = new Service("Marekx", "Kowalski ", "Administrator");
+        usersList.add(service);
+        System.out.println("Dodano do listy nowego uzytkownika");
     }
 }
