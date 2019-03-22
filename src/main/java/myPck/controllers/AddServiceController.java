@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import myPck.Service;
 
 import java.io.IOException;
 
@@ -19,13 +20,13 @@ public class AddServiceController {
     private Button addNewCustomerButton;
 
     @FXML
-    private ListView<?> customersListView;
+    private ListView<String> customersListView;
 
     @FXML
     private Button addNewCarButton;
 
     @FXML
-    private ListView<?> carsListView;
+    private ListView<String> carsListView;
 
     @FXML
     private Button saveServiceButton;
@@ -35,21 +36,29 @@ public class AddServiceController {
 
     @FXML
     void addNewCar(ActionEvent event) {
-
+        carsListView.getItems().add("Test");
     }
 
     @FXML
     void addNewCustomer(ActionEvent event) {
-
+        customersListView.getItems().add("Test");
     }
 
     @FXML
     void cancel(ActionEvent event) throws IOException {
+        System.out.println("Anuluje tworzenie zlecenia");
         mainStackPaneController.loadMainWindow();
     }
 
     @FXML
     void saveService(ActionEvent event) throws IOException {
+        String car = carsListView.getSelectionModel().getSelectedItem();
+        String customer= customersListView.getSelectionModel().getSelectedItem();
+        String status = "No allocated";
+        Service newServiece = new Service(car, customer, status);
+
+        System.out.println("Zapisuje zlecenie");
+        System.out.println(newServiece.toString());
         mainStackPaneController.loadMainWindow();
     }
 
