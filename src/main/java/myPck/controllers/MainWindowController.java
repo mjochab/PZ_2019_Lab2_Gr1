@@ -83,16 +83,16 @@ public class MainWindowController {
 
     @FXML
     //ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
-    void addServicesTest(ActionEvent event) {
-        //przykładowy obiekt
-        Service service = new Service("Fiat Multipla RZ746H"+Service.amount, "Jan Kowalski", "Waiting for assigment");
-        //dodanie do listy
-        servicesList.add(service);
+    void addServicesTest(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
+        StackPane stackPane = loader.load();
 
-        System.out.println("Dodano do listy nowe zlecenie");
-        //zarządzanie widocznością przycisków
-        buttonManagment();
-        //po dodaniu serwisu do pustej listy, przyciski zmieniają stan (Disbale)
+        //przekazanie kontrolera (głównego okna) do okienka AddService
+        AddServiceController addServiceController = loader.getController();
+        addServiceController.setMainStackPaneController(mainStackPaneController);
+        //ustawienie okna AddService
+        mainStackPaneController.setScreen(stackPane);
+
     }
 
     /**
