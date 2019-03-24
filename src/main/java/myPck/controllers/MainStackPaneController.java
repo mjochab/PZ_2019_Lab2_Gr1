@@ -9,23 +9,29 @@ import javafx.scene.layout.StackPane;
 /**
  * typ enum potrzebny tylko do testowania widoku
  */
-enum Type_of_account{
+enum Type_of_account {
     M,  //mechanik
     R,  //recepcjonista
     A,  //admin
     K,  //kierownik
 };
+
 public class MainStackPaneController {
 
-    //TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
-    public static Type_of_account ACCOUNT = Type_of_account.R;
+    /**
+     * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
+     */
+    public static Type_of_account ACCOUNT = Type_of_account.M;
 
+    /**
+     * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
+     */
     @FXML
-    //instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
     private StackPane mainStackPane;
 
-     /**
-     * funkcja wymieniająca okienka w mainStackPane
+    /**
+     * Funkcja wymieniająca okienka w mainStackPane
+     *
      * @param pane
      */
     public void setScreen(Pane pane) {
@@ -34,7 +40,8 @@ public class MainStackPaneController {
     }
 
     /**
-     * funkcja ładująca główne okno aplikacji (MainWindow.fxml)
+     * Funkcja ładująca główne okno aplikacji (MainWindow.fxml)
+     *
      * @throws IOException
      */
     public void loadMainWindow() throws IOException {
@@ -45,10 +52,15 @@ public class MainStackPaneController {
         mainWindowController.setMainStackPaneController(this);
         setScreen(stackPane);
     }
+
+    /**
+     * Pierwsze okno wyświetlane podczas uruchomienia aplikacji
+     * w przyszłości będzie to prawdopodobnie okno logowania
+     *
+     * @throws IOException
+     */
     @FXML
     void initialize() throws IOException {
-        //pierwsze okno wyświetlane podczas uruchomienia aplikacji
-        //w przyszłości będzie to prawdopodobnie okno logowania
         loadMainWindow();
     }
 }

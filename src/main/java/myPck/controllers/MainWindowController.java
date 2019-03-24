@@ -18,8 +18,11 @@ import java.io.IOException;
 
 public class MainWindowController {
 
-    //instancja kontrolera zewnętrzenego okna (rodzica)
+    /**
+     * Instancja kontrolera zewnętrzenego okna (rodzica)
+     */
     private MainStackPaneController mainStackPaneController;
+
     /**
      * Ustawia kontroler
      * @param mainStackPaneController
@@ -92,7 +95,6 @@ public class MainWindowController {
         addServiceController.setMainStackPaneController(mainStackPaneController);
         //ustawienie okna AddService
         mainStackPaneController.setScreen(stackPane);
-
     }
 
     /**
@@ -137,6 +139,7 @@ public class MainWindowController {
             System.out.println("Nie wybrano niczego");
         }
     }
+
 
     @FXML
     void initialize() {

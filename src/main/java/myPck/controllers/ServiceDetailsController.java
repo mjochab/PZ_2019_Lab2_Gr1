@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.StackPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import myPck.Service;
 
@@ -17,13 +17,18 @@ public class ServiceDetailsController {
 
     //instancja kontrolera zewnętrzenego okna (rodzica)
     private MainStackPaneController mainStackPaneController;
+
     //funkcja ustawiająca kontroller
     public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
         this.mainStackPaneController = mainStackPaneController;
     }
+
+    /**
+     * Pole z informacją o samochodzie
+     */
     @FXML
-    //pole z informacją o samochodzie
     private TextField carTextField;
+
     @FXML
     //pole z informacją o kliencie
     private TextField customerTextField;
@@ -35,23 +40,38 @@ public class ServiceDetailsController {
     //opis zlecenia
     private TextArea faultDescTextArea;
 
+    /**
+     * Opis raportu
+     */
     @FXML
-    //opis raportu
-    private TextArea repaiDescTextArea;
+    private TextArea repairDescTextArea;
 
     //przyciski
     @FXML
-    private Button addRaportButton;
+    private Button addReportButton;
+
     @FXML
     private Button backButton;
 
     /**
-     *
+     * Metoda ładuje widok podglądu usługi i przekazuje główny kontroler.
      * @param event
      */
     @FXML
-    void addRaport(ActionEvent event) {
+    void loadServiceReportView(ActionEvent event) {
 
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddServiceReport.fxml"));
+        Pane pane = null;
+        try {
+            pane = loader.load();
+
+            ServiceReportController serviceReportController = loader.getController();
+            serviceReportController.setMainStackPaneController(mainStackPaneController);
+
+            mainStackPaneController.setScreen(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
@@ -73,10 +93,10 @@ public class ServiceDetailsController {
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.ACCOUNT){
             case M:
-                addRaportButton.setVisible(true);
+                addReportButton.setVisible(true);
                 break;
                 default:
-                    addRaportButton.setVisible(false);
+                    addReportButton.setVisible(false);
         }
 
     }
