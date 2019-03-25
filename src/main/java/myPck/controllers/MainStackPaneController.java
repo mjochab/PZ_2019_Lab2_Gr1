@@ -21,7 +21,7 @@ public class MainStackPaneController {
     /**
      * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
      */
-    public static Type_of_account ACCOUNT = Type_of_account.A;
+    public static Type_of_account ACCOUNT = Type_of_account.R;
 
     /**
      * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
