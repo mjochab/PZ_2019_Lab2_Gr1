@@ -1,0 +1,40 @@
+
+## Ga³êzie
+
+git branch // sprawdzanie na jakim branchu jestesmy
+
+git checkout -b feature_nazwa_featura // Stworzenie nowego brancha i przejœcie na niego
+
+git checkout nazwa_brancha // Przejœcie na konkretn¹ ga³¹Ÿ
+
+## Pliki
+
+git add . //Dodanie wszystkich nieœledzonych plikow
+
+git commit -am "Opis kommita" // Commit (lokalnie)
+
+git push origin [nazwa brancha] // Wypchniêcie zmian na zdalne repozytorium
+
+// Merge
+
+git fetch // Pobranie zmian ze zdalnego repo
+
+git merge // Po³¹czenie zmian ze zdalnego repo z naszym lokalnym
+
+git pull // Dwie powy¿sze komendy razem
+
+// Przyk³adowe u¿ycie:
+
+git checkout -b "feature_add_login_panel"
+
+robimy zmiany
+
+git add .
+
+git commit -am "Add login panel"
+
+git rebase origin development - œciaganie najnowszych zmian i rozwiazywanie konfliktow
+
+git push origin feature_add_login_panel
+
+robimy Pull requesta na githubie do brancha development - ogl¹damy zmiany i glosujemy
