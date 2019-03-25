@@ -41,7 +41,7 @@
             <Label text="Fault description:" />
             <TextArea fx:id="faultDescTextArea" editable="false" promptText="no description" wrapText="true" />
             <Label text="Repair description" />
-            <TextArea fx:id="repaiDescTextArea" editable="false" promptText="no report" />
+            <TextArea fx:id="repairDescTextArea" editable="false" promptText="no report" />
             <GridPane>
               <columnConstraints>
                 <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -51,7 +51,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Button fx:id="addRaportButton" mnemonicParsing="false" onAction="#addRaport" text="Add Raport" GridPane.columnIndex="1" />
+                  <Button fx:id="addReportButton" mnemonicParsing="false" onAction="#loadServiceReportView" text="Add Service Report" GridPane.columnIndex="1" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#backToMainWindow" text="Back" />
                </children>
                <padding>
