@@ -33,7 +33,7 @@ public class ProfileController {
 
     @FXML
     void save(ActionEvent event) {
-
+        System.out.println("Zmieniono dane");
     }
 
     @FXML
