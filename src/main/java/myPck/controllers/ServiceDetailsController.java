@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import myPck.Service;
+import myPck.database.models.Service;
 
 import java.io.IOException;
 

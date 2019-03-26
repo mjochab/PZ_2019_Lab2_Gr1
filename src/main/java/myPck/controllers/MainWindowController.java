@@ -10,9 +10,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-import myPck.Service;
-
-import java.util.ArrayList;
+import myPck.database.models.Service;
 
 import java.io.IOException;
 

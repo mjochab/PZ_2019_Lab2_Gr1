@@ -1,25 +1,25 @@
-package myPck.models;
+package myPck.modelsFx;
 
 import javafx.beans.property.IntegerProperty;
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ServiceItem {
+public class ServiceItemFx {
 
+    private IntegerProperty price = new SimpleIntegerProperty();
     private StringProperty serviceName = new SimpleStringProperty();
-    private StringProperty price = new SimpleStringProperty();
 
-    public ServiceItem(String serviceName, String price) {
+    public ServiceItemFx(String serviceName, Integer price) {
         this.serviceName.set(serviceName);
         this.price.set(price);
     }
 
-    public StringProperty priceProperty() {
+    public IntegerProperty priceProperty() {
         return price;
     }
 
     public StringProperty serviceNameProperty() {
         return serviceName;
     }
-
 }

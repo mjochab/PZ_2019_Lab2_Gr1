@@ -4,8 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
-import myPck.models.ServiceItem;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
+import myPck.modelsFx.ServiceItemFx;
 
 import java.io.IOException;
 
@@ -14,20 +17,20 @@ public class ServiceReportController {
     @FXML
     public Button backToServiceDetails;
     public Button saveReportButton;
-    public TableView<ServiceItem> servicesTableView;
+    public TableView<ServiceItemFx> servicesTableView;
     public Button addServiceItemButton;
     public TextField priceInput;
     public TextField serviceNameInput;
 
     @FXML
-    public TableColumn<ServiceItem, String> serviceNameColumn;
+    public TableColumn<ServiceItemFx, String> serviceNameColumn;
     @FXML
-    public TableColumn<ServiceItem, String> priceColumn;
+    public TableColumn<ServiceItemFx, Integer> priceColumn;
 
     /**
      * Lista zawierająca wykonane usługi
      */
-    private ObservableList<ServiceItem> servicesList;
+    private ObservableList<ServiceItemFx> servicesList;
 
     /**
      * Instancja klasy mainStackPaneController
@@ -69,7 +72,7 @@ public class ServiceReportController {
      * @param actionEvent
      */
     public void addServiceItem(ActionEvent actionEvent) {
-        ServiceItem item = new ServiceItem("Serwis", "25");
+        ServiceItemFx item = new ServiceItemFx("Serwis", 25);
         servicesList.add(item);
     }
 
@@ -78,7 +81,7 @@ public class ServiceReportController {
         servicesList = FXCollections.observableArrayList();
         servicesTableView.setItems(this.servicesList);
 
-        serviceNameColumn.setCellValueFactory(cellData-> cellData.getValue().serviceNameProperty());
-        priceColumn.setCellValueFactory(cellData-> cellData.getValue().priceProperty());
+//        serviceNameColumn.setCellValueFactory(cellData-> cellData.getValue().serviceNameProperty());
+//        priceColumn.setCellValueFactory(cellData-> cellData.getValue().priceProperty()));
     }
 }

@@ -6,7 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import myPck.Service;
+import myPck.database.models.Service;
 
 public class AdminPanelController {
 
