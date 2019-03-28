@@ -61,6 +61,10 @@ public class MainStackPaneController {
      */
     @FXML
     void initialize() throws IOException {
-        loadMainWindow();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LogPanel.fxml"));
+        Pane pane = loader.load();
+        LogPanelController logPanelController = loader.getController();
+        logPanelController.setMainStackPaneController(this);
+        setScreen(pane);
     }
 }
