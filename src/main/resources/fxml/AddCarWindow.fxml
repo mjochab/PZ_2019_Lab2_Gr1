@@ -5,16 +5,16 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AddCarController">
+<AnchorPane prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AddCarController">
    <children>
-      <TextField layoutX="183.0" layoutY="30.0" prefHeight="25.0" prefWidth="279.0" />
-      <TextField layoutX="183.0" layoutY="86.0" prefHeight="25.0" prefWidth="279.0" />
+      <TextField fx:id="TextField1" layoutX="183.0" layoutY="30.0" onAction="#OnActionTextField1" onInputMethodTextChanged="#OnInputMetodTextChanged" prefHeight="25.0" prefWidth="279.0" />
+      <TextField fx:id="TextField2" layoutX="183.0" layoutY="86.0" onAction="#OnActionTextField2" prefHeight="25.0" prefWidth="279.0" />
       <Label layoutX="73.0" layoutY="34.0" text="model" />
       <Label layoutX="73.0" layoutY="90.0" text="branch" />
-      <TextField layoutX="183.0" layoutY="144.0" prefHeight="25.0" prefWidth="279.0" />
+      <TextField fx:id="TextField3" layoutX="183.0" layoutY="144.0" onAction="#OnActionTextField3" prefHeight="25.0" prefWidth="279.0" />
       <Label layoutX="73.0" layoutY="148.0" text="type" />
-      <TextField layoutX="183.0" layoutY="202.0" prefHeight="25.0" prefWidth="279.0" />
+      <TextField fx:id="TextField4" layoutX="183.0" layoutY="202.0" onAction="#OnActionTextField4" prefHeight="25.0" prefWidth="279.0" />
       <Label layoutX="73.0" layoutY="206.0" text="production date" />
-      <Button layoutX="613.0" layoutY="271.0" mnemonicParsing="false" text="ADD" />
+      <Button fx:id="button" layoutX="613.0" layoutY="271.0" mnemonicParsing="false" onAction="#OnActionButton" text="ADD" />
    </children>
 </AnchorPane>
