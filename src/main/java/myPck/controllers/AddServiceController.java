@@ -2,8 +2,12 @@ package myPck.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import myPck.Service;
 
 import java.io.IOException;
@@ -35,13 +39,21 @@ public class AddServiceController {
     private Button cancelButton;
 
     @FXML
-    void addNewCar(ActionEvent event) {
-        carsListView.getItems().add("Test");
+    void addNewCar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddCarPanel.fxml"));
+        Pane pane = loader.load();
+        AddCarController addCarController = loader.getController();
+        addCarController.setMainStackPaneController(mainStackPaneController);
+        mainStackPaneController.setScreen(pane);
     }
 
     @FXML
-    void addNewCustomer(ActionEvent event) {
-        customersListView.getItems().add("Test");
+    void addNewCustomer(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddClientPanel.fxml"));
+        Pane pane = loader.load();
+        AddClientController addClientController = loader.getController();
+        addClientController.setMainStackPaneController(mainStackPaneController);
+        mainStackPaneController.setScreen(pane);
     }
 
     @FXML

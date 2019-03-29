@@ -21,7 +21,7 @@ public class MainStackPaneController {
     /**
      * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
      */
-    public static Type_of_account ACCOUNT = Type_of_account.A;
+    public static Type_of_account ACCOUNT = Type_of_account.K;
 
     /**
      * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
@@ -61,6 +61,10 @@ public class MainStackPaneController {
      */
     @FXML
     void initialize() throws IOException {
-        loadMainWindow();
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/LogPanel.fxml"));
+        Pane pane = loader.load();
+        LogPanelController logPanelController = loader.getController();
+        logPanelController.setMainStackPaneController(this);
+        setScreen(pane);
     }
 }
