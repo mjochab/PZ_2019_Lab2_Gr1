@@ -39,8 +39,12 @@ public class AddServiceController {
     private Button cancelButton;
 
     @FXML
-    void addNewCar(ActionEvent event) {
-
+    void addNewCar(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddCarPanel.fxml"));
+        Pane pane = loader.load();
+        AddCarController addCarController = loader.getController();
+        addCarController.setMainStackPaneController(mainStackPaneController);
+        mainStackPaneController.setScreen(pane);
     }
 
     @FXML
