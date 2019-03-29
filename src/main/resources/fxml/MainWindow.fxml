@@ -65,7 +65,7 @@
             </Tab>
             <Tab fx:id="tasksTab" text="Tasks">
               <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                <fx:include source="ManagerPanel.fxml"></fx:include>
               </content>
             </Tab>
             </tabs>

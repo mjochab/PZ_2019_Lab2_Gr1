@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+
+<BorderPane fx:id="borderPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.ManagerController">
+   <center>
+      <TableView fx:id="servicesTableView" prefWidth="700.0" BorderPane.alignment="CENTER">
+         <columns>
+            <TableColumn fx:id="carColumn" prefWidth="180.0" text="car" />
+            <TableColumn fx:id="clientColumn" prefWidth="171.0" text="client" />
+            <TableColumn fx:id="mechanicColumn" prefWidth="147.0" text="mechanic" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+   </center>
+   <bottom>
+      <HBox alignment="BOTTOM_RIGHT" spacing="10.0" BorderPane.alignment="CENTER">
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+         <children>
+            <ComboBox fx:id="mechanicComboBox" prefWidth="150.0" />
+         </children>
+      </HBox>
+   </bottom>
+</BorderPane>
