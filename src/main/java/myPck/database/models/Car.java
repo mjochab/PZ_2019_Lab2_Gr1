@@ -10,7 +10,12 @@ public class Car {
 
     public Car() {
     }
-
+    public Car(String model, String brand, String type, String productionDate){
+        this.model=model;
+        this.brand=brand;
+        this.type=type;
+        this.productionDate=productionDate;
+    }
 
     @Id
     @Column(name="id")

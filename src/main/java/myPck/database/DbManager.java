@@ -1,6 +1,8 @@
 package myPck.database;
 
 
+import myPck.database.models.Car;
+
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
@@ -13,19 +15,13 @@ public class DbManager {
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.tutorial.jpa");
 
         entityManager = entityManagerFactory.createEntityManager();
-
-
+        
     }
-
-
-    public static void addPerson(){
-//        Person person = new Person();
-//        person.setId(10);
-//        person.setName("Test");
-//        person.setSurname("Test");
+    public static void addSampleDataTest(){
+        Car car = new Car("testModel", "testBrand", "testType", "2000");
 
         entityManager.getTransaction().begin();
-//        entityManager.merge(person);
+        entityManager.merge(car);
         entityManager.getTransaction().commit();
 
         entityManager.close();

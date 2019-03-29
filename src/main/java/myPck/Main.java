@@ -23,8 +23,9 @@ public class Main extends Application {
         primaryStage.setTitle("Service station");
 
         DbManager.init();
-
         primaryStage.show();
+
+        DbManager.addSampleDataTest();
 
     }
 }
