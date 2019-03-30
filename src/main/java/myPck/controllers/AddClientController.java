@@ -10,14 +10,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
-public class AddClientController {
+public class AddClientController extends Controller {
 
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
     @FXML
     private ResourceBundle resources;
 

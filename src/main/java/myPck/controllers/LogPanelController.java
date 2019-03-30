@@ -9,14 +9,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 
-public class LogPanelController {
+public class LogPanelController extends Controller{
 
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
     @FXML
     private ResourceBundle resources;
 

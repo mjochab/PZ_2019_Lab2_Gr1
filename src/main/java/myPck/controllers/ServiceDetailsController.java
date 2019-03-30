@@ -13,15 +13,7 @@ import myPck.Service;
 
 import java.io.IOException;
 
-public class ServiceDetailsController {
-
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
-
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
+public class ServiceDetailsController extends Controller{
 
     /**
      * Pole z informacją o samochodzie

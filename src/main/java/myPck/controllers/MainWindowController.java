@@ -16,20 +16,8 @@ import java.util.ArrayList;
 
 import java.io.IOException;
 
-public class MainWindowController {
+public class MainWindowController extends Controller{
 
-    /**
-     * Instancja kontrolera zewnętrzenego okna (rodzica)
-     */
-    private MainStackPaneController mainStackPaneController;
-
-    /**
-     * Ustawia kontroler
-     * @param mainStackPaneController
-     */
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
 
     //lista zawierająca zlecenia
     private ObservableList<Service> servicesList;
