@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
+import myPck.database.DbManager;
 
 public class Main extends Application {
 
@@ -21,7 +22,10 @@ public class Main extends Application {
         primaryStage.setScene(scene);
         primaryStage.setTitle("Service station");
 
+        DbManager.init();
         primaryStage.show();
+
+        DbManager.addSampleDataTest();
 
     }
 }
