@@ -5,17 +5,29 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name="users")
 public class User {
 
     public User() {
     }
 
+    public User(String email, String first_name, String last_name, String login, String password, String role) {
+        this.email = email;
+        this.first_name = first_name;
+        this.last_name = last_name;
+        this.login = login;
+        this.password = password;
+        this.role = role;
+    }
+
     @Id
-    @Column(name="id")
-    @GeneratedValue(generator = "incrementor")
-    @GenericGenerator(name="incrementor", strategy = "increment")
+    @GeneratedValue
     private int id;
+    private String email;
+    private String first_name;
+    private String last_name;
+    private String login;
+    private String password;
+    private String role;
 
     public int getId() {
         return id;
@@ -72,23 +84,4 @@ public class User {
     public void setRole(String role) {
         this.role = role;
     }
-
-    @Column(name="email")
-    private String email;
-
-    @Column(name="first_name")
-    private String first_name;
-
-    @Column(name="last_name")
-    private String last_name;
-
-    @Column(name="login")
-    private String login;
-
-    @Column(name="password")
-    private String password;
-
-    @Column(name="role")
-    private String role;
-
 }

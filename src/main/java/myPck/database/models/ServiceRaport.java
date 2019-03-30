@@ -5,19 +5,20 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name="service_raports")
 public class ServiceRaport {
-    @Id
-    @Column(name="id")
-    @GeneratedValue(generator = "incrementor")
-    @GenericGenerator(name="incrementor", strategy = "increment")
-    private int id;
-
-    @Column(name="description")
-    private String description;
 
     public ServiceRaport() {
     }
+
+    public ServiceRaport(String description) {
+        this.description = description;
+    }
+
+
+    @Id
+    @GeneratedValue
+    private int id;
+    private String description;
 
     public int getId() {
         return id;

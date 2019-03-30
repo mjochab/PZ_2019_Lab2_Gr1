@@ -1,11 +1,8 @@
 package myPck.database.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
-@Table(name="cars")
 public class Car {
 
     public Car() {
@@ -18,21 +15,11 @@ public class Car {
     }
 
     @Id
-    @Column(name="id")
-    @GeneratedValue(generator = "incrementor")
-    @GenericGenerator(name="incrementor", strategy = "increment")
+    @GeneratedValue
     private int id;
-
-    @Column(name="model")
     private String model;
-
-    @Column(name="brand")
     private String brand;
-
-    @Column(name="type")
     private String type;
-
-    @Column(name="production_date")
     private String productionDate;
 
     public int getId() {

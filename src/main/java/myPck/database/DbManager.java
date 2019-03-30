@@ -10,20 +10,20 @@ import javax.persistence.Persistence;
 public class DbManager {
 
     public static EntityManager entityManager;
+    public static EntityManagerFactory entityManagerFactory;
 
     public static void init() {
-        EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("org.hibernate.tutorial.jpa");
-
+        entityManagerFactory = Persistence.createEntityManagerFactory("MyConnect");
         entityManager = entityManagerFactory.createEntityManager();
-        
     }
     public static void addSampleDataTest(){
         Car car = new Car("testModel", "testBrand", "testType", "2000");
 
         entityManager.getTransaction().begin();
-        entityManager.merge(car);
+        entityManager.persist(car);
         entityManager.getTransaction().commit();
 
         entityManager.close();
+        entityManagerFactory.close();
     }
 }
