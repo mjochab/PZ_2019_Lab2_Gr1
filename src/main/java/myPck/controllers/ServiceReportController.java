@@ -9,7 +9,7 @@ import myPck.models.ServiceItem;
 
 import java.io.IOException;
 
-public class ServiceReportController {
+public class ServiceReportController extends Controller{
 
     @FXML
     public Button backToServiceDetails;
@@ -29,19 +29,6 @@ public class ServiceReportController {
      */
     private ObservableList<ServiceItem> servicesList;
 
-    /**
-     * Instancja klasy mainStackPaneController
-     */
-    private MainStackPaneController mainStackPaneController;
-
-    /**
-     * Funkcja ustawiająca główny kontroller
-     *
-     * @param mainStackPaneController
-     */
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
 
     /**
      * Metoda wraca do głównego okna aplikacji.

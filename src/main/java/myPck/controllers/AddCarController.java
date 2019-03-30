@@ -12,13 +12,8 @@ import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 
-public class AddCarController {
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
+public class AddCarController extends Controller{
+
     @FXML
     private ResourceBundle resources;
 

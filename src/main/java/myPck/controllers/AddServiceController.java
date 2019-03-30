@@ -12,14 +12,8 @@ import myPck.Service;
 
 import java.io.IOException;
 
-public class AddServiceController {
+public class AddServiceController extends Controller{
 
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
-    }
     @FXML
     private Button addNewCustomerButton;
 
