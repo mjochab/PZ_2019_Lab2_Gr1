@@ -21,9 +21,11 @@ public class Main extends Application {
         primaryStage.setTitle("ServiceFx station");
 
         primaryStage.show();
-//        DbManager.init();
 
-//        DbManager.addSampleDataTest();
+        /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
+//        DbManager dbManager = new DbManager();
+        /**Uzupełnienie bazy przykładowymi danymi */
+//        dbManager.addSampleDataTest();
 
     }
 }

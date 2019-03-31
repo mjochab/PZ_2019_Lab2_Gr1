@@ -1,32 +1,23 @@
 package myPck.database;
 
-
 import myPck.database.models.Car;
 import myPck.database.models.User;
+import myPck.services.UserService;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
+import java.util.Date;
 
 public class DbManager {
 
-    public static EntityManager entityManager;
-    public static EntityManagerFactory entityManagerFactory;
+    private UserService userService;
 
-    public static void init() {
-        entityManagerFactory = Persistence.createEntityManagerFactory("MyConnect");
-        entityManager = entityManagerFactory.createEntityManager();
+    public DbManager () {
+        this.userService = new UserService();
     }
-    public static void addSampleDataTest(){
-        Car car = new Car("testModel", "testBrand", "testType", "2000");
+
+    public void addSampleDataTest(){
+        Car car = new Car("testModel", "testBrand", "testType", new Date());
         User user = new User("email@o2.pl", "Jan", "Kowalski", "login", "password", "A");
 
-        entityManager.getTransaction().begin();
-        entityManager.persist(car);
-        entityManager.persist(user);
-        entityManager.getTransaction().commit();
-
-        entityManager.close();
-        entityManagerFactory.close();
+        this.userService.persist(user);
     }
 }
