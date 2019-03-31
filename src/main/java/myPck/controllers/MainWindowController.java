@@ -10,9 +10,7 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-import myPck.Service;
-
-import java.util.ArrayList;
+import myPck.ServiceFx;
 
 import java.io.IOException;
 
@@ -20,23 +18,23 @@ public class MainWindowController extends Controller{
 
 
     //lista zawierająca zlecenia
-    private ObservableList<Service> servicesList;
+    private ObservableList<ServiceFx> servicesList;
 
     @FXML
     //tableka wyświetlająca dane z listy ze zleceniami
-    private TableView<Service> servicesTableView;
+    private TableView<ServiceFx> servicesTableView;
 
     @FXML
     //kolumna zawierająca informacje o samochodzie
-    private TableColumn<Service, String> carColumn;
+    private TableColumn<ServiceFx, String> carColumn;
 
     @FXML
     //kolumna zawierająca informacje o kliencie
-    private TableColumn<Service, String> clientColumn;
+    private TableColumn<ServiceFx, String> clientColumn;
 
     @FXML
     //kolumna zawierająca informacje o statusie zlecenia
-    private TableColumn<Service, String> statusColumn;
+    private TableColumn<ServiceFx, String> statusColumn;
     //przyciski
     @FXML
     private Button addNewServiceButton;
@@ -77,7 +75,7 @@ public class MainWindowController extends Controller{
      */
     @FXML
     void invoicePDFTest(ActionEvent event) {
-        Service service;
+        ServiceFx service;
         try{
             //sprawdza czy zaznaczono jakiś element w TableView
             service = servicesTableView.getSelectionModel().getSelectedItem();
@@ -97,7 +95,7 @@ public class MainWindowController extends Controller{
     void showDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
-        Service service;
+        ServiceFx service;
         try{
             //sprawdza czy zaznaczono jakieś zlecenie w TableView
             service = servicesTableView.getSelectionModel().getSelectedItem();
@@ -162,10 +160,10 @@ public class MainWindowController extends Controller{
      */
     void sampleData(){
 
-        Service service1 = new Service("Jaguar XE", "Konrad Rejman", "Done");
-        Service service2 = new Service("Skoda Fabia", "Bartek Kudełka", "in Repair");
-        Service service3 = new Service("Opel Astra", "Filip Rebizant", "not allocated");
-        Service service4 = new Service("Toyota Auris", "Marek Wojdyła", "not allocated");
+        ServiceFx service1 = new ServiceFx("Jaguar XE", "Konrad Rejman", "Done");
+        ServiceFx service2 = new ServiceFx("Skoda Fabia", "Bartek Kudełka", "in Repair");
+        ServiceFx service3 = new ServiceFx("Opel Astra", "Filip Rebizant", "not allocated");
+        ServiceFx service4 = new ServiceFx("Toyota Auris", "Marek Wojdyła", "not allocated");
         //dodanie do listy
         servicesList.add(service1);
         servicesList.add(service2);

@@ -1,40 +1,48 @@
 package myPck.database.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
+@Table(name = "users")
 public class User {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name= "id")
+    private long id;
+
+    @Column(name = "email", length = 40, nullable = false)
+    private String email;
+
+    @Column(name="first_name", length = 25)
+    private String firstName;
+
+    @Column(name="last_name", length = 40)
+    private String lastName;
+
+    @Column(name="login", length = 25, nullable = false)
+    private String login;
+
+    @Column(name="password", length = 40, nullable = false)
+    private String password;
+
+    @Column(name="role", length = 25, nullable = false)
+    private String role;
 
     public User() {
     }
 
     public User(String email, String first_name, String last_name, String login, String password, String role) {
         this.email = email;
-        this.first_name = first_name;
-        this.last_name = last_name;
+        this.firstName = first_name;
+        this.lastName = last_name;
         this.login = login;
         this.password = password;
         this.role = role;
     }
 
-    @Id
-    @GeneratedValue
-    private int id;
-    private String email;
-    private String first_name;
-    private String last_name;
-    private String login;
-    private String password;
-    private String role;
-
-    public int getId() {
+    public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getEmail() {
@@ -45,20 +53,20 @@ public class User {
         this.email = email;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
     public String getLogin() {
@@ -83,5 +91,10 @@ public class User {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    @Override
+    public String toString() {
+        return "User: " + this.login;
     }
 }

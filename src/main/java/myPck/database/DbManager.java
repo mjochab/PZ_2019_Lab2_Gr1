@@ -2,6 +2,7 @@ package myPck.database;
 
 
 import myPck.database.models.Car;
+import myPck.database.models.User;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -18,9 +19,11 @@ public class DbManager {
     }
     public static void addSampleDataTest(){
         Car car = new Car("testModel", "testBrand", "testType", "2000");
+        User user = new User("email@o2.pl", "Jan", "Kowalski", "login", "password", "A");
 
         entityManager.getTransaction().begin();
         entityManager.persist(car);
+        entityManager.persist(user);
         entityManager.getTransaction().commit();
 
         entityManager.close();

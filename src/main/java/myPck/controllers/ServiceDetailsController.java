@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import myPck.Service;
+import myPck.ServiceFx;
 
 import java.io.IOException;
 
@@ -25,7 +25,7 @@ public class ServiceDetailsController extends Controller{
     //pole z informacją o kliencie
     private TextField customerTextField;
     @FXML
-    //etykieta inforująca o stanie zlecenia np: Done, in Service, not allocated
+    //etykieta inforująca o stanie zlecenia np: Done, in ServiceFx, not allocated
     private Label statusLabel;
 
     @FXML
@@ -123,7 +123,7 @@ public class ServiceDetailsController extends Controller{
                 "vida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce " +
                 "at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh.";
 
-        Service service = new Service("Jagura FX", "Jan Kowalski", "Done");
+        ServiceFx service = new ServiceFx("Jagura FX", "Jan Kowalski", "Done");
 
         faultDescTextArea.setText(sampleDesc);
         carTextField.setText(service.getCar());

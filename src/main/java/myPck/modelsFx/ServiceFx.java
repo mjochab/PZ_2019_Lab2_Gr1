@@ -5,14 +5,14 @@ import javafx.beans.property.StringProperty;
 
 // klasa służąca jedynie do testowania działania widoku MainWindow
 // w przysłości ta klasa będzie wymieniona na obiekt reprezentujący zlecenie
-public class Service {
+public class ServiceFx {
 
     public static int amount;
     private StringProperty car = new SimpleStringProperty();
     private StringProperty client = new SimpleStringProperty();
     private StringProperty status = new SimpleStringProperty();
 
-    public Service(String car, String client, String status) {
+    public ServiceFx(String car, String client, String status) {
         amount++;
         this.car.set(car);
         this.client.set(client);
@@ -57,7 +57,7 @@ public class Service {
 
     @Override
     public String toString() {
-        return "Service{" +
+        return "ServiceFx{" +
                 "car=" + car +
                 ", client=" + client +
                 ", status=" + status +
