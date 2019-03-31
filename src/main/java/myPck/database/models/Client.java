@@ -1,9 +1,6 @@
 package myPck.database.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "clients")
@@ -11,20 +8,34 @@ public class Client {
 
     public Client() {
     }
-
-    public Client(String firstName, String lastName, int NIP_number, String address) {
+    /**
+     *
+     * @param String firstName
+     * @param String lastName
+     * @param int NipNumber
+     * @param String address
+     */
+    public Client(String firstName, String lastName, int NipNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
-        this.NIP_number = NIP_number;
+        this.NipNumber = NipNumber;
         this.address = address;
     }
 
     @Id
     @GeneratedValue
     private int id;
+
+    @Column(name="first_name", nullable = false)
     private String firstName;
+
+    @Column(name="last_name", nullable = false)
     private String lastName;
-    private int NIP_number;
+
+    @Column(name="NIP_number")
+    private int NipNumber;
+
+    @Column(name="address", nullable = false)
     private String address;
 
     public int getId() {
@@ -51,12 +62,12 @@ public class Client {
         this.lastName = last_name;
     }
 
-    public int getNIP_number() {
-        return NIP_number;
+    public int getNipNumber() {
+        return NipNumber;
     }
 
-    public void setNIP_number(int NIP_number) {
-        this.NIP_number = NIP_number;
+    public void setNipNumber(int NipNumber) {
+        this.NipNumber = NipNumber;
     }
 
     public String getAddress() {

@@ -27,7 +27,7 @@ public class Service {
     @Temporal(TemporalType.TIMESTAMP)
     private Date startDate;
 
-    @Column(name="end_date", nullable = false, columnDefinition = "DATETIME")
+    @Column(name="end_date", nullable = true, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
 
@@ -38,6 +38,13 @@ public class Service {
     private User mechanic;
 
     public Service() {
+    }
+
+    public Service(Client client, Car car, String status) {
+        this.client = client;
+        this.car = car;
+        this.status = status;
+        this.startDate = new Date();
     }
 
     public String getCar() {
