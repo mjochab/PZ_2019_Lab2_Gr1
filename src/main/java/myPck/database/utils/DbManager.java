@@ -1,4 +1,4 @@
-package myPck.database;
+package myPck.database.utils;
 
 import myPck.database.models.Car;
 import myPck.database.models.User;
