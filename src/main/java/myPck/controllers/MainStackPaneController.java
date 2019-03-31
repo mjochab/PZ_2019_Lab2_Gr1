@@ -1,10 +1,11 @@
 package myPck.controllers;
 
-import java.io.IOException;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+
+import java.io.IOException;
 
 /**
  * typ enum potrzebny tylko do testowania widoku
@@ -21,7 +22,7 @@ public class MainStackPaneController {
     /**
      * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
      */
-    public static Type_of_account ACCOUNT = Type_of_account.K;
+    public static Type_of_account ACCOUNT = Type_of_account.A;
 
     /**
      * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji

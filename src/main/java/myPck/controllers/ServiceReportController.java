@@ -5,7 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import myPck.models.ServiceItem;
+import myPck.modelsFx.ServiceItem;
 
 import java.io.IOException;
 

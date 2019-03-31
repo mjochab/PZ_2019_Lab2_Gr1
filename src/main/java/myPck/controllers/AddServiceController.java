@@ -5,10 +5,8 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
-import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.StackPane;
-import myPck.Service;
+import myPck.ServiceFx;
 
 import java.io.IOException;
 
@@ -61,7 +59,7 @@ public class AddServiceController extends Controller{
         String car = carsListView.getSelectionModel().getSelectedItem();
         String customer= customersListView.getSelectionModel().getSelectedItem();
         String status = "No allocated";
-        Service newServiece = new Service(car, customer, status);
+        ServiceFx newServiece = new ServiceFx(car, customer, status);
 
         System.out.println("Zapisuje zlecenie");
         System.out.println(newServiece.toString());

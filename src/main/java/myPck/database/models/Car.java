@@ -3,6 +3,7 @@ package myPck.database.models;
 import javax.persistence.*;
 
 @Entity
+@Table(name="cars")
 public class Car {
 
     public Car() {
