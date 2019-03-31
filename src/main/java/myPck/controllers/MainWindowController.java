@@ -11,31 +11,34 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
 import myPck.ServiceFx;
+import myPck.database.models.Service;
+import myPck.services.ServiceService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class MainWindowController extends Controller{
 
-
-    //lista zawierająca zlecenia
-    private ObservableList<ServiceFx> servicesList;
+    /** Lista zawierająca zlecenia */
+    private ObservableList<ServiceFx> servicesFxList;
 
     @FXML
-    //tableka wyświetlająca dane z listy ze zleceniami
+    /** Tabela wyświetlająca dane z listy ze zleceniami */
     private TableView<ServiceFx> servicesTableView;
 
     @FXML
-    //kolumna zawierająca informacje o samochodzie
+    /** kolumna zawierająca informacje o samochodzie */
     private TableColumn<ServiceFx, String> carColumn;
 
     @FXML
-    //kolumna zawierająca informacje o kliencie
+    /** kolumna zawierająca informacje o kliencie */
     private TableColumn<ServiceFx, String> clientColumn;
 
     @FXML
-    //kolumna zawierająca informacje o statusie zlecenia
+    /** kolumna zawierająca informacje o statusie zlecenia */
     private TableColumn<ServiceFx, String> statusColumn;
-    //przyciski
+
+    /** Przyciski */
     @FXML
     private Button addNewServiceButton;
     @FXML
@@ -43,7 +46,7 @@ public class MainWindowController extends Controller{
     @FXML
     private Button showDetailsButton;
 
-    //zakładki
+    /** Zakładki */
     @FXML
     private Tab profileTab;
     @FXML
@@ -51,21 +54,32 @@ public class MainWindowController extends Controller{
     @FXML
     private Tab tasksTab;
 
-    /**
-     * ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
-     * @param event
-     */
+    /** Lista zawierająca zlecenia */
+    private List<Service> servicesList;
 
+    /** Serwis Zleceń */
+    private ServiceService serviceService;
+
+    /**
+     * Konstruktor MainWindowControlle i inicjalizacja Serwisu zleceń
+     */
+    public MainWindowController() {
+        this.serviceService = new ServiceService();
+    }
+
+    /**
+     * Metoda otwiera panel dodawanie zlecenia
+     * @param ActionEvent event
+     */
     @FXML
-    //ta funkcja w przyszłości będzie otwierać nowe okno (panel dodawanie zlecenia)
     void addServicesTest(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
         StackPane stackPane = loader.load();
 
-        //przekazanie kontrolera (głównego okna) do okienka AddService
+        /** przekazanie kontrolera (głównego okna) do okienka AddService */
         AddServiceController addServiceController = loader.getController();
         addServiceController.setMainStackPaneController(mainStackPaneController);
-        //ustawienie okna AddService
+        /** Ustawienie okna AddService */
         mainStackPaneController.setScreen(stackPane);
     }
 
@@ -77,7 +91,7 @@ public class MainWindowController extends Controller{
     void invoicePDFTest(ActionEvent event) {
         ServiceFx service;
         try{
-            //sprawdza czy zaznaczono jakiś element w TableView
+            /** sprawdza czy zaznaczono jakiś element w TableView */
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Generuje PDF dla:");
             System.out.println(service.getCar());
@@ -88,7 +102,7 @@ public class MainWindowController extends Controller{
 
     /**
      * Otwiera okno ze szczególowymi informacjami o wybranym zleceniu
-     * @param event
+     * @param ActionEvent event
      * @throws IOException
      */
     @FXML
@@ -97,85 +111,100 @@ public class MainWindowController extends Controller{
         StackPane stackPane = loader.load();
         ServiceFx service;
         try{
-            //sprawdza czy zaznaczono jakieś zlecenie w TableView
+            /** sprawdza czy zaznaczono jakieś zlecenie w TableView */
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
             System.out.println(service.getCar());
 
-            //przekazanie kontrolera (głównego okna) do okienka serviceDetails
+            /** Przekazanie kontrolera (głównego okna) do okienka serviceDetails */
             ServiceDetailsController serviceDetailsController = loader.getController();
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
-            //ustawienie okna serviceDetails
+            /** Ustawienie okna serviceDetails */
             mainStackPaneController.setScreen(stackPane);
         }catch(Exception e){
             System.out.println("Nie wybrano niczego");
         }
     }
+    /**
+     * Metoda ustawia wartości które mają się wyświetlać w poszczególnych kolumnach
+     */
+    private void setUpColumns() {
+        carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
+        clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
+        statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
+    }
 
+    /**
+     * Metoda ustawia liste zleceń.
+     */
+    private void setUpServiceList() {
+        servicesFxList = FXCollections.observableArrayList();
+        servicesTableView.setItems(this.servicesFxList);
+    }
 
     @FXML
     void initialize() {
         System.out.println("Wersja dla konta: "+mainStackPaneController.ACCOUNT);
 
-        servicesList = FXCollections.observableArrayList();
-        servicesTableView.setItems(this.servicesList);
-
-        //ustawienie wartości które mają się wyświetlać w poszczególnych kolumnach
-        carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
-        clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
-        statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
-
-        //zarządzanie dostępem przycisków
+        this.setUpColumns();
+        this.setUpServiceList();
+        this.loadServices();
+        /** zarządzanie dostępem przycisków */
         buttonManagment();
 
-        //ukrywanie elementów dla kont bez uprawnień
+        /** ukrywanie elementów dla kont bez uprawnień */
         switch (mainStackPaneController.ACCOUNT){
             case A:
-                sampleData();
+                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case K:
-                sampleData();
+                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case M:
-                sampleData();
+                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case R:
+                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
                 break;
         }
     }
-    /**
-     * wypełnienie listy przykładowymi zleceniami
-     */
-    void sampleData(){
 
-        ServiceFx service1 = new ServiceFx("Jaguar XE", "Konrad Rejman", "Done");
-        ServiceFx service2 = new ServiceFx("Skoda Fabia", "Bartek Kudełka", "in Repair");
-        ServiceFx service3 = new ServiceFx("Opel Astra", "Filip Rebizant", "not allocated");
-        ServiceFx service4 = new ServiceFx("Toyota Auris", "Marek Wojdyła", "not allocated");
-        //dodanie do listy
-        servicesList.add(service1);
-        servicesList.add(service2);
-        servicesList.add(service3);
-        servicesList.add(service4);
+    /**
+     * Metoda pobiera serwisy z bazy danych.
+     */
+    public void loadServices() {
+        servicesList = serviceService.findAll();
+    }
+
+    /**
+     * Metoda zamienia użytkwonika na użytkownika Fx i dodaje go do tablicy servicesFxList
+     */
+    public void appendUsersToUsersFx() {
+        if (!servicesList.isEmpty()) {
+            for (Service service : servicesList) {
+                ServiceFx serviceFx = new ServiceFx(service.getCar(), service.getClient(), service.getStatus());
+                servicesFxList.add(serviceFx);
+            }
+        }
         buttonManagment();
     }
     /**
-     * funkcja wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
+     * Metoda wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
      */
     void buttonManagment(){
-        if(servicesList.isEmpty()){
+        if(servicesFxList.isEmpty()){
             invoicePDFButton.setDisable(true);
             showDetailsButton.setDisable(true);
         }

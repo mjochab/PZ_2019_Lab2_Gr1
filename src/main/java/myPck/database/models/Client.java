@@ -1,18 +1,20 @@
 package myPck.database.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "clients")
 public class Client {
 
     public Client() {
     }
 
-    public Client(String first_name, String last_name, int NIP_number, String address) {
-        this.first_name = first_name;
-        this.last_name = last_name;
+    public Client(String firstName, String lastName, int NIP_number, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
         this.NIP_number = NIP_number;
         this.address = address;
     }
@@ -20,8 +22,8 @@ public class Client {
     @Id
     @GeneratedValue
     private int id;
-    private String first_name;
-    private String last_name;
+    private String firstName;
+    private String lastName;
     private int NIP_number;
     private String address;
 
@@ -33,20 +35,20 @@ public class Client {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
     public int getNIP_number() {
@@ -63,5 +65,10 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

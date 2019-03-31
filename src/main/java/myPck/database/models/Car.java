@@ -73,4 +73,9 @@ public class Car {
     public void setProductionDate(Date productionDate) {
         this.productionDate = productionDate;
     }
+
+    @Override
+    public String toString() {
+        return brand + " " + model;
+    }
 }
