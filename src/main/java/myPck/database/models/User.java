@@ -11,7 +11,7 @@ public class User {
     @Column(name= "id")
     private long id;
 
-    @Column(name = "email", length = 255)
+    @Column(name = "email", length = 40, nullable = false)
     private String email;
 
     @Column(name="first_name", length = 25)
@@ -20,13 +20,13 @@ public class User {
     @Column(name="last_name", length = 40)
     private String lastName;
 
-    @Column(name="login", length = 25)
+    @Column(name="login", length = 25, nullable = false)
     private String login;
 
-    @Column(name="password", length = 40)
+    @Column(name="password", length = 40, nullable = false)
     private String password;
 
-    @Column(name="role", length = 25)
+    @Column(name="role", length = 25, nullable = false)
     private String role;
 
     public User() {
@@ -41,9 +41,9 @@ public class User {
         this.role = role;
     }
 
-//    public String getId() {
-//        return id;
-//    }
+    public long getId() {
+        return id;
+    }
 
     public String getEmail() {
         return email;
