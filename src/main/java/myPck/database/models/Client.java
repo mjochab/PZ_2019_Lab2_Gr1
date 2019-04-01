@@ -1,28 +1,41 @@
 package myPck.database.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 
 @Entity
+@Table(name = "clients")
 public class Client {
 
     public Client() {
     }
-
-    public Client(String first_name, String last_name, int NIP_number, String address) {
-        this.first_name = first_name;
-        this.last_name = last_name;
-        this.NIP_number = NIP_number;
+    /**
+     *
+     * @param String firstName
+     * @param String lastName
+     * @param int NipNumber
+     * @param String address
+     */
+    public Client(String firstName, String lastName, int NipNumber, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.NipNumber = NipNumber;
         this.address = address;
     }
 
     @Id
     @GeneratedValue
     private int id;
-    private String first_name;
-    private String last_name;
-    private int NIP_number;
+
+    @Column(name="first_name", nullable = false)
+    private String firstName;
+
+    @Column(name="last_name", nullable = false)
+    private String lastName;
+
+    @Column(name="NIP_number")
+    private int NipNumber;
+
+    @Column(name="address", nullable = false)
     private String address;
 
     public int getId() {
@@ -33,28 +46,28 @@ public class Client {
         this.id = id;
     }
 
-    public String getFirst_name() {
-        return first_name;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setFirst_name(String first_name) {
-        this.first_name = first_name;
+    public void setFirstName(String first_name) {
+        this.firstName = first_name;
     }
 
-    public String getLast_name() {
-        return last_name;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setLast_name(String last_name) {
-        this.last_name = last_name;
+    public void setLastName(String last_name) {
+        this.lastName = last_name;
     }
 
-    public int getNIP_number() {
-        return NIP_number;
+    public int getNipNumber() {
+        return NipNumber;
     }
 
-    public void setNIP_number(int NIP_number) {
-        this.NIP_number = NIP_number;
+    public void setNipNumber(int NipNumber) {
+        this.NipNumber = NipNumber;
     }
 
     public String getAddress() {
@@ -63,5 +76,10 @@ public class Client {
 
     public void setAddress(String address) {
         this.address = address;
+    }
+
+    @Override
+    public String toString() {
+        return firstName + " " + lastName;
     }
 }

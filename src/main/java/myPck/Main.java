@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import myPck.database.utils.DbManager;
 
 public class Main extends Application {
 
@@ -21,9 +22,11 @@ public class Main extends Application {
         primaryStage.setTitle("ServiceFx station");
 
         primaryStage.show();
-//        DbManager.init();
 
-//        DbManager.addSampleDataTest();
+        /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
+        DbManager dbManager = new DbManager();
+        /**Uzupełnienie bazy przykładowymi danymi */
+        dbManager.addSampleDataTest();
 
     }
 }

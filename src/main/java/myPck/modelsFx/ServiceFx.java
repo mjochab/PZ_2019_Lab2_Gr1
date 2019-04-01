@@ -3,8 +3,6 @@ package myPck;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-// klasa służąca jedynie do testowania działania widoku MainWindow
-// w przysłości ta klasa będzie wymieniona na obiekt reprezentujący zlecenie
 public class ServiceFx {
 
     public static int amount;

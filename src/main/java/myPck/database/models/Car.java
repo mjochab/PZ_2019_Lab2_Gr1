@@ -1,29 +1,40 @@
 package myPck.database.models;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 @Table(name="cars")
 public class Car {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long id;
+
+    @Column(name = "model", length = 40, nullable = false)
+    private String model;
+
+    @Column(name = "brand", length = 40, nullable = false)
+    private String brand;
+
+    @Column(name = "type", length = 40, nullable = false)
+    private String type;
+
+    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date productionDate;
+
     public Car() {
     }
-    public Car(String model, String brand, String type, String productionDate){
+
+    public Car(String model, String brand, String type, Date productionDate){
         this.model=model;
         this.brand=brand;
         this.type=type;
         this.productionDate=productionDate;
     }
 
-    @Id
-    @GeneratedValue
-    private int id;
-    private String model;
-    private String brand;
-    private String type;
-    private String productionDate;
-
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -55,11 +66,16 @@ public class Car {
         this.type = type;
     }
 
-    public String getProductionDate() {
+    public Date getProductionDate() {
         return productionDate;
     }
 
-    public void setProductionDate(String productionDate) {
+    public void setProductionDate(Date productionDate) {
         this.productionDate = productionDate;
+    }
+
+    @Override
+    public String toString() {
+        return brand + " " + model;
     }
 }

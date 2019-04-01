@@ -1,16 +1,18 @@
 package myPck.database.models;
 
-import org.hibernate.annotations.GenericGenerator;
-
-import javax.persistence.*;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
-public class ServiceRaport {
+@Table(name = "service_reports")
+public class ServiceReport {
 
-    public ServiceRaport() {
+    public ServiceReport() {
     }
 
-    public ServiceRaport(String description) {
+    public ServiceReport(String description) {
         this.description = description;
     }
 

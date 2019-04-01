@@ -1,33 +1,61 @@
 package myPck.database.models;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.List;
 
 @Entity
+@Table(name = "services")
 public class Service {
 
     @Id
     @GeneratedValue
-    private int id;
+    private long id;
     @OneToOne
     private Car car;
-    @OneToOne
+    @ManyToOne
     private Client client;
     @OneToOne
-    private Invoice invodice;
+    private Invoice invoice;
     @OneToOne
-    private ServiceRaport serviceRaport;
+    private ServiceReport serviceReport;
     @OneToMany
     private List<InvoicePosition> invoicePositions;
     private String description;
-    private String start_date;
-    private String end_date;
+
+    @Column(name="start_date", nullable = false, columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date startDate;
+
+    @Column(name="end_date", nullable = true, columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date endDate;
+
     private String status;
     @OneToOne
     private User creater;
     @OneToOne
     private User mechanic;
 
+    public Service() {
+    }
 
+    public Service(Client client, Car car, String status) {
+        this.client = client;
+        this.car = car;
+        this.status = status;
+        this.startDate = new Date();
+    }
 
+    public String getCar() {
+        return car.getBrand() + " " + car .getModel();
+    }
+
+    public String getClient() {
+        return client.getFirstName() + " " + client.getLastName();
+    }
+
+    public String getStatus() {
+        return status;
+    }
 }
