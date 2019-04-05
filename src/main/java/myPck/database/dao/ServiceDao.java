@@ -31,6 +31,7 @@ public class ServiceDao extends SessionManager implements Dao<Service, String> {
     @Override
     public void persist(Service entity) {
         getCurrentSession().save(entity);
+        return null;
     }
 
     @Override

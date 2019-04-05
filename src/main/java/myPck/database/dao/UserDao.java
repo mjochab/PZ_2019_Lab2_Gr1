@@ -31,6 +31,7 @@ public class UserDao extends SessionManager implements Dao<User, String> {
     @Override
     public void persist(User entity) {
         getCurrentSession().save(entity);
+        return null;
     }
 
     @Override

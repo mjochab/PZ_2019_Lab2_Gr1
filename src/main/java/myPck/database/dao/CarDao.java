@@ -31,6 +31,7 @@ public class CarDao extends SessionManager implements Dao<Car, String> {
     @Override
     public void persist(Car entity) {
         getCurrentSession().save(entity);
+        return null;
     }
 
     @Override
