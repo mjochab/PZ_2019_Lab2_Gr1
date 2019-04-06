@@ -84,6 +84,7 @@ public class ServiceDetailsController extends Controller{
 
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.ACCOUNT){
+            case ALL:
             case M:
                 addReportButton.setVisible(true);
                 break;

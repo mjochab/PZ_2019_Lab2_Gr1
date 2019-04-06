@@ -178,6 +178,11 @@ public class MainWindowController extends Controller{
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
                 break;
+            case ALL:
+                appendUsersToUsersFx();
+                invoicePDFButton.setVisible(true);
+                showDetailsButton.setVisible(true);
+                break;
         }
     }
 

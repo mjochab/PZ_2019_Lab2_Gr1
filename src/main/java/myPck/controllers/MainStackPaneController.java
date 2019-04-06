@@ -15,6 +15,7 @@ enum Type_of_account {
     R,  //recepcjonista
     A,  //admin
     K,  //kierownik
+    ALL, //wszystkie opcje
 };
 
 public class MainStackPaneController {
@@ -22,7 +23,7 @@ public class MainStackPaneController {
     /**
      * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
      */
-    public static Type_of_account ACCOUNT = Type_of_account.A;
+    public static Type_of_account ACCOUNT = Type_of_account.ALL;
 
     /**
      * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
