@@ -12,7 +12,6 @@ public class InvoiceDao extends SessionManager implements Dao<Invoice, String> {
     @Override
     public void persist(Invoice entity) {
      getCurrentSession().save(entity);
-        return null;
     }
 
     @Override
