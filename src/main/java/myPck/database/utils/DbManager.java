@@ -28,7 +28,6 @@ public class DbManager {
 
     public void addSampleData() {
         Random generator = new Random();
-        int index = generator.nextInt(2);
         int numberOfRows = 10;
 
         String[] firstNames = {"Jan", "Roman"};
@@ -38,6 +37,7 @@ public class DbManager {
         String[] carTypes = {"Sedan", "Combi"};
 
         for (int i = 0; i <=numberOfRows; i++) {
+            int index = generator.nextInt(2);
             Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
             User user = this.populateUser(firstNames[index], lastNames[index]);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
