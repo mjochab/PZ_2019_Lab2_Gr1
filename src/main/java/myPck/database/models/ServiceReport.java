@@ -10,6 +10,7 @@ import javax.persistence.Table;
 public class ServiceReport {
 
     public ServiceReport() {
+
     }
 
     public ServiceReport(String description) {
