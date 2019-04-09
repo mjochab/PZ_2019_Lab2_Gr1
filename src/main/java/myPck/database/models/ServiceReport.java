@@ -1,28 +1,28 @@
 package myPck.database.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
 @Table(name = "service_reports")
 public class ServiceReport implements Serializable {
 
-    public ServiceReport() {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    @Column(name = "description", length = 500, nullable = true)
+    private String description;
 
+    public ServiceReport() {
     }
 
+    /**
+     *
+     * @param description
+     */
     public ServiceReport(String description) {
         this.description = description;
     }
-
-
-    @Id
-    @GeneratedValue
-    private int id;
-    private String description;
 
     public int getId() {
         return id;
