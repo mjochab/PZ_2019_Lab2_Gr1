@@ -13,4 +13,9 @@ public class InvoicePosition {
     private int id;
     private String name;
     private double price;
+
+    public InvoicePosition(String name, double price) {
+        this.name = name;
+        this.price = price;
+    }
 }

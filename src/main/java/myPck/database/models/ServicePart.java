@@ -15,4 +15,6 @@ public class ServicePart {
     private double price;
     private String name;
     private int service_id;
+
+
 }
