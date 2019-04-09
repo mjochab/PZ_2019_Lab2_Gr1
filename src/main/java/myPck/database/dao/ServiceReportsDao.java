@@ -5,11 +5,10 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class ServiceReportsDao extends SessionManager implements Dao<ServiceReport,String> {
+public class ServiceReportsDao extends SessionManager implements Dao<ServiceReport> {
     public ServiceReportsDao() {
 
     }
-
 
     @Override
     public void persist(ServiceReport entity) {
@@ -22,7 +21,7 @@ public class ServiceReportsDao extends SessionManager implements Dao<ServiceRepo
     }
 
     @Override
-    public ServiceReport findById(String id) {
+    public ServiceReport findById(long id) {
         ServiceReport serviceReport = (ServiceReport) getCurrentSession().get(ServiceReport.class,id);
         return serviceReport;
     }

@@ -1,10 +1,11 @@
 package myPck.database.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "clients")
-public class Client {
+public class Client implements Serializable {
 
     public Client() {
     }

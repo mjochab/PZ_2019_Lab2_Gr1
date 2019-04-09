@@ -19,14 +19,14 @@ public class Main extends Application {
         StackPane stackPane = loader.load();
         Scene scene = new Scene(stackPane, 700, 500);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("ServiceFx station");
+        primaryStage.setTitle("Service station");
 
         primaryStage.show();
 
         /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
         DbManager dbManager = new DbManager();
         /**Uzupełnienie bazy przykładowymi danymi */
-        dbManager.addSampleData();
+//        dbManager.addSampleData();
 
     }
 }

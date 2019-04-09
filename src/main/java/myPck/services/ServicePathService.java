@@ -31,14 +31,14 @@ public class ServicePathService {
         servicePartDao.closeCurrentSessionwithTransaction();
     }
 
-    public ServicePart findById (String id) {
+    public ServicePart findById (long id) {
         servicePartDao.openCurrentSession();
         ServicePart servicePart = servicePartDao.findById(id);
         servicePartDao.closeCurrentSession();
         return servicePart;
     }
 
-    public void delete (String id) {
+    public void delete (long id) {
         servicePartDao.openCurrentSessionwithTransaction();
         ServicePart servicePart = servicePartDao.findById(id);
         servicePartDao.delete(servicePart);

@@ -1,11 +1,12 @@
 package myPck.database.models;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
 @Table(name = "invoices")
-public class Invoice {
+public class Invoice implements Serializable {
     @Id
     @GeneratedValue
     private int id;

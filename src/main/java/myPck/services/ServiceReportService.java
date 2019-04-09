@@ -32,14 +32,14 @@ import java.util.List;
             serviceReportsDao.closeCurrentSessionwithTransaction();
         }
 
-        public ServiceReport findById (String id) {
+        public ServiceReport findById (long id) {
             serviceReportsDao.openCurrentSession();
             ServiceReport serviceReport = serviceReportsDao.findById(id);
             serviceReportsDao.closeCurrentSession();
             return serviceReport;
         }
 
-        public void delete (String id) {
+        public void delete (long id) {
             serviceReportsDao.openCurrentSessionwithTransaction();
             ServiceReport serviceReport = serviceReportsDao.findById(id);
             serviceReportsDao.delete(serviceReport);

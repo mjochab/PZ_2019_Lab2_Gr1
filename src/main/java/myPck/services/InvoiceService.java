@@ -40,14 +40,14 @@ public class InvoiceService {
     /**
 
      */
-    public Invoice findById(String id) {
+    public Invoice findById(long id) {
         invoiceDao.openCurrentSession();
         Invoice invoice = invoiceDao.findById(id);
         invoiceDao.closeCurrentSession();
         return invoice;
     }
 
-    public void delete(String id) {
+    public void delete(long id) {
         invoiceDao.openCurrentSessionwithTransaction();
         Invoice invoice = invoiceDao.findById(id);
         invoiceDao.delete(invoice);

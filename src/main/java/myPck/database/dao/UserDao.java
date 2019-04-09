@@ -5,13 +5,13 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class UserDao extends SessionManager implements Dao<User, String> {
+public class UserDao extends SessionManager implements Dao<User> {
 
     public UserDao() {
     }
 
     @Override
-    public User findById(String id) {
+    public User findById(long id) {
         User user = (User) getCurrentSession().get(User.class, id);
         return user;
     }
