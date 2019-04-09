@@ -1,13 +1,7 @@
 package myPck.database.utils;
 
-import myPck.database.models.Car;
-import myPck.database.models.Client;
-import myPck.database.models.Service;
-import myPck.database.models.User;
-import myPck.services.CarService;
-import myPck.services.ClientService;
-import myPck.services.ServiceService;
-import myPck.services.UserService;
+import myPck.database.models.*;
+import myPck.services.*;
 
 import java.util.Date;
 import java.util.Random;
@@ -20,7 +14,7 @@ public class DbManager {
     private ClientService clientService;
     private InvoiceService invoiceService;
     private InvoicePositionService invoicePositionService;
-    private ServicePartService servicePartService;
+    private ServicePathService servicePathService;
     private ServiceReportService serviceReportService;
 
 
@@ -30,17 +24,17 @@ public class DbManager {
         this.serviceService = new ServiceService();
         this.clientService = new ClientService();
 
-        this.invoicePositionService = new invoicePositionService();
-        this.invoiceService = new invoiceService();
-        this.servicePartService = new servicePartService();
-        this.serviceReportService = new serviceReportService();
+        this.invoicePositionService = new InvoicePositionService();
+        this.invoiceService = new InvoiceService();
+        this.servicePathService = new ServicePathService();
+        this.serviceReportService = new ServiceReportService();
 
     }
 
-    public DbManager(InvoiceService invoiceService, InvoicePositionService invoicePositionService, ServicePartService servicePartService, ServiceReportService serviceReportService) {
+    public DbManager(InvoiceService invoiceService, InvoicePositionService invoicePositionService, ServicePathService servicePartService, ServiceReportService serviceReportService) {
         this.invoiceService = invoiceService;
         this.invoicePositionService = invoicePositionService;
-        this.servicePartService = servicePartService;
+        this.servicePathService = servicePathService;
         this.serviceReportService = serviceReportService;
     }
 
@@ -56,10 +50,10 @@ public class DbManager {
         String[] carTypes = {"Sedan", "Combi"};
 
         String[] dateInvoice = {"2018-07-03", "2014-03-21"};
-        Int[] priceInvoice = {850, 1200};
-        Int[] amountInvoice = {200,100};
+        int[] priceInvoice = {850, 1200};
+        int[] amountInvoice = {200,100};
 
-        String[] = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
+        String[] loremIpsum = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 " Vivamus vitae nisi eget nisl sagittis mollis in id diam. " +
                 "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa." ,
         "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
@@ -75,7 +69,7 @@ public class DbManager {
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
 
-            Invoice invoice = this.populateInvoice(priceInvoice[index],amountInvoice[index]);
+            //Invoice invoice = this.populateInvoice(priceInvoice[index],amountInvoice[index]);
 
 
         }
@@ -114,10 +108,10 @@ public class DbManager {
 
             return car;
     }
-    public InvoicePosition populateInvoicePosition  (Int price, Int amount, String type)
+    public InvoicePosition populateInvoicePosition(int price, String name)
     {
-         InvoicePosition invoicePosition = new InvoicePosition (price,amount,new Date())
-                 this.invoicePositionService.persist(invoicePosition);
+         InvoicePosition invoicePosition = new InvoicePosition(name, price);
+         this.invoicePositionService.persist(invoicePosition);
          return invoicePosition;
     }
 
