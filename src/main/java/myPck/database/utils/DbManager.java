@@ -44,6 +44,7 @@ public class DbManager {
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
         int[] amountInvoice = {200,100,300,400};
+        Date[] dateOfInvoice = {new Date(2009,3,12), new Date(2014,8,20), new Date(), new Date()};
 
         String[] loremIpsum = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 " Vivamus vitae nisi eget nisl sagittis mollis in id diam. " +
@@ -61,7 +62,7 @@ public class DbManager {
             User user = this.populateUser(firstNames[index], lastNames[index]);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
-            //Invoice invoice = this.populateInvoice(priceInvoice[index],amountInvoice[index]);
+            Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
         }
     }
     public void clearDatabase(){
@@ -70,6 +71,7 @@ public class DbManager {
         this.carService.deleteAll();
         this.userService.deleteAll();
         this.clientService.deleteAll();
+        this.invoiceService.deleteAll();
     }
 
     public Service populateService(Car car, Client client) {
@@ -77,6 +79,20 @@ public class DbManager {
         this.serviceService.persist(service);
 
         return service;
+    }
+
+    public InvoicePosition populateInvoicePosition(String name, double price) {
+        InvoicePosition invoicePosition = new InvoicePosition(name, price);
+        this.invoicePositionService.persist(invoicePosition);
+
+        return invoicePosition;
+    }
+
+    public Invoice populateInvoice(Date date_of_issue, double total_price){
+        Invoice invoice = new Invoice(date_of_issue, total_price);
+        this.invoiceService.persist(invoice);
+
+        return invoice;
     }
 
     public Client populateClient(String firstName, String lastName) {

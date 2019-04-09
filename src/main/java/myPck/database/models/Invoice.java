@@ -25,12 +25,11 @@ public class Invoice implements Serializable {
      *
      * @param date_of_issue
      * @param total_price
-     * @param invoicePositions
      */
-    public Invoice(Date date_of_issue, double total_price, List<InvoicePosition> invoicePositions) {
+    public Invoice(Date date_of_issue, double total_price) {
         this.date_of_issue = date_of_issue;
         this.total_price = total_price;
-        this.invoicePositions = invoicePositions;
+
     }
 
     public int getId() {
