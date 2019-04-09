@@ -45,9 +45,14 @@ public class ProfileController {
     @FXML
     void initialize() {
 
-        loadUser();
-        setUpUser();
+        this.user = new User();
+        this.user.setFirstName("Jan");
+        this.user.setLastName("Kowalski");
+        this.user.setEmail("sdg@gmail.com");
+        this.user.setLogin("JanK");
         convertUserToUserFx();
+        setUpUser();
+
 
     }
 
@@ -58,16 +63,16 @@ public class ProfileController {
     public ProfileController() {
         userService = new UserService();
     }
-    public void loadUser() {
-        user = userService.findById("3");
-    }
 
     public void convertUserToUserFx() {
        userFx = new UserFx(user.getEmail(), user.getFirstName(), user.getLastName(), user.getLogin(), user.getRole());
     }
     public void setUpUser() {
 
-        firstNameField.textProperty().bind(userFx.firstNameProperty());
+        firstNameField.textProperty().bindBidirectional(userFx.firstNameProperty());
+        lastNameField.textProperty().bindBidirectional(userFx.lastNameProperty());
+        loginField.textProperty().bindBidirectional(userFx.loginProperty());
+        
     }
 
 
