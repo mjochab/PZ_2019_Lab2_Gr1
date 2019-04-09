@@ -35,7 +35,7 @@ public class Service implements Serializable {
     @Column(name = "status", length = 40, nullable = false)
     private String status;
     @ManyToOne
-    private User creater;
+    private User creator;
     @ManyToOne
     private User mechanic;
 
