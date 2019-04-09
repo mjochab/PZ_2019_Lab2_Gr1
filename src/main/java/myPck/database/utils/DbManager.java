@@ -63,6 +63,8 @@ public class DbManager {
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
             Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
+            ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
+
         }
     }
     public void clearDatabase(){
@@ -72,6 +74,7 @@ public class DbManager {
         this.userService.deleteAll();
         this.clientService.deleteAll();
         this.invoiceService.deleteAll();
+        //this.serviceReportService.deleteAll();
     }
 
     public Service populateService(Car car, Client client) {
@@ -115,11 +118,18 @@ public class DbManager {
         return car;
     }
 
-//    public InvoicePosition populateInvoicePosition(int price, String name)
-//    {
-//         InvoicePosition invoicePosition = new InvoicePosition(name, price);
-//         this.invoicePositionService.persist(invoicePosition);
-//
-//         return invoicePosition;
-//    }
+    public InvoicePosition populateInvoicePosition(int price, String name)
+    {
+         InvoicePosition invoicePosition = new InvoicePosition(name, price);
+         this.invoicePositionService.persist(invoicePosition);
+
+         return invoicePosition;
+    }
+    public ServiceReport populateServiceReport(String description){
+
+        ServiceReport serviceReport = new ServiceReport(description);
+        this.serviceReportService.persist(serviceReport);
+
+        return  serviceReport;
+    }
 }

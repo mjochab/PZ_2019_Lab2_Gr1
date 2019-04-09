@@ -2,6 +2,7 @@ package myPck.database.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -29,7 +30,6 @@ public class Invoice implements Serializable {
     public Invoice(Date date_of_issue, double total_price) {
         this.date_of_issue = date_of_issue;
         this.total_price = total_price;
-
     }
 
     public int getId() {

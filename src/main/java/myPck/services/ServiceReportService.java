@@ -10,7 +10,7 @@ import java.util.List;
         private ServiceReportsDao serviceReportsDao;
 
         public ServiceReportService() {
-            ServiceReportsDao servicePartDao = new ServiceReportsDao();
+             serviceReportsDao = new ServiceReportsDao();
         }
 
         public List<ServiceReport> findAll () {
