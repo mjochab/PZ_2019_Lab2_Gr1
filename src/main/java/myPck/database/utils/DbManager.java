@@ -34,28 +34,28 @@ public class DbManager {
         Random generator = new Random();
         int numberOfRows = 10;
 
-        String[] firstNames = {"Jan", "Roman"};
-        String[] lastNames = {"Kowalski", "Nowak"};
+        String[] firstNames = {"Jan", "Roman", "Mateusz", "Judasz"};
+        String[] lastNames = {"Kowalski", "Nowak", "Kwiatkowski", "Rząsa"};
 
-        String[] carModels = {"A6", "E220"};
-        String[] carBrands = {"Audi", "Mercedes"};
-        String[] carTypes = {"Sedan", "Combi"};
+        String[] carModels = {"A6", "E220", "C4", "XP"};
+        String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
+        String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
 
-        String[] dateInvoice = {"2018-07-03", "2014-03-21"};
-        int[] priceInvoice = {850, 1200};
-        int[] amountInvoice = {200,100};
+        String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
+        int[] priceInvoice = {850, 1200, 355, 457};
+        int[] amountInvoice = {200,100,300,400};
 
         String[] loremIpsum = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
                 " Vivamus vitae nisi eget nisl sagittis mollis in id diam. " +
                 "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa." ,
-        "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
                 "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor." +
                 " In quis risus ante. Donec et sapien massa." };
 
-
+        clearDatabase();
 
         for (int i = 0; i <=numberOfRows; i++) {
-            int index = generator.nextInt(2);
+            int index = generator.nextInt(4);
 
             Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
             User user = this.populateUser(firstNames[index], lastNames[index]);
@@ -63,6 +63,13 @@ public class DbManager {
             Service service = this.populateService(car, client);
             //Invoice invoice = this.populateInvoice(priceInvoice[index],amountInvoice[index]);
         }
+    }
+    public void clearDatabase(){
+        //kolejność usuwania jest ważna!
+        this.serviceService.deleteAll();
+        this.carService.deleteAll();
+        this.userService.deleteAll();
+        this.clientService.deleteAll();
     }
 
     public Service populateService(Car car, Client client) {
@@ -89,7 +96,6 @@ public class DbManager {
     public Car populateCar(String model, String brand, String type) {
         Car car = new Car(model, brand, type, new Date());
         this.carService.persist(car);
-
         return car;
     }
 
