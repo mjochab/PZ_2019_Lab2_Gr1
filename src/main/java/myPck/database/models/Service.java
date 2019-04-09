@@ -10,18 +10,19 @@ import java.util.List;
 public class Service implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
-    @OneToOne
+    @ManyToOne
     private Car car;
     @ManyToOne
     private Client client;
-    @OneToOne
+    @ManyToOne
     private Invoice invoice;
-    @OneToOne
+    @ManyToOne
     private ServiceReport serviceReport;
     @OneToMany
     private List<InvoicePosition> invoicePositions;
+    @Column(name = "description", length = 500, nullable = true)
     private String description;
 
     @Column(name="start_date", nullable = false, columnDefinition = "DATETIME")
@@ -31,16 +32,22 @@ public class Service implements Serializable {
     @Column(name="end_date", nullable = true, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
-
+    @Column(name = "status", length = 40, nullable = false)
     private String status;
-    @OneToOne
+    @ManyToOne
     private User creater;
-    @OneToOne
+    @ManyToOne
     private User mechanic;
 
     public Service() {
     }
 
+    /**
+     *
+     * @param client
+     * @param car
+     * @param status
+     */
     public Service(Client client, Car car, String status) {
         this.client = client;
         this.car = car;
