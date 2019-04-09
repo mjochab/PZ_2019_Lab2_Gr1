@@ -6,7 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
-import myPck.ServiceFx;
+import myPck.modelsFx.ServiceFx;
 
 import java.io.IOException;
 

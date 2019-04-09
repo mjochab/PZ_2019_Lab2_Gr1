@@ -1,4 +1,4 @@
-package myPck;
+package myPck.modelsFx;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;

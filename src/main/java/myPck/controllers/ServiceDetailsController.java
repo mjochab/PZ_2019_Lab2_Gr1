@@ -9,7 +9,7 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import myPck.ServiceFx;
+import myPck.modelsFx.ServiceFx;
 
 import java.io.IOException;
 
@@ -84,6 +84,7 @@ public class ServiceDetailsController extends Controller{
 
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.ACCOUNT){
+            case ALL:
             case M:
                 addReportButton.setVisible(true);
                 break;

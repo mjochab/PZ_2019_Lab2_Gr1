@@ -10,8 +10,8 @@ import javafx.scene.control.Tab;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.StackPane;
-import myPck.ServiceFx;
 import myPck.database.models.Service;
+import myPck.modelsFx.ServiceFx;
 import myPck.services.ServiceService;
 
 import java.io.IOException;
@@ -177,6 +177,11 @@ public class MainWindowController extends Controller{
                 appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
+                break;
+            case ALL:
+                appendUsersToUsersFx();
+                invoicePDFButton.setVisible(true);
+                showDetailsButton.setVisible(true);
                 break;
         }
     }
