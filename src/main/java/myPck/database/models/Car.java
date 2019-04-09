@@ -22,7 +22,7 @@ public class Car implements Serializable {
     private String type;
 
     @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATE")
-    //@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date productionDate;
 
     public Car() {
@@ -37,10 +37,6 @@ public class Car implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getModel() {

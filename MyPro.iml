@@ -5,7 +5,7 @@
       <configuration>
         <setting name="validation-enabled" value="true" />
         <datasource-mapping>
-          <factory-entry name="Entities" />
+          <factory-entry name="Entities" value="abc62b48-bdd9-4d0d-8206-38fbdabe1e22" />
           <factory-entry name="org.hibernate.tutorial.jpa" value="4e2e5eb2-3b3f-4bae-8b20-79fea359d41f" />
         </datasource-mapping>
         <naming-strategy-map />

@@ -31,10 +31,6 @@ public class ServicePart implements Serializable {
         return id;
     }
 
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public double getPrice() {
         return price;
     }

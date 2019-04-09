@@ -12,6 +12,7 @@ public class Invoice implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @Column(name = "date_of_issue", length = 40, nullable = true, columnDefinition = "DATETIME")
+    @Temporal(TemporalType.TIMESTAMP)
     private Date date_of_issue;
     @Column(name = "total_price", nullable = true)
     private double total_price;
@@ -34,10 +35,6 @@ public class Invoice implements Serializable {
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public Date getDate_of_issue() {

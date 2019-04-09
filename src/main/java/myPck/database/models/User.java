@@ -32,7 +32,15 @@ public class User implements Serializable {
 
     public User() {
     }
-
+    /**
+     *
+     * @param email
+     * @param first_name
+     * @param last_name
+     * @param login
+     * @param password
+     * @param role
+     */
     public User(String email, String first_name, String last_name, String login, String password, String role) {
         this.email = email;
         this.firstName = first_name;
