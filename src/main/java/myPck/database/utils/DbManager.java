@@ -17,7 +17,6 @@ public class DbManager {
     private ServicePathService servicePathService;
     private ServiceReportService serviceReportService;
 
-
     public DbManager () {
         this.userService = new UserService();
         this.carService = new CarService();
@@ -29,13 +28,6 @@ public class DbManager {
         this.servicePathService = new ServicePathService();
         this.serviceReportService = new ServiceReportService();
 
-    }
-
-    public DbManager(InvoiceService invoiceService, InvoicePositionService invoicePositionService, ServicePathService servicePartService, ServiceReportService serviceReportService) {
-        this.invoiceService = invoiceService;
-        this.invoicePositionService = invoicePositionService;
-        this.servicePathService = servicePathService;
-        this.serviceReportService = serviceReportService;
     }
 
     public void addSampleData() {
@@ -64,22 +56,14 @@ public class DbManager {
 
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(2);
+
             Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
             User user = this.populateUser(firstNames[index], lastNames[index]);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
-
             //Invoice invoice = this.populateInvoice(priceInvoice[index],amountInvoice[index]);
-
-
         }
     }
-
-
-
-
-
-
 
     public Service populateService(Car car, Client client) {
         Service service = new Service(client, car, "In service");
@@ -103,20 +87,17 @@ public class DbManager {
     }
 
     public Car populateCar(String model, String brand, String type) {
-            Car car = new Car(model, brand, type, new Date());
-            this.carService.persist(car);
+        Car car = new Car(model, brand, type, new Date());
+        this.carService.persist(car);
 
-            return car;
-    }
-    public InvoicePosition populateInvoicePosition(int price, String name)
-    {
-         InvoicePosition invoicePosition = new InvoicePosition(name, price);
-         this.invoicePositionService.persist(invoicePosition);
-         return invoicePosition;
+        return car;
     }
 
-
-
-
-
+//    public InvoicePosition populateInvoicePosition(int price, String name)
+//    {
+//         InvoicePosition invoicePosition = new InvoicePosition(name, price);
+//         this.invoicePositionService.persist(invoicePosition);
+//
+//         return invoicePosition;
+//    }
 }

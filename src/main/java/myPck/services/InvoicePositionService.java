@@ -28,13 +28,13 @@ public class InvoicePositionService {
          invoicePositionDao.update(entity);
          invoicePositionDao.closeCurrentSessionwithTransaction();
      }
-     public InvoicePosition findById (String id){
+     public InvoicePosition findById (long id){
          invoicePositionDao.openCurrentSession();
          InvoicePosition invoicePosition = invoicePositionDao.findById(id);
          invoicePositionDao.closeCurrentSession();
          return invoicePosition;
      }
-     public void delete(String id) {
+     public void delete(long id) {
          invoicePositionDao.openCurrentSessionwithTransaction();
          InvoicePosition invoicePosition = invoicePositionDao.findById(id);
          invoicePositionDao.delete(invoicePosition);

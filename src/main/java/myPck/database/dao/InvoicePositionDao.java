@@ -5,7 +5,7 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class InvoicePositionDao extends SessionManager implements Dao<InvoicePosition,String> {
+public class InvoicePositionDao extends SessionManager implements Dao<InvoicePosition> {
     public InvoicePositionDao(){
 
     }
@@ -21,7 +21,7 @@ public class InvoicePositionDao extends SessionManager implements Dao<InvoicePos
     }
 
     @Override
-    public InvoicePosition findById(String id) {
+    public InvoicePosition findById(long id) {
         InvoicePosition invoicePosition = (InvoicePosition) getCurrentSession().get(InvoicePosition.class,id);
         return invoicePosition;
     }

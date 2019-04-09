@@ -45,11 +45,12 @@ public class ProfileController {
     @FXML
     void initialize() {
 
-        this.user = new User();
-        this.user.setFirstName("Jan");
-        this.user.setLastName("Kowalski");
-        this.user.setEmail("sdg@gmail.com");
-        this.user.setLogin("JanK");
+//        this.user = new User();
+//        this.user.setFirstName("Jan");
+//        this.user.setLastName("Kowalski");
+//        this.user.setEmail("sdg@gmail.com");
+//        this.user.setLogin("JanK");
+        this.user = this.getUser();
         convertUserToUserFx();
         setUpUser();
 
@@ -75,5 +76,7 @@ public class ProfileController {
         
     }
 
-
+    public User getUser() {
+        return userService.findById(2);
+    }
 }

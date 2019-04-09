@@ -5,15 +5,9 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class ClientDao extends SessionManager implements Dao<Client, String> {
+public class ClientDao extends SessionManager implements Dao<Client> {
 
     public ClientDao() {
-    }
-
-    @Override
-    public Client findById(String id) {
-        Client client = (Client) getCurrentSession().get(Client.class, id);
-        return client;
     }
 
     @SuppressWarnings("unchecked")
@@ -37,6 +31,12 @@ public class ClientDao extends SessionManager implements Dao<Client, String> {
     @Override
     public void update(Client entity) {
         getCurrentSession().update(entity);
+    }
+
+    @Override
+    public Client findById(long id) {
+        Client client = (Client) getCurrentSession().get(Client.class, id);
+        return client;
     }
 
     @Override

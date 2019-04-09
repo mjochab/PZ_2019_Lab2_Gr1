@@ -4,10 +4,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.io.Serializable;
 
 @Entity
 @Table(name = "service_parts")
-public class ServicePart {
+public class ServicePart implements Serializable {
 
     @Id
     @GeneratedValue

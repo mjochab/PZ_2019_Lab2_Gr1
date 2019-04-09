@@ -51,10 +51,10 @@ public class CarService {
 
     /**
      * Metoda znajduje samochód o podanym id.
-     * @param String id
+     * @param long id
      * @return Car
      */
-    public Car findById(String id) {
+    public Car findById(long id) {
         carDao.openCurrentSession();
         Car car = carDao.findById(id);
         carDao.closeCurrentSession();
@@ -63,9 +63,9 @@ public class CarService {
 
     /**
      * Metoda usuwa z bazy danych samochó o podanym id.
-     * @param String id
+     * @param long id
      */
-    public void delete(String id) {
+    public void delete(long id) {
         carDao.openCurrentSessionwithTransaction();
         Car car = carDao.findById(id);
         carDao.delete(car);

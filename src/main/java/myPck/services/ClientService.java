@@ -50,10 +50,10 @@ public class ClientService {
 
     /**
      * Metoda znajduje samochód o podanym id.
-     * @param String id
+     * @param long id
      * @return Client
      */
-    public Client findById(String id) {
+    public Client findById(long id) {
         clientDao.openCurrentSession();
         Client client = clientDao.findById(id);
         clientDao.closeCurrentSession();
@@ -62,9 +62,9 @@ public class ClientService {
 
     /**
      * Metoda usuwa z bazy danych samochó o podanym id.
-     * @param String id
+     * @param long id
      */
-    public void delete(String id) {
+    public void delete(long id) {
         clientDao.openCurrentSessionwithTransaction();
         Client client = clientDao.findById(id);
         clientDao.delete(client);

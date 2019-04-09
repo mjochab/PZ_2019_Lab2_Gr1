@@ -50,10 +50,10 @@ public class ServiceService {
 
     /**
      * Metoda znajduje serwis o podanym id.
-     * @param String id
+     * @param long id
      * @return Service
      */
-    public Service findById(String id) {
+    public Service findById(long id) {
         serviceDao.openCurrentSession();
         Service service = serviceDao.findById(id);
         serviceDao.closeCurrentSession();
@@ -62,9 +62,9 @@ public class ServiceService {
 
     /**
      * Metoda usuwa z bazy danych serwis o podanym id.
-     * @param String id
+     * @param long id
      */
-    public void delete(String id) {
+    public void delete(long id) {
         serviceDao.openCurrentSessionwithTransaction();
         Service service = serviceDao.findById(id);
         serviceDao.delete(service);

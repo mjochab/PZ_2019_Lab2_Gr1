@@ -5,7 +5,7 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class ServicePartDao extends SessionManager implements Dao<ServicePart ,String> {
+public class ServicePartDao extends SessionManager implements Dao<ServicePart> {
     public ServicePartDao(){
 
     }
@@ -21,7 +21,7 @@ public class ServicePartDao extends SessionManager implements Dao<ServicePart ,S
     }
 
     @Override
-    public ServicePart findById(String id) {
+    public ServicePart findById(long id) {
         ServicePart servicePart = (ServicePart) getCurrentSession().get(ServicePart.class,id);
         return servicePart;
     }

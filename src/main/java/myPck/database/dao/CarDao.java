@@ -5,13 +5,13 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class CarDao extends SessionManager implements Dao<Car, String> {
+public class CarDao extends SessionManager implements Dao<Car> {
 
     public CarDao() {
     }
 
     @Override
-    public Car findById(String id) {
+    public Car findById(long id) {
         Car car = (Car) getCurrentSession().get(Car.class, id);
         return car;
     }

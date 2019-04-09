@@ -51,10 +51,10 @@ public class UserService {
 
     /**
      * Metoda znajduje użytkownika o podanym id.
-     * @param String id
+     * @param long id
      * @return User
      */
-    public User findById(String id) {
+    public User findById(long id) {
         userDao.openCurrentSession();
         User user = userDao.findById(id);
         userDao.closeCurrentSession();
@@ -63,9 +63,9 @@ public class UserService {
 
     /**
      * Metoda usuwa z bazy danych użytkownika o podanym id.
-     * @param String id
+     * @param long id
      */
-    public void delete(String id) {
+    public void delete(long id) {
         userDao.openCurrentSessionwithTransaction();
         User user = userDao.findById(id);
         userDao.delete(user);
