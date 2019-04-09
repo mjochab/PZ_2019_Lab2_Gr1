@@ -21,6 +21,8 @@ public class Service implements Serializable {
     @ManyToOne
     private ServiceReport serviceReport;
     @OneToMany
+    private List<ServicePart> serviceParts;
+    @OneToMany
     private List<InvoicePosition> invoicePositions;
     @Column(name = "description", length = 500, nullable = true)
     private String description;
@@ -65,5 +67,93 @@ public class Service implements Serializable {
 
     public String getStatus() {
         return status;
+    }
+
+    public void setCar(Car car) {
+        this.car = car;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
+    public Invoice getInvoice() {
+        return invoice;
+    }
+
+    public void setInvoice(Invoice invoice) {
+        this.invoice = invoice;
+    }
+
+    public ServiceReport getServiceReport() {
+        return serviceReport;
+    }
+
+    public void setServiceReport(ServiceReport serviceReport) {
+        this.serviceReport = serviceReport;
+    }
+
+    public List<ServicePart> getServiceParts() {
+        return serviceParts;
+    }
+
+    public void setServiceParts(List<ServicePart> serviceParts) {
+        this.serviceParts = serviceParts;
+    }
+
+    public List<InvoicePosition> getInvoicePositions() {
+        return invoicePositions;
+    }
+
+    public void setInvoicePositions(List<InvoicePosition> invoicePositions) {
+        this.invoicePositions = invoicePositions;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getStartDate() {
+        return startDate;
+    }
+
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
+
+    public Date getEndDate() {
+        return endDate;
+    }
+
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public User getCreator() {
+        return creator;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setCreator(User creator) {
+        this.creator = creator;
+    }
+
+    public User getMechanic() {
+        return mechanic;
+    }
+
+    public void setMechanic(User mechanic) {
+        this.mechanic = mechanic;
     }
 }
