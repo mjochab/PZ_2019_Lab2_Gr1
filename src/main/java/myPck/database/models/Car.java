@@ -21,8 +21,8 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String type;
 
-    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATETIME")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATE")
+    //@Temporal(TemporalType.TIMESTAMP)
     private Date productionDate;
 
     public Car() {
