@@ -1,55 +1,55 @@
 package myPck.services;
 
-import myPck.database.dao.ServiceReportsDao;
+import myPck.database.dao.ServiceReportDao;
 import myPck.database.models.ServiceReport;
 
 import java.util.List;
 
 
     public class ServiceReportService {
-        private ServiceReportsDao serviceReportsDao;
+        private ServiceReportDao serviceReportDao;
 
         public ServiceReportService() {
-             serviceReportsDao = new ServiceReportsDao();
+             serviceReportDao = new ServiceReportDao();
         }
 
         public List<ServiceReport> findAll () {
-            serviceReportsDao.openCurrentSession();
-            List<ServiceReport> serviceReports = serviceReportsDao.findAll();
-            serviceReportsDao.closeCurrentSession();
+            serviceReportDao.openCurrentSession();
+            List<ServiceReport> serviceReports = serviceReportDao.findAll();
+            serviceReportDao.closeCurrentSession();
             return serviceReports;
         }
 
         public void persist (ServiceReport entity) {
-            serviceReportsDao.openCurrentSessionwithTransaction();
-            serviceReportsDao.persist(entity);
-            serviceReportsDao.closeCurrentSessionwithTransaction();
+            serviceReportDao.openCurrentSessionwithTransaction();
+            serviceReportDao.persist(entity);
+            serviceReportDao.closeCurrentSessionwithTransaction();
         }
 
         public void update (ServiceReport entity){
-            serviceReportsDao.openCurrentSessionwithTransaction();
-            serviceReportsDao.update(entity);
-            serviceReportsDao.closeCurrentSessionwithTransaction();
+            serviceReportDao.openCurrentSessionwithTransaction();
+            serviceReportDao.update(entity);
+            serviceReportDao.closeCurrentSessionwithTransaction();
         }
 
         public ServiceReport findById (long id) {
-            serviceReportsDao.openCurrentSession();
-            ServiceReport serviceReport = serviceReportsDao.findById(id);
-            serviceReportsDao.closeCurrentSession();
+            serviceReportDao.openCurrentSession();
+            ServiceReport serviceReport = serviceReportDao.findById(id);
+            serviceReportDao.closeCurrentSession();
             return serviceReport;
         }
 
         public void delete (long id) {
-            serviceReportsDao.openCurrentSessionwithTransaction();
-            ServiceReport serviceReport = serviceReportsDao.findById(id);
-            serviceReportsDao.delete(serviceReport);
-            serviceReportsDao.closeCurrentSessionwithTransaction();
+            serviceReportDao.openCurrentSessionwithTransaction();
+            ServiceReport serviceReport = serviceReportDao.findById(id);
+            serviceReportDao.delete(serviceReport);
+            serviceReportDao.closeCurrentSessionwithTransaction();
         }
 
         public void deleteAll () {
-            serviceReportsDao.openCurrentSessionwithTransaction();
-            serviceReportsDao.deleteAll();
-            serviceReportsDao.closeCurrentSessionwithTransaction();
+            serviceReportDao.openCurrentSessionwithTransaction();
+            serviceReportDao.deleteAll();
+            serviceReportDao.closeCurrentSessionwithTransaction();
         }
     }
 

@@ -5,8 +5,8 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-public class ServiceReportsDao extends SessionManager implements Dao<ServiceReport> {
-    public ServiceReportsDao() {
+public class ServiceReportDao extends SessionManager implements Dao<ServiceReport> {
+    public ServiceReportDao() {
 
     }
 
@@ -33,7 +33,7 @@ public class ServiceReportsDao extends SessionManager implements Dao<ServiceRepo
 
     @Override
     public List<ServiceReport> findAll() {
-        List<ServiceReport> serviceReports = (List<ServiceReport>) getCurrentSession().createQuery("from ServiceReports").list();
+        List<ServiceReport> serviceReports = (List<ServiceReport>) getCurrentSession().createQuery("from ServiceReport").list();
         return serviceReports;
     }
 

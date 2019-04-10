@@ -55,6 +55,7 @@ public class DbManager {
 
         clearDatabase();
 
+
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(4);
 
@@ -74,7 +75,7 @@ public class DbManager {
         this.userService.deleteAll();
         this.clientService.deleteAll();
         this.invoiceService.deleteAll();
-        //this.serviceReportService.deleteAll();
+        this.serviceReportService.deleteAll();
     }
 
     public Service populateService(Car car, Client client) {
