@@ -1,9 +1,6 @@
 package myPck.database.models;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
@@ -11,11 +8,42 @@ import java.io.Serializable;
 public class ServicePart implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+    @Column(name = "price", nullable = false)
     private double price;
+    @Column(name = "name", length = 40, nullable = false)
     private String name;
-    private int service_id;
 
+    public ServicePart() {
+    }
+    /**
+     *
+     * @param price
+     * @param name
+     */
+    public ServicePart(double price, String name) {
+        this.price = price;
+        this.name = name;
+    }
 
+    public int getId() {
+        return id;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
 }

@@ -21,7 +21,7 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String type;
 
-    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATETIME")
+    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATE")
     @Temporal(TemporalType.TIMESTAMP)
     private Date productionDate;
 
@@ -37,10 +37,6 @@ public class Car implements Serializable {
 
     public long getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getModel() {

@@ -7,24 +7,8 @@ import java.io.Serializable;
 @Table(name = "clients")
 public class Client implements Serializable {
 
-    public Client() {
-    }
-    /**
-     *
-     * @param String firstName
-     * @param String lastName
-     * @param int NipNumber
-     * @param String address
-     */
-    public Client(String firstName, String lastName, int NipNumber, String address) {
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.NipNumber = NipNumber;
-        this.address = address;
-    }
-
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @Column(name="first_name", nullable = false)
@@ -33,18 +17,30 @@ public class Client implements Serializable {
     @Column(name="last_name", nullable = false)
     private String lastName;
 
-    @Column(name="NIP_number")
+    @Column(name="NIP_number", length = 10)
     private int NipNumber;
 
-    @Column(name="address", nullable = false)
+    @Column(name="address", length = 50, nullable = false)
     private String address;
+
+    public Client() {
+    }
+    /**
+     *
+     * @param firstName
+     * @param lastName
+     * @param NipNumber
+     * @param address
+     */
+    public Client(String firstName, String lastName, int NipNumber, String address) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.NipNumber = NipNumber;
+        this.address = address;
+    }
 
     public int getId() {
         return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getFirstName() {
