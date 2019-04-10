@@ -1,9 +1,7 @@
 package myPck.controllers;
 
-import java.net.URL;
-import java.util.List;
-import java.util.ResourceBundle;
 
+import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;

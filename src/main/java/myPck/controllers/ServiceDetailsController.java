@@ -9,11 +9,19 @@ import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
+import myPck.database.models.Service;
 import myPck.modelsFx.ServiceFx;
 
 import java.io.IOException;
 
 public class ServiceDetailsController extends Controller{
+
+    /** opisywany serwis */
+    private Service service = null;
+
+    public void setService(Service service) {
+        this.service = service;
+    }
 
     /**
      * Pole z informacją o samochodzie
@@ -79,9 +87,9 @@ public class ServiceDetailsController extends Controller{
 
     @FXML
     void initialize() {
-        //wypełnienie pól przykładowymi danymi
-        setSampleData();
-
+        /** wypełnienie pól danymi */
+//        setData();
+        System.out.println(service.toString());
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.ACCOUNT){
             case ALL:
@@ -97,40 +105,13 @@ public class ServiceDetailsController extends Controller{
     /**
      * Wypełnia formatki w oknie przykładowymi danymi
      */
-    private void setSampleData(){
+    private void setData(){
 
-        String sampleDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                " Nam non volutpat nibh, vel tempor dolor. In at dui nec mauris imperdiet" +
-                " dictum vitae ac odio. In quis nunc at quam rutrum placerat tristique sit" +
-                " amet turpis. Nulla facilisi. In ullamcorper vehicula est vel egestas. Quisque" +
-                " ac nibh eu velit volutpat luctus. Vivamus imperdiet est eget dolor interdum, nec" +
-                " maximus risus facilisis. Etiam auctor mi urna, id commodo ligula condimentum" +
-                " porttitor. Phasellus ut pharetra lectus, eget auctor elit. Donec eget semper dui." +
-                " Sed ut justo consequat, consequat metus id, tincidunt quam." +
-                " Suspendisse luctus ante sodales, euismod tellus fringilla, venenatis velit." +
-                " Duis ex nulla, eleifend ac velit ac, porta sagittis orci. Sed quis dui nibh.Sed" +
-                " neque nisi, egestas sit amet venenatis eget, ultricies id felis. Etiam efficitur" +
-                " tortor eget nibh malesuada, vitae volutpat massa finibus. Pellentesque a sodales " +
-                "libero. Ut non lacinia nulla. Donec in dui ipsum. Pellentesque et viverra tortor." +
-                " Curabitur posuere magna at suscipit aliquet. Duis risus tellus, laoreet id tempus " +
-                "a, vehicula sed enim. Nullam leo diam, imperdiet sed orci sit amet, convallis finib" +
-                "us tortor. Phasellus non tristique eros, sed malesuada dui. Duis scelerisque erat ve" +
-                "l lectus tempor hendrerit. Interdum et malesuada fames ac ante ipsum primis in fauci" +
-                "bus. Mauris dapibus dolor eget mauris placerat sollicitudin. Cras posuere mattis neq" +
-                "ue, vel finibus risus.Morbi ut justo porta, fermentum urna vitae, semper enim. Duis e" +
-                "u elementum felis. Cras dapibus augue at iaculis rhoncus. Donec eget augue risus. Mor" +
-                "bi justo purus, gravida quis odio et, imperdiet pellentesque justo. Praesent sem ligu" +
-                "la, ornare non ex id, placerat volutpat tortor. Morbi id tellus at tellus eleifend gra" +
-                "vida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce " +
-                "at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh.";
-
-        ServiceFx service = new ServiceFx("Jagura FX", "Jan Kowalski", "Done");
-
-        faultDescTextArea.setText(sampleDesc);
-        carTextField.setText(service.getCar());
-        customerTextField.setText(service.getClient());
-        statusLabel.setText(service.getStatus());
-        //ustawienie koloru dla statusu
+        faultDescTextArea.setText("");
+        carTextField.setText(this.service.getCar());
+        customerTextField.setText(this.service.getClient());
+        statusLabel.setText(this.service.getStatus());
+        /** ustawienie koloru dla statusu */
         setCollorOfStatus();
     }
 

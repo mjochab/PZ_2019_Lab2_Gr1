@@ -10,13 +10,10 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
-import myPck.database.models.Service;
 import myPck.modelsFx.CarFx;
 import myPck.modelsFx.ClientFx;
-import myPck.modelsFx.ServiceFx;
 import myPck.services.CarService;
 import myPck.services.ClientService;
-import myPck.services.ServiceService;
 
 import java.io.IOException;
 import java.util.List;
