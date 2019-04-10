@@ -77,6 +77,12 @@ public class ProfileController {
     }
 
     public User getUser() {
-        return userService.findById(2);
+        //tymczasowy kod do testów
+        //---------------------------------------
+        List<User> users = userService.findAll();
+        User user = users.get(0);
+        //---------------------------------------
+
+        return userService.findById(user.getId());
     }
 }
