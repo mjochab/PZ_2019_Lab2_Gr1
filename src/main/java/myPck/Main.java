@@ -26,7 +26,7 @@ public class Main extends Application {
         /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
         DbManager dbManager = new DbManager();
         /**Uzupełnienie bazy przykładowymi danymi */
-        dbManager.addSampleData();
+        //dbManager.addSampleData();
 
     }
 }

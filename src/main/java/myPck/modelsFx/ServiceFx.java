@@ -9,13 +9,22 @@ public class ServiceFx {
     private StringProperty car = new SimpleStringProperty();
     private StringProperty client = new SimpleStringProperty();
     private StringProperty status = new SimpleStringProperty();
+    private StringProperty mechanic = new SimpleStringProperty();
 
+    public ServiceFx(String car, String client, String status, String mechanic) {
+        amount++;
+        this.car.set(car);
+        this.client.set(client);
+        this.status.set(status);
+        this.mechanic.set(mechanic);
+    }
     public ServiceFx(String car, String client, String status) {
         amount++;
         this.car.set(car);
         this.client.set(client);
         this.status.set(status);
     }
+
 
     public String getCar() {
         return car.get();
@@ -51,6 +60,18 @@ public class ServiceFx {
 
     public void setStatus(String status) {
         this.status.set(status);
+    }
+
+    public String getMechanic() {
+        return mechanic.get();
+    }
+
+    public StringProperty mechanicProperty() {
+        return mechanic;
+    }
+
+    public void setMechanic(String mechanic) {
+        this.mechanic.set(mechanic);
     }
 
     @Override
