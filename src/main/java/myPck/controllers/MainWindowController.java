@@ -100,7 +100,6 @@ public class MainWindowController extends Controller{
             System.out.println("Nie wybrano niczego");
         }
     }
-
     /**
      *
      * @param event
@@ -114,13 +113,13 @@ public class MainWindowController extends Controller{
         try{
             /** sprawdza czy zaznaczono jakieś zlecenie w TableView */
             int id =servicesTableView.getSelectionModel().getSelectedIndex();
-            System.out.println("Wybrana pozycja : " + id);
             selected = servicesList.get(id);
-            System.out.println(selected.toString());
 
             ServiceDetailsController serviceDetailsController = loader.getController();
             /** przekazanie zaznaczonego serwisu */
             serviceDetailsController.setService(selected);
+            /** wyswietlenie danych o serwisie */
+            serviceDetailsController.setData();
 
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
             /** Ustawienie okna serviceDetails */

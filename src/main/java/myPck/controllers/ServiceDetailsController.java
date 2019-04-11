@@ -87,9 +87,6 @@ public class ServiceDetailsController extends Controller{
 
     @FXML
     void initialize() {
-        /** wypełnienie pól danymi */
-//        setData();
-        System.out.println(service.toString());
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.ACCOUNT){
             case ALL:
@@ -105,9 +102,9 @@ public class ServiceDetailsController extends Controller{
     /**
      * Wypełnia formatki w oknie przykładowymi danymi
      */
-    private void setData(){
+    public void setData(){
 
-        faultDescTextArea.setText("");
+        faultDescTextArea.setText(this.service.getDescription());
         carTextField.setText(this.service.getCar());
         customerTextField.setText(this.service.getClient());
         statusLabel.setText(this.service.getStatus());
@@ -124,7 +121,7 @@ public class ServiceDetailsController extends Controller{
         if(s=="Done"){
             statusLabel.setTextFill(Color.web("#00ff00"));
         }
-        if(s=="In repair"){
+        if(s=="In service"){
             statusLabel.setTextFill(Color.web("#ff0000"));
         }
         if(s=="No allocated"){
