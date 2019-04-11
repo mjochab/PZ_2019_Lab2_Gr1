@@ -135,12 +135,20 @@ public class AddServiceController extends Controller{
         }
     }
     @FXML
-    void editClient(ActionEvent event){
+    void editClient(ActionEvent event) throws IOException {
         System.out.println("Edit");
         int id =customersListView.getSelectionModel().getSelectedIndex();
 
         Client selected = clientList.get(id);
         System.out.println(selected.getFirstName());
+
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditClient.fxml"));
+        Pane pane = loader.load();
+        EditClientController editClientController = loader.getController();
+        editClientController.setMainStackPaneController(mainStackPaneController);
+
+        mainStackPaneController.setScreen(pane);
+
     }
     @FXML
     void deleteClient(ActionEvent event){
