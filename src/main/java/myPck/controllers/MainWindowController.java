@@ -68,8 +68,9 @@ public class MainWindowController extends Controller{
     }
 
     /**
-     * Metoda otwiera panel dodawanie zlecenia
-     * @param ActionEvent event
+     *
+     * @param event
+     * @throws IOException
      */
     @FXML
     void addServicesTest(ActionEvent event) throws IOException {
@@ -99,25 +100,27 @@ public class MainWindowController extends Controller{
             System.out.println("Nie wybrano niczego");
         }
     }
-
     /**
-     * Otwiera okno ze szczególowymi informacjami o wybranym zleceniu
-     * @param ActionEvent event
+     *
+     * @param event
      * @throws IOException
      */
     @FXML
     void showDetails(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
-        ServiceFx service;
+        Service selected;
         try{
             /** sprawdza czy zaznaczono jakieś zlecenie w TableView */
-            service = servicesTableView.getSelectionModel().getSelectedItem();
-            System.out.println("Pokazuje detale dla zlecenia z samochodem : ");
-            System.out.println(service.getCar());
+            int id =servicesTableView.getSelectionModel().getSelectedIndex();
+            selected = servicesList.get(id);
 
-            /** Przekazanie kontrolera (głównego okna) do okienka serviceDetails */
             ServiceDetailsController serviceDetailsController = loader.getController();
+            /** przekazanie zaznaczonego serwisu */
+            serviceDetailsController.setService(selected);
+            /** wyswietlenie danych o serwisie */
+            serviceDetailsController.setData();
+
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
             /** Ustawienie okna serviceDetails */
             mainStackPaneController.setScreen(stackPane);

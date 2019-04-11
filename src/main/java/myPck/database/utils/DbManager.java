@@ -80,6 +80,7 @@ public class DbManager {
 
     public Service populateService(Car car, Client client) {
         Service service = new Service(client, car, "In service");
+        service.setDescription("Opis");
         this.serviceService.persist(service);
 
         return service;
