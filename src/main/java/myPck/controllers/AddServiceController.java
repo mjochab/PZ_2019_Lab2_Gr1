@@ -10,8 +10,6 @@ import javafx.scene.control.ListView;
 import javafx.scene.layout.Pane;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
-import myPck.modelsFx.CarFx;
-import myPck.modelsFx.ClientFx;
 import myPck.services.CarService;
 import myPck.services.ClientService;
 
@@ -22,8 +20,8 @@ public class AddServiceController extends Controller{
 
     private List<Car> carList;
     private List<Client> clientList;
-    private ObservableList<CarFx> carFxList;
-    private ObservableList<ClientFx> clientFxList;
+    private ObservableList<String> carNameList;
+    private ObservableList<String> clientNameList;
     private CarService carService;
     private ClientService clientService;
 
@@ -36,13 +34,13 @@ public class AddServiceController extends Controller{
     private Button addNewCustomerButton;
 
     @FXML
-    private ListView<ClientFx> customersListView;
+    private ListView<String> customersListView;
 
     @FXML
     private Button addNewCarButton;
 
     @FXML
-    private ListView<CarFx> carsListView;
+    private ListView<String> carsListView;
 
     @FXML
     private Button saveServiceButton;
@@ -97,12 +95,12 @@ public class AddServiceController extends Controller{
 
     }
     private void setUpCarList() {
-        carFxList = FXCollections.observableArrayList();
-        carsListView.setItems(this.carFxList);
+        carNameList = FXCollections.observableArrayList();
+        carsListView.setItems(this.carNameList);
     }
     private void setUpClientList() {
-        clientFxList = FXCollections.observableArrayList();
-        customersListView.setItems(this.clientFxList);
+        clientNameList = FXCollections.observableArrayList();
+        customersListView.setItems(this.clientNameList);
     }
     public void loadCars() {
         this.carList = carService.findAll();
@@ -113,16 +111,14 @@ public class AddServiceController extends Controller{
     public void appendCarToCarFx() {
         if (!carList.isEmpty()) {
             for (Car car : carList) {
-                CarFx carFx = new CarFx(car.toString());
-                carFxList.add(carFx);
+                carNameList.add(car.toString());
             }
         }
     }
     public void appendClientToClientFx() {
         if (!clientList.isEmpty()) {
             for (Client client : clientList) {
-                ClientFx clientFx = new ClientFx(client.toString());
-                clientFxList.add(clientFx);
+                clientNameList.add(client.toString());
             }
         }
     }
