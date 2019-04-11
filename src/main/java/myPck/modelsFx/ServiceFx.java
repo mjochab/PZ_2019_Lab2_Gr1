@@ -23,8 +23,8 @@ public class ServiceFx {
         this.car.set(car);
         this.client.set(client);
         this.status.set(status);
-    }
 
+    }
 
     public String getCar() {
         return car.get();
@@ -70,9 +70,7 @@ public class ServiceFx {
         return mechanic;
     }
 
-    public void setMechanic(String mechanic) {
-        this.mechanic.set(mechanic);
-    }
+
 
     @Override
     public String toString() {
