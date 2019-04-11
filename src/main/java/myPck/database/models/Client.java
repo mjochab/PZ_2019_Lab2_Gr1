@@ -9,7 +9,7 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name="first_name", nullable = false)
     private String firstName;
@@ -39,7 +39,7 @@ public class Client implements Serializable {
         this.address = address;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 

@@ -6,13 +6,17 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
+import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
 import myPck.services.CarService;
 import myPck.services.ClientService;
 
+import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -29,6 +33,14 @@ public class AddServiceController extends Controller{
         carService = new CarService();
         clientService = new ClientService();
     }
+    @FXML
+    private ContextMenu clientContextMenu;
+
+    @FXML
+    private MenuItem editClientMenuItem;
+
+    @FXML
+    private MenuItem deleteClientMenuItem;
 
     @FXML
     private Button addNewCustomerButton;
@@ -122,4 +134,23 @@ public class AddServiceController extends Controller{
             }
         }
     }
+    @FXML
+    void editClient(ActionEvent event){
+        System.out.println("Edit");
+        int id =customersListView.getSelectionModel().getSelectedIndex();
+
+        Client selected = clientList.get(id);
+        System.out.println(selected.getFirstName());
+    }
+    @FXML
+    void deleteClient(ActionEvent event){
+          System.out.println("Delete");
+//        int id =customersListView.getSelectionModel().getSelectedIndex();
+//        Client selected = clientList.get(id);
+//        clientService.delete(selected.getId());
+//        clientList.remove(id);
+//        clientNameList.remove(id);
+    }
+
+
 }
