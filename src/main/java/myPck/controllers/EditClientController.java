@@ -1,5 +1,6 @@
 package myPck.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -7,12 +8,23 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
+import myPck.database.models.Car;
 import myPck.database.models.Client;
+import myPck.modelsFx.ClientFx;
+import myPck.services.ClientService;
 
 import java.io.IOException;
 
 public class EditClientController extends Controller{
 
+    private Client client;
+    private ClientFx clientFx;
+    private ClientService clientService;
+
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 
     @FXML
     private TextField firstNameField;
@@ -27,9 +39,6 @@ public class EditClientController extends Controller{
     private TextField addressField;
 
     @FXML
-    private Button resetButton;
-
-    @FXML
     private Button saveButton;
 
     @FXML
@@ -37,7 +46,30 @@ public class EditClientController extends Controller{
 
     @FXML
     void initialize() {
+        clientService = new ClientService();
+    }
+    public void setData(){
+        clientFx = new ClientFx(client.getFirstName(),client.getLastName(),client.getNipNumber(),client.getAddress());
+        setBinding();
+    }
+    public void setBinding(){
+        firstNameField.textProperty().bindBidirectional(clientFx.firstNameProperty());
+        lastNameField.textProperty().bindBidirectional(clientFx.lastNameProperty());
+        NIPField.textProperty().bindBidirectional(clientFx.NIP_numberProperty());
+        addressField.textProperty().bindBidirectional(clientFx.addressProperty());
+    }
+    @FXML
+    void save(ActionEvent event){
+        System.out.println("Save");
+        client.setFirstName(clientFx.getFirstName());
+        client.setLastName(clientFx.getLastName());
+        client.setAddress(clientFx.getAddress());
+        int nip = Integer.parseInt(client.getNipNumber());
+        client.setNipNumber(nip);
 
+        clientService.update(client);
+
+        backButton.fire();
 
     }
     @FXML

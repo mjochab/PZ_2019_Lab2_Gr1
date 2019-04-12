@@ -140,12 +140,12 @@ public class AddServiceController extends Controller{
         int id =customersListView.getSelectionModel().getSelectedIndex();
 
         Client selected = clientList.get(id);
-        System.out.println(selected.getFirstName());
-
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditClient.fxml"));
         Pane pane = loader.load();
         EditClientController editClientController = loader.getController();
         editClientController.setMainStackPaneController(mainStackPaneController);
+        editClientController.setClient(selected);
+        editClientController.setData();
 
         mainStackPaneController.setScreen(pane);
 

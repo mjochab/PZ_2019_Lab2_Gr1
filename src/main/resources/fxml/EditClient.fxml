@@ -7,10 +7,8 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
-
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.EditClientController">
    <children>
@@ -19,7 +17,7 @@
             <GridPane alignment="CENTER" hgap="10.0" layoutX="84.0" layoutY="121.0" prefHeight="258.0" prefWidth="533.0" vgap="10.0">
               <columnConstraints>
                 <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="247.0" />
-                <ColumnConstraints hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="409.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="409.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,13 +35,8 @@
                   <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                   <TextField fx:id="NIPField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
                   <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                  <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" GridPane.columnIndex="1" GridPane.rowIndex="4">
-                     <children>
-                        <Button fx:id="resetButton" mnemonicParsing="false" text="Reset" />
-                        <Button fx:id="saveButton" mnemonicParsing="false" text="Save" />
-                     </children>
-                  </HBox>
-                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Back" GridPane.rowIndex="4" />
+                  <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                  <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Cancel" GridPane.rowIndex="4" />
                </children>
                <opaqueInsets>
                   <Insets />

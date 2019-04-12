@@ -59,8 +59,10 @@ public class Client implements Serializable {
         this.lastName = last_name;
     }
 
-    public int getNipNumber() {
-        return NipNumber;
+    public String getNipNumber() {
+
+        String nip = ""+this.NipNumber;
+        return nip;
     }
 
     public void setNipNumber(int NipNumber) {
