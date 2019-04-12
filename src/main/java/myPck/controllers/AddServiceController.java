@@ -10,13 +10,10 @@ import javafx.scene.control.ContextMenu;
 import javafx.scene.control.ListView;
 import javafx.scene.control.MenuItem;
 import javafx.scene.layout.Pane;
-import javafx.scene.layout.VBox;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
 import myPck.services.CarService;
 import myPck.services.ClientService;
-
-import java.awt.event.MouseEvent;
 import java.io.IOException;
 import java.util.List;
 
@@ -136,19 +133,18 @@ public class AddServiceController extends Controller{
     }
     @FXML
     void editClient(ActionEvent event) throws IOException {
-        System.out.println("Edit");
+        /** pobranie id wybranego elemntu */
         int id =customersListView.getSelectionModel().getSelectedIndex();
-
+        /** zaznaczony klient */
         Client selected = clientList.get(id);
+        /** ładowanie widou EditClient */
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditClient.fxml"));
         Pane pane = loader.load();
         EditClientController editClientController = loader.getController();
         editClientController.setMainStackPaneController(mainStackPaneController);
-        editClientController.setClient(selected);
-        editClientController.setData();
-
         mainStackPaneController.setScreen(pane);
-
+        /** wysłanie zaznaczonego klienta do widoku EditClient */
+        editClientController.setClient(selected);
     }
     @FXML
     void deleteClient(ActionEvent event){
