@@ -65,16 +65,6 @@ public class AddServiceController extends Controller{
         addCarController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(pane);
     }
-
-    @FXML
-    void addNewCustomer(ActionEvent event) throws IOException {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddClientPanel.fxml"));
-        Pane pane = loader.load();
-        AddClientController addClientController = loader.getController();
-        addClientController.setMainStackPaneController(mainStackPaneController);
-        mainStackPaneController.setScreen(pane);
-    }
-
     @FXML
     void cancel(ActionEvent event) throws IOException {
         System.out.println("Anuluje tworzenie zlecenia");
@@ -145,6 +135,14 @@ public class AddServiceController extends Controller{
         mainStackPaneController.setScreen(pane);
         /** wysłanie zaznaczonego klienta do widoku EditClient */
         editClientController.setClient(selected);
+    }
+    @FXML
+    void addNewClient(ActionEvent event) throws IOException {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddClientPanel.fxml"));
+        Pane pane = loader.load();
+        AddClientController addClientController = loader.getController();
+        addClientController.setMainStackPaneController(mainStackPaneController);
+        mainStackPaneController.setScreen(pane);
     }
     @FXML
     void deleteClient(ActionEvent event){
