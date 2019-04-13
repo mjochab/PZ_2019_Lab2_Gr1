@@ -146,12 +146,23 @@ public class AddServiceController extends Controller{
     }
     @FXML
     void deleteClient(ActionEvent event){
-          System.out.println("Delete");
-//        int id =customersListView.getSelectionModel().getSelectedIndex();
-//        Client selected = clientList.get(id);
-//        clientService.delete(selected.getId());
-//        clientList.remove(id);
-//        clientNameList.remove(id);
+
+          int id =customersListView.getSelectionModel().getSelectedIndex();
+          Client selected = clientList.get(id);
+
+        try{
+            /** sprawdza czy można usnąc klienta */
+            clientService.delete(selected.getId());
+
+        }catch(Exception e){
+            System.out.println("Nie można usunąć");
+        }finally {
+            clientList.clear();
+            loadClient();
+            clientNameList.clear();
+            appendClientToClientFx();
+        }
+
     }
 
 

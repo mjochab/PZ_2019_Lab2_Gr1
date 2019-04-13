@@ -65,6 +65,11 @@ public class DbManager {
             Service service = this.populateService(car, client);
             Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
+//            long id = service.getId();
+//            serviceService.delete(id);
+//            id = client.getId();
+//            clientService.delete(id);
+
 
         }
     }
