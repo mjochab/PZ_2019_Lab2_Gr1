@@ -15,6 +15,9 @@ public class ServicePart implements Serializable {
     @Column(name = "name", length = 40, nullable = false)
     private String name;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Service service;
+
     public ServicePart() {
     }
     /**

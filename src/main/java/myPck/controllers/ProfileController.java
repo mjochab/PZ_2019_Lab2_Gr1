@@ -1,6 +1,5 @@
 package myPck.controllers;
 
-import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -50,9 +49,9 @@ public class ProfileController {
 //        this.user.setLastName("Kowalski");
 //        this.user.setEmail("sdg@gmail.com");
 //        this.user.setLogin("JanK");
-        this.user = this.getUser();
-        convertUserToUserFx();
-        setUpUser();
+//        this.user = this.getUser();
+//        convertUserToUserFx();
+//        setUpUser();
 
 
     }
@@ -80,7 +79,7 @@ public class ProfileController {
         //tymczasowy kod do testów
         //---------------------------------------
         List<User> users = userService.findAll();
-        User user = users.get(0);
+//        User user = users.get(0);
         //---------------------------------------
 
         return userService.findById(user.getId());
