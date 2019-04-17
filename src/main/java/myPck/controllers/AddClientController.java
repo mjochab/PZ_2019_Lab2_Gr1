@@ -1,6 +1,5 @@
 package myPck.controllers;
 
-import java.io.IOException;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -10,6 +9,8 @@ import javafx.scene.layout.StackPane;
 import myPck.database.models.Client;
 import myPck.modelsFx.ClientFx;
 import myPck.services.ClientService;
+
+import java.io.IOException;
 
 public class AddClientController extends Controller {
 
@@ -57,6 +58,7 @@ public class AddClientController extends Controller {
 
     @FXML
     void initialize() {
+        convertTextFieldToNumberField(NIPNumberField);
         clientService = new ClientService();
     }
     private Client client;

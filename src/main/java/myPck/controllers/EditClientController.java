@@ -28,9 +28,9 @@ public class EditClientController extends Controller{
     private Button backButton;
     @FXML
     void initialize() {
+        convertTextFieldToNumberField(NIPField);
         clientService = new ClientService();
     }
-
     private Client client;
     private ClientFx clientFx;
     private ClientService clientService;
@@ -56,7 +56,7 @@ public class EditClientController extends Controller{
         client.setLastName(clientFx.getLastName());
         client.setAddress(clientFx.getAddress());
         /** zamiana NIP na liczbę */
-        int nip = Integer.parseInt(client.getNipNumber());
+        int nip = Integer.parseInt(clientFx.getNIP_number());
         client.setNipNumber(nip);
         /** zapis do bazy danych */
         clientService.update(client);
@@ -76,4 +76,6 @@ public class EditClientController extends Controller{
         mainStackPaneController.setScreen(stackPane);
 
     }
+
+
 }
