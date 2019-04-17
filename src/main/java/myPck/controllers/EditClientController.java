@@ -28,7 +28,11 @@ public class EditClientController extends Controller{
     private Button backButton;
     @FXML
     void initialize() {
+        setMaxLengthOfTextField(firstNameField, 200);
+        setMaxLengthOfTextField(lastNameField, 200);
+        setMaxLengthOfTextField(addressField, 50);
         convertTextFieldToNumberField(NIPField);
+        setMaxLengthOfTextField(NIPField,10);
         clientService = new ClientService();
     }
     private Client client;
@@ -55,13 +59,21 @@ public class EditClientController extends Controller{
         client.setFirstName(clientFx.getFirstName());
         client.setLastName(clientFx.getLastName());
         client.setAddress(clientFx.getAddress());
-        /** zamiana NIP na liczbę */
-        int nip = Integer.parseInt(clientFx.getNIP_number());
-        client.setNipNumber(nip);
-        /** zapis do bazy danych */
-        clientService.update(client);
-        /** wywołanie przycisku powrotu */
-        backButton.fire();
+        client.setNipNumber(clientFx.getNIP_number());
+
+        String firstName = client.getFirstName();
+        String lastName = client.getLastName();
+        String nipNumber = client.getNipNumber();
+        String address = client.getAddress();
+        if(firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length()!=10) {
+            System.out.println("Error");
+        }else{
+            /** zapis do bazy danych */
+            clientService.update(client);
+            /** wywołanie przycisku powrotu */
+            backButton.fire();
+        }
+
     }
     @FXML
     void back(ActionEvent event) throws IOException {

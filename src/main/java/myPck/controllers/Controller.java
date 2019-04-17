@@ -22,4 +22,9 @@ public abstract class Controller {
             }
         });
     }
+    public static void setMaxLengthOfTextField(TextField textField, int length){
+        textField.setOnKeyTyped(event ->{
+            if(textField.getText().length() >= length) event.consume();
+        });
+    }
 }

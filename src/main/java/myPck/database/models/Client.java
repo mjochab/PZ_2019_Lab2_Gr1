@@ -18,7 +18,7 @@ public class Client implements Serializable {
     private String lastName;
 
     @Column(name="NIP_number", length = 10)
-    private int NipNumber;
+    private String NipNumber;
 
     @Column(name="address", length = 50, nullable = false)
     private String address;
@@ -32,7 +32,7 @@ public class Client implements Serializable {
      * @param NipNumber
      * @param address
      */
-    public Client(String firstName, String lastName, int NipNumber, String address) {
+    public Client(String firstName, String lastName, String NipNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.NipNumber = NipNumber;
@@ -65,7 +65,7 @@ public class Client implements Serializable {
         return nip;
     }
 
-    public void setNipNumber(int NipNumber) {
+    public void setNipNumber(String NipNumber) {
         this.NipNumber = NipNumber;
     }
 

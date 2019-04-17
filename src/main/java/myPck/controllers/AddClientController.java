@@ -35,16 +35,23 @@ public class AddClientController extends Controller {
 
     @FXML
     void add(ActionEvent event) throws IOException {
+
         String firstName = firstNameField.getText();
         String lastName = lastNameField.getText();
         String nipNumber = NIPNumberField.getText();
         String address = addressField.getText();
-        /** zamiana NIP na liczbę */
-        int nip = Integer.parseInt(nipNumber);
-        this.client = new Client(firstName,lastName,nip,address);
-        clientService.persist(this.client);
-        /** wywołanie przycisku powrotu */
-        backButton.fire();
+
+        if(firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length()!=10){
+            System.out.println("Error");
+        }else {
+
+            this.client = new Client(firstName, lastName, nipNumber, address);
+            clientService.persist(this.client);
+            /** wywołanie przycisku powrotu */
+            backButton.fire();
+        }
+
+
     }
 
     @FXML
@@ -58,9 +65,14 @@ public class AddClientController extends Controller {
 
     @FXML
     void initialize() {
+        setMaxLengthOfTextField(firstNameField, 200);
+        setMaxLengthOfTextField(lastNameField, 200);
+        setMaxLengthOfTextField(NIPNumberField, 10);
+        setMaxLengthOfTextField(addressField, 50);
         convertTextFieldToNumberField(NIPNumberField);
         clientService = new ClientService();
     }
+
     private Client client;
     private ClientFx clientFx;
     private ClientService clientService;
