@@ -14,10 +14,11 @@ import myPck.database.models.Car;
 import myPck.database.models.Client;
 import myPck.services.CarService;
 import myPck.services.ClientService;
+
 import java.io.IOException;
 import java.util.List;
 
-public class AddServiceController extends Controller{
+public class AddServiceController extends Controller {
 
     private List<Car> carList;
     private List<Client> clientList;
@@ -26,10 +27,11 @@ public class AddServiceController extends Controller{
     private CarService carService;
     private ClientService clientService;
 
-    public AddServiceController(){
+    public AddServiceController() {
         carService = new CarService();
         clientService = new ClientService();
     }
+
     @FXML
     private ContextMenu clientContextMenu;
 
@@ -65,6 +67,7 @@ public class AddServiceController extends Controller{
         addCarController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(pane);
     }
+
     @FXML
     void cancel(ActionEvent event) throws IOException {
         System.out.println("Anuluje tworzenie zlecenia");
@@ -93,20 +96,25 @@ public class AddServiceController extends Controller{
         appendClientToClientFx();
 
     }
+
     private void setUpCarList() {
         carNameList = FXCollections.observableArrayList();
         carsListView.setItems(this.carNameList);
     }
+
     private void setUpClientList() {
         clientNameList = FXCollections.observableArrayList();
         customersListView.setItems(this.clientNameList);
     }
+
     public void loadCars() {
         this.carList = carService.findAll();
     }
+
     public void loadClient() {
         clientList = clientService.findAll();
     }
+
     public void appendCarToCarFx() {
         if (!carList.isEmpty()) {
             for (Car car : carList) {
@@ -114,6 +122,7 @@ public class AddServiceController extends Controller{
             }
         }
     }
+
     public void appendClientToClientFx() {
         if (!clientList.isEmpty()) {
             for (Client client : clientList) {
@@ -121,10 +130,11 @@ public class AddServiceController extends Controller{
             }
         }
     }
+
     @FXML
     void editClient(ActionEvent event) throws IOException {
         /** pobranie id wybranego elemntu */
-        int id =customersListView.getSelectionModel().getSelectedIndex();
+        int id = customersListView.getSelectionModel().getSelectedIndex();
         /** zaznaczony klient */
         Client selected = clientList.get(id);
         /** ładowanie widou EditClient */
@@ -136,6 +146,7 @@ public class AddServiceController extends Controller{
         /** wysłanie zaznaczonego klienta do widoku EditClient */
         editClientController.setClient(selected);
     }
+
     @FXML
     void addNewClient(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddClientPanel.fxml"));
@@ -144,26 +155,25 @@ public class AddServiceController extends Controller{
         addClientController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(pane);
     }
+
     @FXML
-    void deleteClient(ActionEvent event){
+    void deleteClient(ActionEvent event) {
 
-          int id =customersListView.getSelectionModel().getSelectedIndex();
-          Client selected = clientList.get(id);
+        int id = customersListView.getSelectionModel().getSelectedIndex();
+        Client selected = clientList.get(id);
 
-        try{
+        try {
             /** sprawdza czy można usnąc klienta */
             clientService.delete(selected.getId());
-
-        }catch(Exception e){
-            System.out.println("Nie można usunąć");
-        }finally {
             clientList.clear();
             loadClient();
             clientNameList.clear();
             appendClientToClientFx();
+
+        } catch (Exception e) {
+            System.out.println("Nie można usunąć");
+
         }
 
+
     }
-
-
-}
