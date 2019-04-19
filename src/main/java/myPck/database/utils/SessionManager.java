@@ -27,7 +27,12 @@ public abstract class SessionManager {
     }
 
     public void closeCurrentSessionwithTransaction() {
-        currentTransaction.commit();
+        try{
+            currentTransaction.commit();
+        } catch (Exception e){
+            currentTransaction.rollback();
+        }
+
         currentSession.close();
     }
 
