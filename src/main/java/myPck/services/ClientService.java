@@ -68,8 +68,7 @@ public class ClientService {
         clientDao.openCurrentSessionwithTransaction();
         Client client = clientDao.findById(id);
         clientDao.delete(client);
-        boolean result = clientDao.closeCurrentSessionwithTransaction();
-        return result;
+        return clientDao.closeCurrentSessionwithTransaction();
     }
 
     /**

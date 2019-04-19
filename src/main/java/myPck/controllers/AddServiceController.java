@@ -133,18 +133,21 @@ public class AddServiceController extends Controller {
 
     @FXML
     void editClient(ActionEvent event) throws IOException {
-        /** pobranie id wybranego elemntu */
-        int id = customersListView.getSelectionModel().getSelectedIndex();
-        /** zaznaczony klient */
-        Client selected = clientList.get(id);
-        /** ładowanie widou EditClient */
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditClient.fxml"));
-        Pane pane = loader.load();
-        EditClientController editClientController = loader.getController();
-        editClientController.setMainStackPaneController(mainStackPaneController);
-        mainStackPaneController.setScreen(pane);
-        /** wysłanie zaznaczonego klienta do widoku EditClient */
-        editClientController.setClient(selected);
+        if(!clientNameList.isEmpty()){
+            /** pobranie id wybranego elemntu */
+            int id = customersListView.getSelectionModel().getSelectedIndex();
+            /** zaznaczony klient */
+            Client selected = clientList.get(id);
+            /** ładowanie widou EditClient */
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditClient.fxml"));
+            Pane pane = loader.load();
+            EditClientController editClientController = loader.getController();
+            editClientController.setMainStackPaneController(mainStackPaneController);
+            mainStackPaneController.setScreen(pane);
+            /** wysłanie zaznaczonego klienta do widoku EditClient */
+            editClientController.setClient(selected);
+        }
+
     }
 
     @FXML
@@ -158,16 +161,22 @@ public class AddServiceController extends Controller {
 
     @FXML
     void deleteClient(ActionEvent event) {
+        if(!clientNameList.isEmpty()){
+            int id = customersListView.getSelectionModel().getSelectedIndex();
+            Client selected = clientList.get(id);
 
-        int id = customersListView.getSelectionModel().getSelectedIndex();
-        Client selected = clientList.get(id);
+            boolean isDelete = clientService.delete(selected.getId());
 
-        boolean isDelete = clientService.delete(selected.getId());
-        clientList.clear();
-        loadClient();
-        clientNameList.clear();
-        appendClientToClientFx();
-        System.out.println(isDelete);
+            if(isDelete){
+                System.out.println("Usunięto");
+                clientList.clear();
+                loadClient();
+                clientNameList.clear();
+                appendClientToClientFx();
+            }else{
+                System.out.println("Nie usunięto");
+            }
+        }
 
     }
 }
