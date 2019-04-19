@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import myPck.database.models.Service;
 import myPck.modelsFx.ServiceFx;
@@ -53,6 +50,12 @@ public class MainWindowController extends Controller{
     private Tab adminPanelTab;
     @FXML
     private Tab tasksTab;
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private Button resetButton;
 
     /** Lista zawierająca zlecenia */
     private List<Service> servicesList;
@@ -220,5 +223,14 @@ public class MainWindowController extends Controller{
             invoicePDFButton.setDisable(false);
             showDetailsButton.setDisable(false);
         }
+    }
+    @FXML
+    void resetFilters(ActionEvent event) {
+
+    }
+
+    @FXML
+    void search(ActionEvent event) {
+
     }
 }
