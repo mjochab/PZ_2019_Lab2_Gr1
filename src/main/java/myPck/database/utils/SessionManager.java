@@ -26,14 +26,15 @@ public abstract class SessionManager {
         currentSession.close();
     }
 
-    public void closeCurrentSessionwithTransaction() {
+    public boolean closeCurrentSessionwithTransaction() {
         try{
             currentTransaction.commit();
         } catch (Exception e){
             currentTransaction.rollback();
         }
-
+        boolean wasCommitted = currentTransaction.wasCommitted();
         currentSession.close();
+        return wasCommitted;
     }
 
     private static SessionFactory getSessionFactory() {

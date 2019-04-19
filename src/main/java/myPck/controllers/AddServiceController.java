@@ -162,18 +162,12 @@ public class AddServiceController extends Controller {
         int id = customersListView.getSelectionModel().getSelectedIndex();
         Client selected = clientList.get(id);
 
-        try {
-            /** sprawdza czy można usnąc klienta */
-            clientService.delete(selected.getId());
-            clientList.clear();
-            loadClient();
-            clientNameList.clear();
-            appendClientToClientFx();
-
-        } catch (Exception e) {
-            System.out.println("Nie można usunąć");
-
-        }
+        boolean isDelete = clientService.delete(selected.getId());
+        clientList.clear();
+        loadClient();
+        clientNameList.clear();
+        appendClientToClientFx();
+        System.out.println(isDelete);
 
     }
 }
