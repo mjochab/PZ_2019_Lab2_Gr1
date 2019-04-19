@@ -65,6 +65,11 @@ public class DbManager {
             Service service = this.populateService(car, client);
             Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
+//            long id = service.getId();
+//            serviceService.delete(id);
+//            id = client.getId();
+//            clientService.delete(id);
+
 
         }
     }
@@ -101,7 +106,7 @@ public class DbManager {
     }
 
     public Client populateClient(String firstName, String lastName) {
-        Client client = new Client(firstName,  lastName, 323232, "Rzeszów Pigonia 1");
+        Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
         this.clientService.persist(client);
 
         return client;
