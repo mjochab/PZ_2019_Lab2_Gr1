@@ -13,13 +13,13 @@
    <property name="show_sql">false</property>
    <property name="hibernate.current_session_context_class">thread</property>
 
-   <mapping class="myPck.database.models.InvoicePosition"/>
-   <mapping class="myPck.database.models.Invoice"/>
-   <mapping class="myPck.database.models.ServiceReport"/>
-   <mapping class="myPck.database.models.ServicePart"/>
    <mapping class="myPck.database.models.Client"/>
    <mapping class="myPck.database.models.Car"/>
    <mapping class="myPck.database.models.User"/>
    <mapping class="myPck.database.models.Service"/>
+   <mapping class="myPck.database.models.InvoicePosition"/>
+   <mapping class="myPck.database.models.ServicePart"/>
+   <mapping class="myPck.database.models.Invoice"/>
+   <mapping class="myPck.database.models.ServiceReport"/>
 </session-factory>
 </hibernate-configuration>

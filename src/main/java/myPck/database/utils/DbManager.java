@@ -46,12 +46,14 @@ public class DbManager {
         int[] amountInvoice = {200,100,300,400};
         Date[] dateOfInvoice = {new Date(2009,3,12), new Date(2014,8,20), new Date(), new Date()};
 
-        String[] loremIpsum = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                " Vivamus vitae nisi eget nisl sagittis mollis in id diam. " +
-                "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa." ,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor." +
-                " In quis risus ante. Donec et sapien massa." };
+        String[] loremIpsum = {
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                " Vivamus vitae nisi eget nisl sagittis mollis in id diam. ",
+                "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+                "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
+                " In quis risus ante. Donec et sapien massa."
+        };
 
         clearDatabase();
 
