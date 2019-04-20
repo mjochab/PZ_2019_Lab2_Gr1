@@ -6,6 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import myPck.controllers.utils.Validator;
 import myPck.database.models.Client;
 import myPck.modelsFx.ClientFx;
 import myPck.services.ClientService;
@@ -65,11 +66,11 @@ public class AddClientController extends Controller {
 
     @FXML
     void initialize() {
-        setMaxLengthOfTextField(firstNameField, 200);
-        setMaxLengthOfTextField(lastNameField, 200);
-        setMaxLengthOfTextField(NIPNumberField, 10);
-        setMaxLengthOfTextField(addressField, 50);
-        convertTextFieldToNumberField(NIPNumberField);
+        Validator.setMaxLengthOfTextField(firstNameField, 200);
+        Validator.setMaxLengthOfTextField(lastNameField, 200);
+        Validator.setMaxLengthOfTextField(NIPNumberField, 10);
+        Validator.setMaxLengthOfTextField(addressField, 50);
+        Validator.convertTextFieldToNumberField(NIPNumberField);
         clientService = new ClientService();
     }
 
