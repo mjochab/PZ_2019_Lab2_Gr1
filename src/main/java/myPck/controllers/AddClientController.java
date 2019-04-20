@@ -27,6 +27,7 @@ public class AddClientController extends Controller {
     private Button addButton;
     @FXML
     private Button backButton;
+
     @FXML
     void add(ActionEvent event) throws IOException {
         String firstName = firstNameField.getText();
@@ -37,13 +38,11 @@ public class AddClientController extends Controller {
         if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length() != 10) {
             System.out.println("Error");
         } else {
-
             this.client = new Client(firstName, lastName, nipNumber, address);
             clientService.persist(this.client);
             /** wywołanie przycisku powrotu */
             backButton.fire();
         }
-
     }
     @FXML
     void back(ActionEvent event) throws IOException {
