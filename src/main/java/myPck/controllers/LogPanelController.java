@@ -7,7 +7,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import myPck.services.UserService;
-
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;

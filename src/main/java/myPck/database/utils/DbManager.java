@@ -2,19 +2,18 @@ package myPck.database.utils;
 
 import myPck.database.models.*;
 import myPck.services.*;
-
 import java.util.Date;
 import java.util.Random;
+import static myPck.utils.Password.hashPassword;
 
 public class DbManager {
-
     private UserService userService;
     private CarService carService;
     private ServiceService serviceService;
     private ClientService clientService;
     private InvoiceService invoiceService;
     private InvoicePositionService invoicePositionService;
-    private ServicePathService servicePathService;
+    private ServicePartService servicePathService;
     private ServiceReportService serviceReportService;
 
     public DbManager () {
@@ -22,12 +21,10 @@ public class DbManager {
         this.carService = new CarService();
         this.serviceService = new ServiceService();
         this.clientService = new ClientService();
-
         this.invoicePositionService = new InvoicePositionService();
         this.invoiceService = new InvoiceService();
-        this.servicePathService = new ServicePathService();
+        this.servicePathService = new ServicePartService();
         this.serviceReportService = new ServiceReportService();
-
     }
 
     public void addSampleData() {
@@ -57,17 +54,15 @@ public class DbManager {
 
         clearDatabase();
 
-
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(4);
 
             Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
-            User user = this.populateUser(firstNames[index], lastNames[index]);
+            User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
             Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
-
         }
     }
     public void clearDatabase(){
@@ -109,8 +104,8 @@ public class DbManager {
         return client;
     }
 
-    public User populateUser(String firstName, String lastName) {
-        User user = new User("email@o2.pl", firstName, lastName, "login", "password", "A");
+    public User populateUser(String firstName, String lastName, int index) {
+        User user = new User("email@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
         this.userService.persist(user);
 
         return user;
@@ -129,8 +124,8 @@ public class DbManager {
 
          return invoicePosition;
     }
-    public ServiceReport populateServiceReport(String description){
 
+    public ServiceReport populateServiceReport(String description){
         ServiceReport serviceReport = new ServiceReport(description);
         this.serviceReportService.persist(serviceReport);
 

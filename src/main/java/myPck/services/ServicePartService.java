@@ -5,10 +5,10 @@ import myPck.database.models.ServicePart;
 
 import java.util.List;
 
-public class ServicePathService {
+public class ServicePartService {
     private ServicePartDao servicePartDao;
 
-    public ServicePathService () {
+    public ServicePartService() {
         servicePartDao = new ServicePartDao();
     }
 
