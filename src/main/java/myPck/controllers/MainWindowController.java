@@ -147,42 +147,38 @@ public class MainWindowController extends Controller{
 
     @FXML
     void initialize() {
-        System.out.println("Wersja dla konta: "+mainStackPaneController.ACCOUNT);
+        System.out.println("Wersja dla konta: "+mainStackPaneController.accountType);
 
         this.setUpColumns();
         this.setUpServiceList();
         this.loadServices();
         /** zarządzanie dostępem przycisków */
         buttonManagment();
+        appendUsersToUsersFx();
 
         /** ukrywanie elementów dla kont bez uprawnień */
-        switch (mainStackPaneController.ACCOUNT){
+        switch (mainStackPaneController.accountType){
             case A:
-                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case K:
-                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case M:
-                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case R:
-                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
                 break;
             case ALL:
-                appendUsersToUsersFx();
                 invoicePDFButton.setVisible(true);
                 showDetailsButton.setVisible(true);
                 break;

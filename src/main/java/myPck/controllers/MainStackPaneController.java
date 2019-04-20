@@ -4,13 +4,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
-
+import myPck.database.models.User;
 import java.io.IOException;
 
-/**
- * typ enum potrzebny tylko do testowania widoku
- */
-enum Type_of_account {
+enum accountTypes {
     M,  //mechanik
     R,  //recepcjonista
     A,  //admin
@@ -21,19 +18,19 @@ enum Type_of_account {
 public class MainStackPaneController {
 
     /**
-     * TU USTAW TYP KONTA !!!!!!!!!!!!!!!!!!!!!!
+     * Zmienna odpowiadająca za typ konta.
      */
-    public static Type_of_account ACCOUNT = Type_of_account.ALL;
+    public static accountTypes accountType;
 
     /**
      * Instancja najbardziej zewnętrzenego okna (pojemnika) na wszystkie pozostałe okienka aplikacji
      */
     @FXML
     private StackPane mainStackPane;
+    private User user;
 
     /**
      * Funkcja wymieniająca okienka w mainStackPane
-     *
      * @param pane
      */
     public void setScreen(Pane pane) {
@@ -43,7 +40,6 @@ public class MainStackPaneController {
 
     /**
      * Funkcja ładująca główne okno aplikacji (MainWindow.fxml)
-     *
      * @throws IOException
      */
     public void loadMainWindow() throws IOException {
@@ -52,6 +48,7 @@ public class MainStackPaneController {
 
         MainWindowController mainWindowController = loader.getController();
         mainWindowController.setMainStackPaneController(this);
+        this.setAccountType();
         setScreen(stackPane);
     }
 
@@ -67,6 +64,23 @@ public class MainStackPaneController {
         Pane pane = loader.load();
         LogPanelController logPanelController = loader.getController();
         logPanelController.setMainStackPaneController(this);
+        accountType = accountTypes.ALL; //TODO Usunąć tą linie przed publikacja aplikacji
         setScreen(pane);
+    }
+
+    /**
+     * Metoda ustawiająca użytkownika po zalogowaniu
+     * @param user
+     */
+    protected void setUser(User user) {
+        this.user = user;
+    }
+
+    /**
+     * Metoda ustawiająza typ konta
+     */
+    protected void setAccountType() {
+//        accountType = accountType.valueOf(this.user.getRole());
+        /** TODO: odkomentować linie wyżej przed publikacja aplikacji*/
     }
 }
