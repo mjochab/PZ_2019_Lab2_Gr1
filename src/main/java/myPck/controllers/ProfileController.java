@@ -10,8 +10,6 @@ import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
 
-import java.util.List;
-
 public class ProfileController {
 
 
@@ -65,23 +63,18 @@ public class ProfileController {
     }
 
     public void convertUserToUserFx() {
-       userFx = new UserFx(user.getEmail(), user.getFirstName(), user.getLastName(), user.getLogin(), user.getRole());
+        userFx = new UserFx(user.getEmail(), user.getFirstName(), user.getLastName(), user.getLogin(), user.getRole());
     }
+
     public void setUpUser() {
 
         firstNameField.textProperty().bindBidirectional(userFx.firstNameProperty());
         lastNameField.textProperty().bindBidirectional(userFx.lastNameProperty());
         loginField.textProperty().bindBidirectional(userFx.loginProperty());
-        
+
     }
 
     public User getUser() {
-        //tymczasowy kod do testów
-        //---------------------------------------
-        List<User> users = userService.findAll();
-//        User user = users.get(0);
-        //---------------------------------------
-
         return userService.findById(user.getId());
     }
 }
