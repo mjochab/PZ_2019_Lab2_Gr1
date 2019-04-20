@@ -57,6 +57,7 @@ public class ClientService {
         clientDao.openCurrentSession();
         Client client = clientDao.findById(id);
         clientDao.closeCurrentSession();
+
         return client;
     }
 
@@ -68,6 +69,7 @@ public class ClientService {
         clientDao.openCurrentSessionwithTransaction();
         Client client = clientDao.findById(id);
         clientDao.delete(client);
+
         return clientDao.closeCurrentSessionwithTransaction();
     }
 
