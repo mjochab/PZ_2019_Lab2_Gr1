@@ -10,6 +10,7 @@ import javafx.scene.layout.StackPane;
 import myPck.database.models.Service;
 import myPck.modelsFx.ServiceFx;
 import myPck.services.ServiceService;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,13 +29,21 @@ public class MainWindowController extends Controller {
         this.serviceService = new ServiceService();
     }
 
-    /** opcje filtrowania */
+    /**
+     * opcje filtrowania
+     */
     private ObservableList<String> options;
-    /** lista zawierająca serwisy */
+    /**
+     * lista zawierająca serwisy
+     */
     private List<Service> servicesList;
-    /** kopia listy wykorzystywana przy filtrowaniu */
+    /**
+     * kopia listy wykorzystywana przy filtrowaniu
+     */
     private List<Service> servicesListCopy;
-    /** Lista zawierająca serwisyFx */
+    /**
+     * Lista zawierająca serwisyFx
+     */
     private ObservableList<ServiceFx> servicesFxList;
 
     @FXML
@@ -78,7 +87,6 @@ public class MainWindowController extends Controller {
     private Button searchButton;
     @FXML
     private ComboBox<String> filterComboBox;
-
 
     /**
      * @param event
@@ -162,8 +170,8 @@ public class MainWindowController extends Controller {
     @FXML
     void initialize() {
         System.out.println("Wersja dla konta: " + mainStackPaneController.ACCOUNT);
-        options =  FXCollections.observableArrayList();
-        options.setAll("All","Done","In service","Not allocated","car","client");
+        options = FXCollections.observableArrayList();
+        options.setAll("All", "Done", "In service", "Not allocated", "car", "client");
         filterComboBox.setItems(options);
         filterComboBox.getSelectionModel().selectFirst();
 
@@ -246,8 +254,8 @@ public class MainWindowController extends Controller {
         String searchValue = searchField.getText().toLowerCase();
         String value;
         String checkCategory = filterComboBox.getSelectionModel().getSelectedItem();
-        for (Service service:servicesListCopy) {
-            switch (checkCategory){
+        for (Service service : servicesListCopy) {
+            switch (checkCategory) {
                 case "car":
                     value = service.getCar();
                     break;
@@ -258,55 +266,55 @@ public class MainWindowController extends Controller {
                     value = null;
             }
             value = value.toLowerCase();
-            if(value.indexOf(searchValue)>=0){
+            if (value.indexOf(searchValue) >= 0) {
                 servicesList.add(service);
             }
-
         }
         appendUsersToUsersFx();
     }
+
     @FXML
     void comboBoxAction(ActionEvent event) {
         String option = filterComboBox.getSelectionModel().getSelectedItem();
         servicesList.clear();
         servicesFxList.clear();
-        switch (option){
+        switch (option) {
             case "All":
-                    showAll();
+                showAll();
                 break;
             case "car":
             case "client":
                 showSearched();
                 break;
-            default:{
+            default: {
                 showStatus(option);
             }
-
         }
     }
-    private void showAll(){
+
+    private void showAll() {
         searchButton.setVisible(false);
         searchField.setVisible(false);
 
         servicesList = new ArrayList<>(servicesListCopy);
         appendUsersToUsersFx();
-
     }
-    private void showStatus(String status){
+
+    private void showStatus(String status) {
         searchButton.setVisible(false);
         searchField.setVisible(false);
 
-        for (Service service:servicesListCopy) {
+        for (Service service : servicesListCopy) {
             System.out.println(service.getStatus());
             System.out.println(status);
-            if(service.getStatus().equals(status)){
+            if (service.getStatus().equals(status)) {
                 servicesList.add(service);
             }
         }
         appendUsersToUsersFx();
-
     }
-    private void showSearched(){
+
+    private void showSearched() {
         searchButton.setVisible(true);
         searchField.setVisible(true);
         searchField.setText("");
