@@ -41,10 +41,9 @@
             <top>
                <HBox spacing="10.0" BorderPane.alignment="CENTER">
                   <children>
-                     <ComboBox fx:id="filterComboBox" prefWidth="150.0" />
-                     <TextField fx:id="searchField" prefHeight="31.0" prefWidth="360.0" />
+                     <ComboBox fx:id="filterComboBox" onAction="#comboBoxAction" prefWidth="150.0" />
+                     <TextField fx:id="searchField" prefHeight="31.0" prefWidth="444.0" />
                      <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Search" />
-                     <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetFilters" text="Reset" />
                   </children>
                   <padding>
                      <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
