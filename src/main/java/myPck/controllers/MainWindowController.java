@@ -305,8 +305,6 @@ public class MainWindowController extends Controller {
         searchField.setVisible(false);
 
         for (Service service : servicesListCopy) {
-            System.out.println(service.getStatus());
-            System.out.println(status);
             if (service.getStatus().equals(status)) {
                 servicesList.add(service);
             }
