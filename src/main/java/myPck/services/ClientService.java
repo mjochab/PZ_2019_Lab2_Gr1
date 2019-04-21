@@ -57,6 +57,7 @@ public class ClientService {
         clientDao.openCurrentSession();
         Client client = clientDao.findById(id);
         clientDao.closeCurrentSession();
+
         return client;
     }
 
@@ -64,11 +65,12 @@ public class ClientService {
      * Metoda usuwa z bazy danych samochó o podanym id.
      * @param long id
      */
-    public void delete(long id) {
+    public boolean delete(long id) {
         clientDao.openCurrentSessionwithTransaction();
         Client client = clientDao.findById(id);
         clientDao.delete(client);
-        clientDao.closeCurrentSessionwithTransaction();
+
+        return clientDao.closeCurrentSessionwithTransaction();
     }
 
     /**

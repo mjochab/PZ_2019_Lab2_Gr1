@@ -5,21 +5,45 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.Tab;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import myPck.database.models.Service;
 import myPck.modelsFx.ServiceFx;
 import myPck.services.ServiceService;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
-public class MainWindowController extends Controller{
+public class MainWindowController extends Controller {
 
-    /** Lista zawierająca zlecenia */
+    /**
+     * Serwis Zleceń
+     */
+    private ServiceService serviceService;
+
+    /**
+     * Konstruktor MainWindowControlle i inicjalizacja Serwisu zleceń
+     */
+    public MainWindowController() {
+        this.serviceService = new ServiceService();
+    }
+
+    /**
+     * opcje filtrowania
+     */
+    private ObservableList<String> options;
+    /**
+     * lista zawierająca serwisy
+     */
+    private List<Service> servicesList;
+    /**
+     * kopia listy wykorzystywana przy filtrowaniu
+     */
+    private List<Service> servicesListCopy;
+    /**
+     * Lista zawierająca serwisyFx
+     */
     private ObservableList<ServiceFx> servicesFxList;
 
     @FXML
@@ -38,7 +62,9 @@ public class MainWindowController extends Controller{
     /** kolumna zawierająca informacje o statusie zlecenia */
     private TableColumn<ServiceFx, String> statusColumn;
 
-    /** Przyciski */
+    /**
+     * Przyciski
+     */
     @FXML
     private Button addNewServiceButton;
     @FXML
@@ -46,29 +72,23 @@ public class MainWindowController extends Controller{
     @FXML
     private Button showDetailsButton;
 
-    /** Zakładki */
+    /**
+     * Zakładki
+     */
     @FXML
     private Tab profileTab;
     @FXML
     private Tab adminPanelTab;
     @FXML
     private Tab tasksTab;
-
-    /** Lista zawierająca zlecenia */
-    private List<Service> servicesList;
-
-    /** Serwis Zleceń */
-    private ServiceService serviceService;
-
-    /**
-     * Konstruktor MainWindowControlle i inicjalizacja Serwisu zleceń
-     */
-    public MainWindowController() {
-        this.serviceService = new ServiceService();
-    }
+    @FXML
+    private TextField searchField;
+    @FXML
+    private Button searchButton;
+    @FXML
+    private ComboBox<String> filterComboBox;
 
     /**
-     *
      * @param event
      * @throws IOException
      */
@@ -86,22 +106,23 @@ public class MainWindowController extends Controller{
 
     /**
      * generowanie faktury
+     *
      * @param event
      */
     @FXML
     void invoicePDFTest(ActionEvent event) {
         ServiceFx service;
-        try{
+        try {
             /** sprawdza czy zaznaczono jakiś element w TableView */
             service = servicesTableView.getSelectionModel().getSelectedItem();
             System.out.println("Generuje PDF dla:");
             System.out.println(service.getCar());
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Nie wybrano niczego");
         }
     }
+
     /**
-     *
      * @param event
      * @throws IOException
      */
@@ -110,9 +131,9 @@ public class MainWindowController extends Controller{
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceDetails.fxml"));
         StackPane stackPane = loader.load();
         Service selected;
-        try{
+        try {
             /** sprawdza czy zaznaczono jakieś zlecenie w TableView */
-            int id =servicesTableView.getSelectionModel().getSelectedIndex();
+            int id = servicesTableView.getSelectionModel().getSelectedIndex();
             selected = servicesList.get(id);
 
             ServiceDetailsController serviceDetailsController = loader.getController();
@@ -124,17 +145,18 @@ public class MainWindowController extends Controller{
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
             /** Ustawienie okna serviceDetails */
             mainStackPaneController.setScreen(stackPane);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println("Nie wybrano niczego");
         }
     }
+
     /**
      * Metoda ustawia wartości które mają się wyświetlać w poszczególnych kolumnach
      */
     private void setUpColumns() {
-        carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
-        clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
-        statusColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
+        carColumn.setCellValueFactory(cellData -> cellData.getValue().carProperty());
+        clientColumn.setCellValueFactory(cellData -> cellData.getValue().clientProperty());
+        statusColumn.setCellValueFactory(cellData -> cellData.getValue().statusProperty());
     }
 
     /**
@@ -147,42 +169,44 @@ public class MainWindowController extends Controller{
 
     @FXML
     void initialize() {
-        System.out.println("Wersja dla konta: "+mainStackPaneController.ACCOUNT);
+        System.out.println("Wersja dla konta: " + mainStackPaneController.ACCOUNT);
+        options = FXCollections.observableArrayList();
+        options.setAll("All", "Done", "In service", "Not allocated", "car", "client");
+        filterComboBox.setItems(options);
+        filterComboBox.getSelectionModel().selectFirst();
 
         this.setUpColumns();
         this.setUpServiceList();
         this.loadServices();
+
         /** zarządzanie dostępem przycisków */
         buttonManagment();
-
+        appendUsersToUsersFx();
+        searchField.setVisible(false);
+        searchButton.setVisible(false);
         /** ukrywanie elementów dla kont bez uprawnień */
-        switch (mainStackPaneController.ACCOUNT){
+        switch (mainStackPaneController.ACCOUNT) {
             case A:
-                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case K:
-                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case M:
-                appendUsersToUsersFx();
                 tasksTab.setDisable(true);
                 adminPanelTab.setDisable(true);
                 addNewServiceButton.setVisible(false);
                 invoicePDFButton.setVisible(false);
                 break;
             case R:
-                appendUsersToUsersFx();
                 adminPanelTab.setDisable(true);
                 tasksTab.setDisable(true);
                 break;
             case ALL:
-                appendUsersToUsersFx();
                 invoicePDFButton.setVisible(true);
                 showDetailsButton.setVisible(true);
                 break;
@@ -194,6 +218,7 @@ public class MainWindowController extends Controller{
      */
     public void loadServices() {
         servicesList = serviceService.findAll();
+        servicesListCopy = new ArrayList<Service>(servicesList);
     }
 
     /**
@@ -208,17 +233,90 @@ public class MainWindowController extends Controller{
         }
         buttonManagment();
     }
+
     /**
      * Metoda wyłącza dostęp do przycisków Recepcjonisty gdy nie ma żadnych zleceń w "bazie danych"
      */
-    void buttonManagment(){
-        if(servicesFxList.isEmpty()){
+    void buttonManagment() {
+        if (servicesFxList.isEmpty()) {
             invoicePDFButton.setDisable(true);
             showDetailsButton.setDisable(true);
-        }
-        else {
+        } else {
             invoicePDFButton.setDisable(false);
             showDetailsButton.setDisable(false);
         }
+    }
+
+    @FXML
+    void search(ActionEvent event) {
+        servicesList.clear();
+        servicesFxList.clear();
+        String searchValue = searchField.getText().toLowerCase();
+        String value;
+        String checkCategory = filterComboBox.getSelectionModel().getSelectedItem();
+        for (Service service : servicesListCopy) {
+            switch (checkCategory) {
+                case "car":
+                    value = service.getCar();
+                    break;
+                case "client":
+                    value = service.getClient();
+                    break;
+                default:
+                    value = null;
+            }
+            value = value.toLowerCase();
+            if (value.indexOf(searchValue) >= 0) {
+                servicesList.add(service);
+            }
+        }
+        appendUsersToUsersFx();
+    }
+
+    @FXML
+    void comboBoxAction(ActionEvent event) {
+        String option = filterComboBox.getSelectionModel().getSelectedItem();
+        servicesList.clear();
+        servicesFxList.clear();
+        switch (option) {
+            case "All":
+                showAll();
+                break;
+            case "car":
+            case "client":
+                showSearched();
+                break;
+            default: {
+                showStatus(option);
+            }
+        }
+    }
+
+    private void showAll() {
+        searchButton.setVisible(false);
+        searchField.setVisible(false);
+
+        servicesList = new ArrayList<>(servicesListCopy);
+        appendUsersToUsersFx();
+    }
+
+    private void showStatus(String status) {
+        searchButton.setVisible(false);
+        searchField.setVisible(false);
+
+        for (Service service : servicesListCopy) {
+            System.out.println(service.getStatus());
+            System.out.println(status);
+            if (service.getStatus().equals(status)) {
+                servicesList.add(service);
+            }
+        }
+        appendUsersToUsersFx();
+    }
+
+    private void showSearched() {
+        searchButton.setVisible(true);
+        searchField.setVisible(true);
+        searchField.setText("");
     }
 }

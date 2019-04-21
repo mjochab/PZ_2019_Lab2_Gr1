@@ -46,12 +46,14 @@ public class DbManager {
         int[] amountInvoice = {200,100,300,400};
         Date[] dateOfInvoice = {new Date(2009,3,12), new Date(2014,8,20), new Date(), new Date()};
 
-        String[] loremIpsum = {"Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                " Vivamus vitae nisi eget nisl sagittis mollis in id diam. " +
-                "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa." ,
-                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. " +
-                "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor." +
-                " In quis risus ante. Donec et sapien massa." };
+        String[] loremIpsum = {
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+                " Vivamus vitae nisi eget nisl sagittis mollis in id diam. ",
+                "Sed iaculis fringilla turpis in tempor. In quis risus ante. Donec et sapien massa.",
+                "Lorem ipsum dolor sit amet, consectetur adipiscing elit. ",
+                "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
+                " In quis risus ante. Donec et sapien massa."
+        };
 
         clearDatabase();
 
@@ -65,6 +67,11 @@ public class DbManager {
             Service service = this.populateService(car, client);
             Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
+//            long id = service.getId();
+//            serviceService.delete(id);
+//            id = client.getId();
+//            clientService.delete(id);
+
 
         }
     }
@@ -101,7 +108,7 @@ public class DbManager {
     }
 
     public Client populateClient(String firstName, String lastName) {
-        Client client = new Client(firstName,  lastName, 323232, "Rzeszów Pigonia 1");
+        Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
         this.clientService.persist(client);
 
         return client;

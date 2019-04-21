@@ -45,4 +45,17 @@ public class UserDao extends SessionManager implements Dao<User> {
             delete(entity);
         }
     }
+
+    public User findByLogin(String login) {
+        User user = (User) getCurrentSession()
+                .createQuery("from User WHERE login = :login")
+                .setParameter("login", login)
+                .uniqueResult();
+
+        if (user != null) {
+            return user;
+        }
+
+        return null;
+    }
 }

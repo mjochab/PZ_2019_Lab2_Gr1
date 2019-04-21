@@ -7,7 +7,7 @@ import java.util.List;
 
 @Entity
 @Table(name = "services")
-public class Service implements Serializable {
+public class Service implements Serializable{
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -20,7 +20,7 @@ public class Service implements Serializable {
     private Invoice invoice;
     @ManyToOne
     private ServiceReport serviceReport;
-    @OneToMany
+    @OneToMany(mappedBy = "service")
     private List<ServicePart> serviceParts;
     @OneToMany
     private List<InvoicePosition> invoicePositions;

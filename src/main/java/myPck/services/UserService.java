@@ -80,4 +80,12 @@ public class UserService {
         userDao.deleteAll();
         userDao.closeCurrentSessionwithTransaction();
     }
+
+    public User findByLogin(String login) {
+        userDao.openCurrentSession();
+        User user = userDao.findByLogin(login);
+        userDao.closeCurrentSession();
+
+        return user;
+    }
 }

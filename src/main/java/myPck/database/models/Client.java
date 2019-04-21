@@ -9,7 +9,7 @@ public class Client implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name="first_name", nullable = false)
     private String firstName;
@@ -18,7 +18,7 @@ public class Client implements Serializable {
     private String lastName;
 
     @Column(name="NIP_number", length = 10)
-    private int NipNumber;
+    private String NipNumber;
 
     @Column(name="address", length = 50, nullable = false)
     private String address;
@@ -32,14 +32,14 @@ public class Client implements Serializable {
      * @param NipNumber
      * @param address
      */
-    public Client(String firstName, String lastName, int NipNumber, String address) {
+    public Client(String firstName, String lastName, String NipNumber, String address) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.NipNumber = NipNumber;
         this.address = address;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
@@ -59,11 +59,13 @@ public class Client implements Serializable {
         this.lastName = last_name;
     }
 
-    public int getNipNumber() {
-        return NipNumber;
+    public String getNipNumber() {
+
+        String nip = ""+this.NipNumber;
+        return nip;
     }
 
-    public void setNipNumber(int NipNumber) {
+    public void setNipNumber(String NipNumber) {
         this.NipNumber = NipNumber;
     }
 
