@@ -168,7 +168,7 @@ public class MainWindowController extends Controller {
 
     @FXML
     void initialize() {
-        System.out.println("Wersja dla konta: " + mainStackPaneController.ACCOUNT);
+        System.out.println("Wersja dla konta: " + mainStackPaneController.accountType);
         options = FXCollections.observableArrayList();
         options.setAll("All", "Done", "In service", "Not allocated", "car", "client");
         filterComboBox.setItems(options);
