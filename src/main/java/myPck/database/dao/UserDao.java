@@ -5,8 +5,6 @@ import myPck.database.utils.SessionManager;
 
 import java.util.List;
 
-//import javax.management.Query;
-
 public class UserDao extends SessionManager implements Dao<User> {
 
     public UserDao() {

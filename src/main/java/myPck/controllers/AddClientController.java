@@ -1,57 +1,70 @@
 package myPck.controllers;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import myPck.controllers.utils.Validator;
+import myPck.database.models.Client;
+import myPck.modelsFx.ClientFx;
+import myPck.services.ClientService;
+
+import java.io.IOException;
 
 public class AddClientController extends Controller {
 
     @FXML
-    private ResourceBundle resources;
-
+    private TextField firstNameField;
     @FXML
-    private URL location;
-
+    private TextField lastNameField;
     @FXML
-    private TextField fname;
-
+    private TextField NIPNumberField;
     @FXML
-    private TextField lname;
-
+    private TextField addressField;
     @FXML
-    private TextField nip;
-
+    private Button addButton;
     @FXML
-    private TextField address;
-
-    @FXML
-    private Button add1;
+    private Button backButton;
 
     @FXML
     void add(ActionEvent event) throws IOException {
+        String firstName = firstNameField.getText();
+        String lastName = lastNameField.getText();
+        String nipNumber = NIPNumberField.getText();
+        String address = addressField.getText();
+
+        if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length() != 10) {
+            System.out.println("Error");
+        } else {
+            this.client = new Client(firstName, lastName, nipNumber, address);
+            clientService.persist(this.client);
+            /** wywołanie przycisku powrotu */
+            backButton.fire();
+        }
+    }
+    @FXML
+    void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
         StackPane stackPane = loader.load();
-
-        //przekazanie kontrolera (głównego okna) do okienka serviceDetails
         AddServiceController addServiceController = loader.getController();
         addServiceController.setMainStackPaneController(mainStackPaneController);
-        //ustawienie okna serviceDetails
         mainStackPaneController.setScreen(stackPane);
     }
 
     @FXML
     void initialize() {
-        assert fname != null : "fx:id=\"fname\" was not injected: check your FXML file 'AddClientPanel.fxml'.";
-        assert lname != null : "fx:id=\"lname\" was not injected: check your FXML file 'AddClientPanel.fxml'.";
-        assert nip != null : "fx:id=\"nip\" was not injected: check your FXML file 'AddClientPanel.fxml'.";
-        assert address != null : "fx:id=\"address\" was not injected: check your FXML file 'AddClientPanel.fxml'.";
-        assert add1 != null : "fx:id=\"add1\" was not injected: check your FXML file 'AddClientPanel.fxml'.";
-
+        Validator.setMaxLengthOfTextField(firstNameField, 200);
+        Validator.setMaxLengthOfTextField(lastNameField, 200);
+        Validator.setMaxLengthOfTextField(NIPNumberField, 10);
+        Validator.setMaxLengthOfTextField(addressField, 50);
+        Validator.convertTextFieldToNumberField(NIPNumberField);
+        clientService = new ClientService();
     }
+
+    private Client client;
+    private ClientFx clientFx;
+    private ClientService clientService;
+
 }

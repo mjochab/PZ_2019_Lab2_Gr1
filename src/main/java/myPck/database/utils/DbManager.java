@@ -98,7 +98,7 @@ public class DbManager {
     }
 
     public Client populateClient(String firstName, String lastName) {
-        Client client = new Client(firstName,  lastName, 323232, "Rzeszów Pigonia 1");
+        Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
         this.clientService.persist(client);
 
         return client;

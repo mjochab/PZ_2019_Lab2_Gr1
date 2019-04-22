@@ -1,14 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0"
-           prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-           fx:controller="myPck.controllers.MainWindowController">
-    <TabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="508.0" prefWidth="700.0"
-             tabClosingPolicy="UNAVAILABLE">
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.MainWindowController">
+    <TabPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="508.0" prefWidth="700.0" tabClosingPolicy="UNAVAILABLE">
         <Tab fx:id="servicesTab" text="Services">
             <BorderPane>
                 <center>
@@ -33,16 +38,28 @@
                         </padding>
                     </HBox>
                 </bottom>
+            <top>
+               <HBox spacing="10.0" BorderPane.alignment="CENTER">
+                  <children>
+                     <ComboBox fx:id="filterComboBox" onAction="#comboBoxAction" prefWidth="150.0" />
+                     <TextField fx:id="searchField" prefHeight="31.0" prefWidth="444.0" />
+                     <Button fx:id="searchButton" mnemonicParsing="false" onAction="#search" text="Search" />
+                  </children>
+                  <padding>
+                     <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  </padding>
+               </HBox>
+            </top>
             </BorderPane>
         </Tab>
         <Tab fx:id="profileTab" text="Profile">
-            <fx:include source="Profile.fxml"/>
+            <fx:include source="Profile.fxml" />
         </Tab>
         <Tab fx:id="adminPanelTab" text="Admin panel">
-            <fx:include source="AdminPanelListUsers.fxml"/>
+            <fx:include source="AdminPanelListUsers.fxml" />
         </Tab>
         <Tab fx:id="tasksTab" text="Tasks">
-            <fx:include source="ManagerPanel.fxml"/>
+            <fx:include source="ManagerPanel.fxml" />
         </Tab>
     </TabPane>
 </StackPane>
