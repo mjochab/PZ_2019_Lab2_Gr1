@@ -49,4 +49,12 @@ public class ServicePart implements Serializable {
     public void setName(String name) {
         this.name = name;
     }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Service getService() {
+        return this.service;
+    }
 }

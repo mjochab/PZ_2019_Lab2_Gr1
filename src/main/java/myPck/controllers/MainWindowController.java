@@ -106,7 +106,6 @@ public class MainWindowController extends Controller {
 
     /**
      * generowanie faktury
-     *
      * @param event
      */
     @FXML
@@ -169,7 +168,7 @@ public class MainWindowController extends Controller {
 
     @FXML
     void initialize() {
-        System.out.println("Wersja dla konta: " + mainStackPaneController.ACCOUNT);
+        System.out.println("Wersja dla konta: " + mainStackPaneController.accountType);
         options = FXCollections.observableArrayList();
         options.setAll("All", "Done", "In service", "Not allocated", "car", "client");
         filterComboBox.setItems(options);
@@ -185,7 +184,7 @@ public class MainWindowController extends Controller {
         searchField.setVisible(false);
         searchButton.setVisible(false);
         /** ukrywanie elementów dla kont bez uprawnień */
-        switch (mainStackPaneController.ACCOUNT) {
+        switch (mainStackPaneController.accountType){
             case A:
                 tasksTab.setDisable(true);
                 addNewServiceButton.setVisible(false);

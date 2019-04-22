@@ -13,6 +13,10 @@ public class ServiceReport implements Serializable {
     @Column(name = "description", length = 500, nullable = true)
     private String description;
 
+    @OneToOne
+    private Service service;
+
+
     public ServiceReport() {
     }
 

@@ -12,7 +12,7 @@ public class User implements Serializable {
     @Column(name= "id")
     private long id;
 
-    @Column(name = "email", length = 40, nullable = false)
+    @Column(name = "email", length = 40, nullable = false, unique = true)
     private String email;
 
     @Column(name="first_name", length = 25)
@@ -21,10 +21,10 @@ public class User implements Serializable {
     @Column(name="last_name", length = 40)
     private String lastName;
 
-    @Column(name="login", length = 25, nullable = false)
+    @Column(name="login", length = 25, nullable = false, unique = true)
     private String login;
 
-    @Column(name="password", length = 40, nullable = false)
+    @Column(name="password", length = 60, nullable = false)
     private String password;
 
     @Column(name="role", length = 25, nullable = false)

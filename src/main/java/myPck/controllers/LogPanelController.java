@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class LogPanelController extends Controller{
+public class LogPanelController extends Controller {
 
     public Label errorLabel;
     @FXML
@@ -52,6 +52,8 @@ public class LogPanelController extends Controller{
 //                String hashedPassInDatabase = user.getPassword();
 //                if (checkPassword(password, hashedPassInDatabase)) {
 //                    errorLabel.setVisible(false);
+//                    mainStackPaneController.setUser(user);
+//                    mainStackPaneController.setAccountType();
 //                    mainStackPaneController.loadMainWindow();
 //                }
 //            }
@@ -61,10 +63,5 @@ public class LogPanelController extends Controller{
 //            errorLabel.setText("Provide login and password.");
 //            errorLabel.setVisible(true);
 //        }
-    }
-
-    @FXML
-    void initialize() {
-
     }
 }
