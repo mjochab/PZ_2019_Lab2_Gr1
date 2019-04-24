@@ -13,66 +13,67 @@ public class Car implements Serializable {
     private long id;
 
     @Column(name = "model", length = 40, nullable = false)
-    private String model;
+    private String Model;
 
     @Column(name = "brand", length = 40, nullable = false)
-    private String brand;
+    private String Brand;
 
     @Column(name = "type", length = 40, nullable = false)
-    private String type;
+    private String Type;
 
-    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date productionDate;
+    @Column(name = "ProductionsDate", length = 40, nullable = false, columnDefinition = "DATE")
+    @Temporal(TemporalType.java.util.Date)
+    private String  ProductionsDate;
 
-    public Car() {
+
+
+    public Car(String Model, String Brand, String Type, String ProductionsDate){
+        this.Model=Model;
+        this.Brand=Brand;
+        this.Type=Type;
+        this.ProductionsDate=ProductionsDate;
     }
 
-    public Car(String model, String brand, String type, Date productionDate){
-        this.model=model;
-        this.brand=brand;
-        this.type=type;
-        this.productionDate=productionDate;
-    }
+
 
     public long getId() {
         return id;
     }
 
     public String getModel() {
-        return model;
+        return Model;
     }
 
-    public void setModel(String model) {
-        this.model = model;
+    public void setModel(String Model) {
+        this.Model = Model;
     }
 
     public String getBrand() {
-        return brand;
+        return Brand;
     }
 
-    public void setBrand(String brand) {
-        this.brand = brand;
+    public void setBrand(String Brand) {
+        this.Brand = Brand;
     }
 
     public String getType() {
-        return type;
+        return Type;
     }
 
-    public void setType(String type) {
-        this.type = type;
+    public void setType(String Type) {
+        this.Type = Type;
     }
 
-    public Date getProductionDate() {
-        return productionDate;
+    public String getProductionsDate() {
+        return ProductionsDate;
     }
 
-    public void setProductionDate(Date productionDate) {
-        this.productionDate = productionDate;
+    public void setProductionsDate(String ProductionsDate) {
+        this.ProductionsDate = ProductionsDate;
     }
 
     @Override
     public String toString() {
-        return brand + " " + model;
+        return Brand + " " + Model;
     }
 }

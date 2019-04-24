@@ -29,7 +29,7 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label text="Branch" GridPane.rowIndex="1">
+            <Label text="Brand" GridPane.rowIndex="1">
                <padding>
                   <Insets right="10.0" />
                </padding>
@@ -39,22 +39,22 @@
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <Label text="Production date" GridPane.rowIndex="3">
+            <Label text="Productions date" GridPane.rowIndex="3">
                <padding>
                   <Insets right="10.0" />
                </padding>
             </Label>
-            <TextField fx:id="branchField" GridPane.columnIndex="1" GridPane.rowIndex="1">
+            <TextField fx:id="BrandField" GridPane.columnIndex="1" GridPane.rowIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" right="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="typeField" prefHeight="31.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+            <TextField fx:id="TypeField" prefHeight="31.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
                <GridPane.margin>
                   <Insets left="20.0" right="10.0" />
                </GridPane.margin>
             </TextField>
-            <TextField fx:id="dateField" prefHeight="31.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
+            <TextField fx:id="ProductionsDateField" prefHeight="31.0" prefWidth="224.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                <GridPane.margin>
                   <Insets left="20.0" right="10.0" />
                </GridPane.margin>
@@ -63,11 +63,12 @@
                <GridPane.margin>
                   <Insets right="10.0" />
                </GridPane.margin></Button>
-            <TextField fx:id="modelField" prefHeight="30.0" prefWidth="204.0" GridPane.columnIndex="1">
+            <TextField fx:id="ModelField" prefHeight="30.0" prefWidth="204.0" GridPane.columnIndex="1">
                <GridPane.margin>
                   <Insets left="20.0" right="10.0" />
                </GridPane.margin>
             </TextField>
+            <Button fx:id="CancelButton" mnemonicParsing="false" onAction="#Cancel" text="Cancel" GridPane.rowIndex="4" />
          </children>
       </GridPane>
    </children>

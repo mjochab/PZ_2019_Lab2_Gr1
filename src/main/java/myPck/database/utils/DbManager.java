@@ -16,7 +16,7 @@ public class DbManager {
     private ServicePartService servicePathService;
     private ServiceReportService serviceReportService;
 
-    public DbManager () {
+    public DbManager() {
         this.userService = new UserService();
         this.carService = new CarService();
         this.serviceService = new ServiceService();
@@ -37,11 +37,12 @@ public class DbManager {
         String[] carModels = {"A6", "E220", "C4", "XP"};
         String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
         String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
+        String [] carProductionsDate = {"2020","2012","2009","2000"};
 
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
-        int[] amountInvoice = {200,100,300,400};
-        Date[] dateOfInvoice = {new Date(2009,3,12), new Date(2014,8,20), new Date(), new Date()};
+        int[] amountInvoice = {200, 100, 300, 400};
+        Date[] dateOfInvoice = {new Date(2009, 3, 12), new Date(2014, 8, 20), new Date(), new Date()};
 
         String[] loremIpsum = {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -54,17 +55,23 @@ public class DbManager {
 
         clearDatabase();
 
-        for (int i = 0; i <=numberOfRows; i++) {
+        for (int i = 0; i <= numberOfRows; i++) {
             int index = generator.nextInt(4);
 
-            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
+            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index],carProductionsDate[index]);
             User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
-            Invoice invoice = this.populateInvoice(dateOfInvoice[index],priceInvoice[index]);
+            Invoice invoice = this.populateInvoice(dateOfInvoice[index], priceInvoice[index]);
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
         }
+
     }
+
+
+
+
+
     public void clearDatabase(){
         //kolejność usuwania jest ważna!
         this.serviceService.deleteAll();
@@ -96,6 +103,11 @@ public class DbManager {
 
         return invoice;
     }
+    public Car populateCar(String model, String brand, String type,String ProductionsDate) {
+        Car car = new Car(model, brand,type,"2020");
+        this.carService.persist(car);
+        return car;
+    }
 
     public Client populateClient(String firstName, String lastName) {
         Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
@@ -111,11 +123,6 @@ public class DbManager {
         return user;
     }
 
-    public Car populateCar(String model, String brand, String type) {
-        Car car = new Car(model, brand, type, new Date());
-        this.carService.persist(car);
-        return car;
-    }
 
     public InvoicePosition populateInvoicePosition(int price, String name)
     {
