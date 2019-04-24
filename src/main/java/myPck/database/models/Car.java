@@ -2,7 +2,6 @@ package myPck.database.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.Date;
 
 @Entity
 @Table(name="cars")
@@ -21,8 +20,8 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String Type;
 
-    @Column(name = "ProductionsDate", length = 40, nullable = false, columnDefinition = "DATE")
-    @Temporal(TemporalType.java.util.Date)
+    @Column(name = "productionsDate", length = 40, nullable = false, columnDefinition = "DATE")
+    @Temporal(TemporalType.TIMESTAMP)
     private String  ProductionsDate;
 
 
