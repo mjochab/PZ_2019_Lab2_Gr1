@@ -51,7 +51,7 @@ public class DbManager {
                 "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
                 " In quis risus ante. Donec et sapien massa."
         };
-
+//        Car car = this.populateCar(carModels[0], carBrands[0], carTypes[0]);
         clearDatabase();
 
         for (int i = 0; i <=numberOfRows; i++) {
@@ -105,7 +105,7 @@ public class DbManager {
     }
 
     public User populateUser(String firstName, String lastName, int index) {
-        User user = new User("email@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
+        User user = new User("email" + index + "@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
         this.userService.persist(user);
 
         return user;

@@ -10,12 +10,14 @@ public class ServicePart implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column(name = "price", nullable = false)
     private double price;
+
     @Column(name = "name", length = 40, nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private Service service;
 
     public ServicePart() {

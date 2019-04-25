@@ -101,6 +101,7 @@
                   <Button fx:id="backToServiceDetails" mnemonicParsing="false" onAction="#backToServiceDetails" text="Back" />
                   <Label fx:id="errorLabel" alignment="CENTER" text="Label" textAlignment="CENTER" textFill="RED" visible="false" />
                   <Button fx:id="saveReportButton" mnemonicParsing="false" onAction="#addReport" text="Save Report" />
+                  <Button fx:id="editReportButton" mnemonicParsing="false" onAction="#editReport" text="Edit Report" />
                </children>
             </HBox>
          </children>
