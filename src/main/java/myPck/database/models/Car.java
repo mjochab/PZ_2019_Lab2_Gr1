@@ -2,6 +2,7 @@ package myPck.database.models;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.text.DateFormat;
 
 @Entity
 @Table(name="cars")
@@ -20,19 +21,20 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String Type;
 
-    @Column(name = "productionsDate", length = 40, nullable = false, columnDefinition = "DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private String  ProductionsDate;
 
 
 
-    public Car(String Model, String Brand, String Type, String ProductionsDate){
+
+
+    public Car(String Model, String Brand, String Type){
         this.Model=Model;
         this.Brand=Brand;
         this.Type=Type;
-        this.ProductionsDate=ProductionsDate;
+
     }
 
+    public Car() {
+    }
 
 
     public long getId() {
@@ -63,13 +65,7 @@ public class Car implements Serializable {
         this.Type = Type;
     }
 
-    public String getProductionsDate() {
-        return ProductionsDate;
-    }
 
-    public void setProductionsDate(String ProductionsDate) {
-        this.ProductionsDate = ProductionsDate;
-    }
 
     @Override
     public String toString() {

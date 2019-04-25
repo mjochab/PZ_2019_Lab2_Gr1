@@ -22,8 +22,7 @@ public class DeleteCarController extends Controller {
     private TextField BrandField;
     @FXML
     private TextField TypeField;
-    @FXML
-    private TextField ProductionsDateField;
+
     @FXML
     private Button saveButton;
     @FXML
@@ -34,8 +33,7 @@ public class DeleteCarController extends Controller {
         Validator.setMaxLengthOfTextField(ModelField, 200);
         Validator.setMaxLengthOfTextField(BrandField, 200);
         Validator.setMaxLengthOfTextField(TypeField, 50);
-        Validator.convertTextFieldToNumberField(ProductionsDateField);
-        Validator.setMaxLengthOfTextField(ProductionsDateField, 10);
+
         carService = new CarService();
     }
 
@@ -50,14 +48,14 @@ public class DeleteCarController extends Controller {
     }
 
     private CarFx converCartoCarFx(Car car) {
-        return new CarFx(car.getModel(), car.getBrand(), car.getType(), car.getProductionsDate());
+        return new CarFx(car.getModel(),car.getBrand(),car.getType());
     }
 
     private void setFieldsBinding() {
         ModelField.textProperty().bindBidirectional(carFx.ModelProperty());
         BrandField.textProperty().bindBidirectional(carFx.BrandProperty());
         TypeField.textProperty().bindBidirectional(carFx.TypeProperty());
-        ProductionsDateField.textProperty().bindBidirectional(carFx.ProductionsDateProperty());
+
     }
 
     @FXML
@@ -66,13 +64,13 @@ public class DeleteCarController extends Controller {
         car.setModel(carFx.getModel());
         car.setBrand(carFx.getBrand());
         car.setType(carFx.getType());
-        car.setProductionsDate(carFx.getProductionsDate());
+
 
         String Model = car.getModel();
         String Branch = car.getBrand();
         String Type = car.getType();
-        String ProductionsDate = String.valueOf(car.getProductionsDate());
-        if (Model.isEmpty() || Branch.isEmpty() || Type.isEmpty() || ProductionsDate.length() != 10) {
+
+        if (Model.isEmpty() || Branch.isEmpty() || Type.isEmpty() ) {
             System.out.println("Error");
         } else {
             /** zapis do bazy danych */

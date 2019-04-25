@@ -2,6 +2,10 @@ package myPck.database.utils;
 
 import myPck.database.models.*;
 import myPck.services.*;
+
+import java.awt.datatransfer.DataFlavor;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 import static myPck.utils.Password.hashPassword;
@@ -15,6 +19,8 @@ public class DbManager {
     private InvoicePositionService invoicePositionService;
     private ServicePartService servicePathService;
     private ServiceReportService serviceReportService;
+    private Object Date;
+
 
     public DbManager() {
         this.userService = new UserService();
@@ -37,7 +43,7 @@ public class DbManager {
         String[] carModels = {"A6", "E220", "C4", "XP"};
         String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
         String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
-        String [] carProductionsDate = {"2020","2012","2009","2000"};
+
 
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
@@ -58,7 +64,7 @@ public class DbManager {
         for (int i = 0; i <= numberOfRows; i++) {
             int index = generator.nextInt(4);
 
-            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index],carProductionsDate[index]);
+            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
             User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
@@ -103,8 +109,8 @@ public class DbManager {
 
         return invoice;
     }
-    public Car populateCar(String model, String brand, String type,String ProductionsDate) {
-        Car car = new Car(model, brand,type,"2020");
+    public Car populateCar(String model, String brand, String type) {
+        Car car = new Car(model, brand,type);
         this.carService.persist(car);
         return car;
     }

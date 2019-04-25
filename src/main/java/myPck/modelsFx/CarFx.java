@@ -2,19 +2,20 @@ package myPck.modelsFx;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
-import java.util.Date;
+
+import java.text.DateFormat;
 
 public class CarFx {
     private StringProperty Model = new SimpleStringProperty();
     private StringProperty Brand = new SimpleStringProperty();
     private StringProperty Type = new SimpleStringProperty();
-    private StringProperty ProductionsDate = new SimpleStringProperty();
 
-    public CarFx (String Model, String Brand, String Type, String ProductionsDate ){
+
+    public CarFx (String Model, String Brand, String Type ){
         this.Model.set(Model);
         this.Brand.set(Brand);
         this.Type.set(Type);
-        this.ProductionsDate.set(ProductionsDate);
+
     }
     public String getModel() {
         return Model.get();
@@ -40,11 +41,5 @@ public class CarFx {
         return Type;
     }
 
-    public String getProductionsDate() {
-        return String.valueOf(ProductionsDate);
-    }
 
-    public StringProperty ProductionsDateProperty() {
-        return ProductionsDate;
-    }
 }
