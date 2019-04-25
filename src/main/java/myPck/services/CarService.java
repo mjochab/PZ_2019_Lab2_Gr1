@@ -64,12 +64,14 @@ public class CarService {
     /**
      * Metoda usuwa z bazy danych samochó o podanym id.
      * @param long id
+     * @return
      */
-    public void delete(long id) {
+    public boolean delete(long id) {
         carDao.openCurrentSessionwithTransaction();
         Car car = carDao.findById(id);
         carDao.delete(car);
         carDao.closeCurrentSessionwithTransaction();
+        return false;
     }
 
     /**

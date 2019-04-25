@@ -112,7 +112,7 @@ public class DbManager {
     }
 
     public Car populateCar(String model, String brand, String type) {
-        Car car = new Car(model, brand, type, new Date());
+        Car car = new Car(model, brand, type);
         this.carService.persist(car);
         return car;
     }

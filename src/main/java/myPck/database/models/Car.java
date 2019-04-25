@@ -21,18 +21,15 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String type;
 
-    @Column(name = "production_date", length = 40, nullable = false, columnDefinition = "DATE")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date productionDate;
 
-    public Car() {
-    }
-
-    public Car(String model, String brand, String type, Date productionDate){
+    public Car(String model, String brand, String type){
         this.model=model;
         this.brand=brand;
         this.type=type;
-        this.productionDate=productionDate;
+
+    }
+
+    public Car() {
     }
 
     public long getId() {
@@ -63,13 +60,6 @@ public class Car implements Serializable {
         this.type = type;
     }
 
-    public Date getProductionDate() {
-        return productionDate;
-    }
-
-    public void setProductionDate(Date productionDate) {
-        this.productionDate = productionDate;
-    }
 
     @Override
     public String toString() {
