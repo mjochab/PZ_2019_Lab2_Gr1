@@ -65,7 +65,7 @@ public class EditCarController extends Controller  {
             System.out.println("Error");
         } else {
             carService.update(car);
-
+            cancelButton.fire();
         }
     }
         @FXML

@@ -1,5 +1,7 @@
 package myPck.controllers;
 
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -71,23 +73,7 @@ public class AddServiceController extends Controller {
         System.out.println("Anuluje tworzenie zlecenia");
         mainStackPaneController.loadMainWindow();
     }
-    @FXML
-    void editCar(ActionEvent event) throws IOException {
-        if (!carNameList.isEmpty()) {
-            /** pobranie id wybranego elemntu */
-            int id = carsListView.getSelectionModel().getSelectedIndex();
-            /** zaznaczony klient */
-            Car selected = carList.get(id);
-            /** ładowanie widou EditClient */
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditCar.fxml"));
-            Pane pane = loader.load();
-            EditCarController editCarController = loader.getController();
-            editCarController.setMainStackPaneController(mainStackPaneController);
-            mainStackPaneController.setScreen(pane);
-            /** wysłanie zaznaczonego klienta do widoku EditClient */
-            editCarController.setCar(selected);
-        }
-    }
+
 
 
 
@@ -163,7 +149,23 @@ public class AddServiceController extends Controller {
             editClientController.setClient(selected);
         }
     }
-
+    @FXML
+    void editCar(ActionEvent event) throws IOException {
+        if (!carNameList.isEmpty()) {
+            /** pobranie id wybranego elemntu */
+            int id = carsListView.getSelectionModel().getSelectedIndex();
+            /** zaznaczony klient */
+            Car selected = carList.get(id);
+            /** ładowanie widou EditClient */
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditCar.fxml"));
+            Pane pane = loader.load();
+            EditCarController editCarController = loader.getController();
+            editCarController.setMainStackPaneController(mainStackPaneController);
+            mainStackPaneController.setScreen(pane);
+            /** wysłanie zaznaczonego klienta do widoku EditClient */
+            editCarController.setCar(selected);
+        }
+    }
     @FXML
     void addNewClient(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddClientPanel.fxml"));
@@ -194,6 +196,7 @@ public class AddServiceController extends Controller {
     }
     @FXML
     void deleteCar (ActionEvent event) {
+        ObjectProperty<Car> selectedCarProperty = new SimpleObjectProperty();
         if (!carNameList.isEmpty()){
             int id = carsListView.getSelectionModel().getSelectedIndex();
             Car selected = carList.get(id);
