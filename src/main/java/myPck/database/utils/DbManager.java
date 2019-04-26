@@ -34,6 +34,7 @@ public class DbManager {
         String[] carModels = {"A6", "E220", "C4", "XP"};
         String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
         String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
+        String [] carProductionsDate ={"1992","1993"};
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
         int[] amountInvoice = {200,100,300,400};
@@ -52,7 +53,7 @@ public class DbManager {
 
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(4);
-            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
+            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index],carProductionsDate[index]);
             User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
@@ -105,8 +106,8 @@ public class DbManager {
 
         return user;
     }
-    public Car populateCar(String model, String brand, String type) {
-        Car car = new Car(model, brand, type);
+    public Car populateCar(String model, String brand, String type,String ProductionsDate) {
+        Car car = new Car(model, brand, type,ProductionsDate);
         this.carService.persist(car);
         return car;
     }

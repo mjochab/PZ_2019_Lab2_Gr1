@@ -70,8 +70,7 @@ public class CarService {
         carDao.openCurrentSessionwithTransaction();
         Car car = carDao.findById(id);
         carDao.delete(car);
-        carDao.closeCurrentSessionwithTransaction();
-        return false;
+        return carDao.closeCurrentSessionwithTransaction();
     }
 
     /**

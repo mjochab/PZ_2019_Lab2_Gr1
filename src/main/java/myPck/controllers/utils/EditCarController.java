@@ -22,6 +22,8 @@ public class EditCarController extends Controller  {
     @FXML
     private  TextField TypeField;
     @FXML
+    private TextField ProductionsDateField;
+    @FXML
     private Button saveButton;
     @FXML
     private Button cancelButton;
@@ -31,6 +33,7 @@ public class EditCarController extends Controller  {
         Validator.setMaxLengthOfTextField(ModelField,100);
         Validator.setMaxLengthOfTextField(BrandField,100);
         Validator.setMaxLengthOfTextField(TypeField,100);
+        Validator.convertTextFieldToNumberField(ProductionsDateField);
         carService = new CarService();
     }
     private Car car ;
@@ -43,7 +46,7 @@ public class EditCarController extends Controller  {
         setFieldsBinding();
     }
     private static CarFx convertCartoCarFx(Car car) {
-        return new CarFx(car.getModel(),car.getBrand(),car.getType());
+        return new CarFx(car.getModel(),car.getBrand(),car.getType(),car.getPrductionsDate());
     }
 
 
@@ -51,17 +54,20 @@ public class EditCarController extends Controller  {
         ModelField.textProperty().bindBidirectional(carFx.ModelProperty());
         BrandField.textProperty().bindBidirectional(carFx.BrandProperty());
         TypeField.textProperty().bindBidirectional(carFx.TypeProperty());
+        ProductionsDateField.textProperty().bindBidirectional(carFx.ProductionsDateProperty());
     }
     @FXML
     void save(ActionEvent event) {
         car.setModel(carFx.getModel());
         car.setBrand(carFx.getBrand());
         car.setType(carFx.getType());
+        car.setPrductionsDate(carFx.getProductionsDate());
         String Model = car.getModel();
         String Brand = car.getBrand();
         String Type = car.getType();
+        String ProductionsDate = car.getPrductionsDate();
 
-        if (Model.isEmpty() || Brand.isEmpty() || Type.isEmpty()) {
+        if (Model.isEmpty() || Brand.isEmpty() || Type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() !=4) {
             System.out.println("Error");
         } else {
             carService.update(car);

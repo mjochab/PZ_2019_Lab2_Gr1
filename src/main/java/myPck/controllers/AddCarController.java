@@ -26,6 +26,8 @@ public class AddCarController extends Controller{
 
     @FXML
     private TextField typeField;
+    @FXML
+    private TextField ProductionsDateField;
 
     @FXML
     private Button addButton;
@@ -39,10 +41,11 @@ public class AddCarController extends Controller{
         String model = modelField.getText();
         String brand = brandField.getText();
         String type = typeField.getText();
-        if (model.isEmpty() || brand.isEmpty() || type.isEmpty()) {
+        String ProductionsDate = ProductionsDateField.getText();
+        if (model.isEmpty() || brand.isEmpty() || type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() !=4) {
             System.out.println("Error");
         }else{
-            this.car = new Car(model,brand,type);
+            this.car = new Car(model,brand,type,ProductionsDate);
             carService.persist(this.car);
             backButton.fire();
         }
@@ -61,6 +64,7 @@ public class AddCarController extends Controller{
         Validator.setMaxLengthOfTextField(modelField,200);
         Validator.setMaxLengthOfTextField(brandField,200);
         Validator.setMaxLengthOfTextField(typeField,100);
+        Validator.convertTextFieldToNumberField(ProductionsDateField);
         carService = new CarService();
     }
     public Car car;
