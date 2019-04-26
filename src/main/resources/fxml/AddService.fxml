@@ -75,8 +75,8 @@
                            <contextMenu>
                               <ContextMenu>
                                 <items>
-                                    <MenuItem fx:id="editCarMenuItem" mnemonicParsing="false" onAction="#editCar" text="editCar" />
-                                  <MenuItem fx:id="deleteCarMenuItem" mnemonicParsing="false" onAction="#deleteCar" text="deleteCar" />
+                                    <MenuItem fx:id="editCarMenuItem" mnemonicParsing="false" onAction="#editCar" text="edit" />
+                                  <MenuItem fx:id="deleteCarMenuItem" mnemonicParsing="false" onAction="#deleteCar" text="delete" />
                                 </items>
                               </ContextMenu>
                            </contextMenu></ListView>

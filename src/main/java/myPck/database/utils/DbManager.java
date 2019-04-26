@@ -26,18 +26,14 @@ public class DbManager {
         this.servicePathService = new ServicePartService();
         this.serviceReportService = new ServiceReportService();
     }
-
     public void addSampleData() {
         Random generator = new Random();
         int numberOfRows = 10;
-
         String[] firstNames = {"Jan", "Roman", "Mateusz", "Judasz"};
         String[] lastNames = {"Kowalski", "Nowak", "Kwiatkowski", "Rząsa"};
-
         String[] carModels = {"A6", "E220", "C4", "XP"};
         String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
         String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
-
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
         int[] amountInvoice = {200,100,300,400};
@@ -56,7 +52,6 @@ public class DbManager {
 
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(4);
-
             Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index]);
             User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
@@ -110,13 +105,11 @@ public class DbManager {
 
         return user;
     }
-
     public Car populateCar(String model, String brand, String type) {
         Car car = new Car(model, brand, type);
         this.carService.persist(car);
         return car;
     }
-
     public InvoicePosition populateInvoicePosition(int price, String name)
     {
          InvoicePosition invoicePosition = new InvoicePosition(name, price);
@@ -124,7 +117,6 @@ public class DbManager {
 
          return invoicePosition;
     }
-
     public ServiceReport populateServiceReport(String description){
         ServiceReport serviceReport = new ServiceReport(description);
         this.serviceReportService.persist(serviceReport);

@@ -196,17 +196,21 @@ public class AddServiceController extends Controller {
     }
     @FXML
     void deleteCar (ActionEvent event) {
-        ObservableList<String> oneCar;
-        ObservableList<String> allCar;
-        try{
-            allCar = carsListView.getItems();
-            if (allCar.size() !=0){
-                oneCar = carsListView.getSelectionModel().getSelectedItems();
-                oneCar.forEach(allCar::remove);
-            }
-        }catch (Exception e) {
-            //nic nie rób
+        if (!carNameList.isEmpty()){
+            int id = carsListView.getSelectionModel().getSelectedIndex();
+            Car selected = carList.get(id);
 
+            boolean isDelete = carService.delete(selected.getId());
+
+            if (isDelete){
+                System.out.println("Usunięto");
+                carList.clear();
+                loadCar();
+                carNameList.clear();
+                appendCarToCarFx();
+            }else {
+                System.out.println("Nie usunięto");
+            }
         }
     }
 
