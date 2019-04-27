@@ -1,4 +1,4 @@
-package myPck.controllers.utils;
+package myPck.controllers;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -6,8 +6,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.controllers.AddServiceController;
-import myPck.controllers.Controller;
+import myPck.controllers.utils.Validator;
 import myPck.database.models.Car;
 import myPck.modelsFx.CarFx;
 import myPck.services.CarService;
@@ -33,6 +32,7 @@ public class EditCarController extends Controller  {
         Validator.setMaxLengthOfTextField(ModelField,100);
         Validator.setMaxLengthOfTextField(BrandField,100);
         Validator.setMaxLengthOfTextField(TypeField,100);
+        Validator.setMaxLengthOfTextField(ProductionsDateField, 4);
         Validator.convertTextFieldToNumberField(ProductionsDateField);
         carService = new CarService();
     }
