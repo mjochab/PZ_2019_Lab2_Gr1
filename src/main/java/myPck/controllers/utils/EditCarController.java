@@ -46,7 +46,7 @@ public class EditCarController extends Controller  {
         setFieldsBinding();
     }
     private static CarFx convertCartoCarFx(Car car) {
-        return new CarFx(car.getModel(),car.getBrand(),car.getType(),car.getPrductionsDate());
+        return new CarFx(car.getModel(),car.getBrand(),car.getType(),car.getPrductionsDate().toString());
     }
 
 
@@ -65,7 +65,7 @@ public class EditCarController extends Controller  {
         String Model = car.getModel();
         String Brand = car.getBrand();
         String Type = car.getType();
-        String ProductionsDate = car.getPrductionsDate();
+        String ProductionsDate = car.getPrductionsDate().toString();
 
         if (Model.isEmpty() || Brand.isEmpty() || Type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() !=4) {
             System.out.println("Error");

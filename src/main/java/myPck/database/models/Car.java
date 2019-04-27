@@ -5,7 +5,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name="cars")
+@Table(name = "cars")
 public class Car implements Serializable {
 
     @Id
@@ -21,17 +21,16 @@ public class Car implements Serializable {
     @Column(name = "type", length = 40, nullable = false)
     private String type;
     @Column(name = "productionsDate", length = 40, nullable = false)
-    private String prductionsDate;
+    private Date prductionsDate;
 
 
-    public Car(String model, String brand, String type,String productionsDate){
-        this.model=model;
-        this.brand=brand;
-        this.type=type;
-        this.prductionsDate=productionsDate;
+    public Car(String model, String brand, String type, String productionsDate) {
+        this.model = model;
+        this.brand = brand;
+        this.type = type;
+        this.prductionsDate = new Date(Integer.parseInt(productionsDate), 1, 1);
 
     }
-
 
 
     public Car() {
@@ -65,9 +64,13 @@ public class Car implements Serializable {
         this.type = type;
     }
 
-    public String getPrductionsDate() {return prductionsDate;}
+    public String getPrductionsDate() {
+        return prductionsDate.getYear()+"";
+    }
 
-    public void setPrductionsDate(String prductionsDate) {this.prductionsDate=prductionsDate;}
+    public void setPrductionsDate(String prductionsDate) {
+        this.prductionsDate = new Date(Integer.parseInt(prductionsDate), 1, 1);
+    }
 
     @Override
     public String toString() {
