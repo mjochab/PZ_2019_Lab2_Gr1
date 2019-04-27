@@ -57,10 +57,10 @@ public class AddServiceController extends Controller {
     private Button cancelButton;
     @FXML
     void addNewCar(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddCarPanel.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
             Pane pane = loader.load();
-            AddCarController addCarController = loader.getController();
-            addCarController.setMainStackPaneController(mainStackPaneController);
+            AddEditCarController addEditCarController = loader.getController();
+            addEditCarController.setMainStackPaneController(mainStackPaneController);
             mainStackPaneController.setScreen(pane);
         }
 
@@ -153,13 +153,13 @@ public class AddServiceController extends Controller {
             /** zaznaczony klient */
             Car selected = carList.get(id);
             /** ładowanie widou EditClient */
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/EditCar.fxml"));
+            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
             Pane pane = loader.load();
-            EditCarController editCarController = loader.getController();
-            editCarController.setMainStackPaneController(mainStackPaneController);
+            AddEditCarController addEditCarController = loader.getController();
+            addEditCarController.setMainStackPaneController(mainStackPaneController);
             mainStackPaneController.setScreen(pane);
             /** wysłanie zaznaczonego klienta do widoku EditClient */
-            editCarController.setCar(selected);
+            addEditCarController.setCar(selected);
         }
     }
     @FXML
