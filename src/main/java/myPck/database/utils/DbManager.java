@@ -53,7 +53,7 @@ public class DbManager {
 
         for (int i = 0; i <=numberOfRows; i++) {
             int index = generator.nextInt(4);
-            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index],carProductionsDate[index]);
+            Car car = this.populateCar(carModels[index], carBrands[index], carTypes[index],"2010");
             User user = this.populateUser(firstNames[index], lastNames[index], i);
             Client client = this.populateClient(firstNames[index], lastNames[index]);
             Service service = this.populateService(car, client);
