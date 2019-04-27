@@ -13,6 +13,7 @@ import myPck.services.ServicePartService;
 import myPck.services.ServiceReportService;
 
 import java.io.IOException;
+import java.util.List;
 
 public class ServiceReportController extends Controller{
 
@@ -71,15 +72,7 @@ public class ServiceReportController extends Controller{
             serviceReportService.persist(serviceReport);
 
             if (!servicesList.isEmpty()) {
-//                ServicePartService servicePartService = new ServicePartService();
-                for (ServicePartFx servicesListItem : servicesList) {
-                    ServicePart servicePart = new ServicePart();
-                    servicePart.setName(servicesListItem.serviceNameProperty().getValue());
-                    Double price = Double.parseDouble(servicesListItem.priceProperty().getValue());
-                    servicePart.setPrice(price);
-                    servicePart.setService(this.service); //Ustawić serwis
-                    this.servicePartService.persist(servicePart);
-                }
+                this.saveServiceParts();
             }
 
             mainStackPaneController.loadMainWindow(); // Przekierowane do menu glownego
@@ -97,24 +90,37 @@ public class ServiceReportController extends Controller{
             this.service.getServiceReport().setDescription(reportTextField.getText());
             this.service.getServiceReport().setService(this.service);
             this.serviceReportService.update(this.service.getServiceReport());
+            this.deleteServiceParts();
 
             if (!servicesList.isEmpty()) {
                 ServicePartService servicePartService = new ServicePartService();
-                service.getServiceParts().clear();
-                for (ServicePartFx servicesListItem : servicesList) {
-                    ServicePart servicePart = new ServicePart();
-                    servicePart.setName(servicesListItem.serviceNameProperty().getValue());
-                    Double price = Double.parseDouble(servicesListItem.priceProperty().getValue());
-                    servicePart.setPrice(price);
-                    servicePart.setService(this.service);
-                    this.servicePartService.persist(servicePart);
-                }
+                this.saveServiceParts();
             }
 
             mainStackPaneController.loadMainWindow(); // Przekierowane do menu glownego
         } else {
             errorLabel.setVisible(true);
             errorLabel.setText("Enter report description");
+        }
+    }
+    private void deleteServiceParts() {
+        System.out.println("inside delete");
+        List<ServicePart> serviceParts = service.getServiceParts();
+        for (ServicePart servicePart : serviceParts) {
+        System.out.println(servicePart.getName());
+            this.servicePartService.delete(servicePart.getId());
+        }
+    }
+
+    private void saveServiceParts() {
+        System.out.println(servicesList.size());
+        for (ServicePartFx servicesListItem : servicesList) {
+            ServicePart servicePart = new ServicePart();
+            servicePart.setName(servicesListItem.serviceNameProperty().getValue());
+            Double price = Double.parseDouble(servicesListItem.priceProperty().getValue());
+            servicePart.setPrice(price);
+            servicePart.setService(this.service);
+            this.servicePartService.persist(servicePart);
         }
     }
 
@@ -147,7 +153,6 @@ public class ServiceReportController extends Controller{
         }
 
         errorLabel.setVisible(false);
-
         ServicePartFx item = new ServicePartFx(serviceNameInput.getText(), priceInput.getText());
         servicesList.add(item);
         serviceNameInput.setText("");
@@ -179,8 +184,11 @@ public class ServiceReportController extends Controller{
 
     public void setUpWindow() {
         if (editMode) {
+            editReportButton.setVisible(true);
+            saveReportButton.setVisible(false);
             reportTextField.setText(service.getServiceReport().getDescription());
             if (service.getServiceParts() != null) {
+                System.out.println("Wielkość listy po pobraniu z bazy:");
                 System.out.println(service.getServiceParts().size());
                 for (ServicePart part: service.getServiceParts()) {
                     ServicePartFx item = new ServicePartFx(part.getName(), Double.toString(part.getPrice()));
@@ -188,5 +196,11 @@ public class ServiceReportController extends Controller{
                 }
             }
         }
+    }
+
+    public void deleteServiceItem(ActionEvent actionEvent) {
+        System.out.println(actionEvent.toString());
+        int selectedServiceId = servicesTableView.getSelectionModel().getSelectedIndex();
+        servicesList.remove(selectedServiceId);
     }
 }

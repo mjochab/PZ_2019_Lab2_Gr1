@@ -63,7 +63,7 @@ public class ServiceDetailsController extends Controller {
      */
     @FXML
     void loadAddServiceReportView(ActionEvent event) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddServiceReport.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceReport.fxml"));
         Pane pane;
         try {
             pane = loader.load();
@@ -142,7 +142,7 @@ public class ServiceDetailsController extends Controller {
     }
 
     public void loadEditServiceReportView(ActionEvent actionEvent) {
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddServiceReport.fxml"));
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceReport.fxml"));
         Pane pane;
         try {
             pane = loader.load();

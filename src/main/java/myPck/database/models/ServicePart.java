@@ -9,7 +9,7 @@ public class ServicePart implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private long id;
 
     @Column(name = "price", nullable = false)
     private double price;
@@ -17,7 +17,7 @@ public class ServicePart implements Serializable {
     @Column(name = "name", length = 40, nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.DETACH)
     private Service service;
 
     public ServicePart() {
@@ -32,7 +32,7 @@ public class ServicePart implements Serializable {
         this.name = name;
     }
 
-    public int getId() {
+    public long getId() {
         return id;
     }
 
