@@ -5,10 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.control.Button;
-import javafx.scene.control.ContextMenu;
-import javafx.scene.control.ListView;
-import javafx.scene.control.MenuItem;
+import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
@@ -186,7 +183,13 @@ public class AddServiceController extends Controller {
                 clientNameList.clear();
                 appendClientToClientFx();
             } else {
-                System.out.println("Nie usunięto");
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Can not be deleted");
+                alert.setContentText("This client is associated witch a service.");
+
+                alert.showAndWait();
             }
         }
     }
@@ -205,7 +208,12 @@ public class AddServiceController extends Controller {
                 carNameList.clear();
                 appendCarToCarFx();
             }else {
-                System.out.println("Nie usunięto");
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Can not be deleted");
+                alert.setContentText("This car is associated witch a service.");
+
+                alert.showAndWait();
             }
         }
     }
