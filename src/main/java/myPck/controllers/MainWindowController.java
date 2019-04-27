@@ -109,7 +109,7 @@ public class MainWindowController extends Controller {
      * @param event
      */
     @FXML
-    void invoicePDFTest(ActionEvent event) {
+    void invoicePDF(ActionEvent event) {
         ServiceFx service;
         try {
             /** sprawdza czy zaznaczono jakiś element w TableView */
