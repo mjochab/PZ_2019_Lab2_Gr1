@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AddCarController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="500.0" prefWidth="700.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AddEditCarController">
    <children>
-      <GridPane layoutX="129.0" layoutY="105.0" prefHeight="226.0" prefWidth="447.0">
+      <GridPane hgap="10.0" layoutX="129.0" layoutY="105.0" prefHeight="241.0" prefWidth="494.0" vgap="10.0">
         <columnConstraints>
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="216.0" minWidth="10.0" prefWidth="210.0" />
           <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="319.0" minWidth="10.0" prefWidth="289.0" />
@@ -24,32 +24,20 @@
             <RowConstraints maxHeight="50.0" minHeight="10.0" prefHeight="40.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Model">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label text="Brand" GridPane.rowIndex="1">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Label text="Type" GridPane.rowIndex="2">
-               <padding>
-                  <Insets right="10.0" />
-               </padding>
-            </Label>
-            <Button fx:id="addButton" mnemonicParsing="false" onAction="#add" text="Add" GridPane.columnIndex="1" GridPane.rowIndex="4">
-               <GridPane.margin>
-                  <Insets right="10.0" />
-               </GridPane.margin></Button>
-            <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Cancel" GridPane.rowIndex="4" />
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="217.0" text="ProductionsDate" GridPane.rowIndex="3" />
-            <TextField fx:id="ProductionsDateField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Label text="Model" />
+            <Label text="Brand" GridPane.rowIndex="1" />
+            <Label text="Type" GridPane.rowIndex="2" />
+            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="217.0" text="Productions date" GridPane.rowIndex="3" />
             <TextField fx:id="modelField" GridPane.columnIndex="1" />
             <TextField fx:id="brandField" GridPane.columnIndex="1" GridPane.rowIndex="1" />
             <TextField fx:id="typeField" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <TextField fx:id="productionDate" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Cancel" GridPane.rowIndex="4" />
          </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
       </GridPane>
    </children>
 </AnchorPane>
