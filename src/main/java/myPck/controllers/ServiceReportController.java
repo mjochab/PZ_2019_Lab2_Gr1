@@ -11,6 +11,7 @@ import myPck.database.models.ServiceReport;
 import myPck.modelsFx.ServicePartFx;
 import myPck.services.ServicePartService;
 import myPck.services.ServiceReportService;
+import myPck.services.ServiceService;
 
 import java.io.IOException;
 import java.util.List;
@@ -69,7 +70,11 @@ public class ServiceReportController extends Controller{
             /** Zapis do bazy */
             serviceReport.setDescription(reportTextField.getText());
             serviceReport.setService(this.service);
+            service.setStatus("Done");
+            ServiceService serviceService = new ServiceService();
+            serviceService.update(service);
             serviceReportService.persist(serviceReport);
+
 
             if (!servicesList.isEmpty()) {
                 this.saveServiceParts();
