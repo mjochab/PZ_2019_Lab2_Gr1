@@ -75,9 +75,6 @@ public class AddEditCarController extends Controller {
         infoModel.setVisible(false);
         infoType.setVisible(false);
     }
-    void showInfoLabels(){
-
-    }
     void edit() {
         car.setModel(carFx.getModel());
         car.setBrand(carFx.getBrand());
