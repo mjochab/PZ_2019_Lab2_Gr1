@@ -93,7 +93,6 @@ public class ServiceReportController extends Controller{
             this.deleteServiceParts();
 
             if (!servicesList.isEmpty()) {
-                ServicePartService servicePartService = new ServicePartService();
                 this.saveServiceParts();
             }
 
@@ -104,16 +103,13 @@ public class ServiceReportController extends Controller{
         }
     }
     private void deleteServiceParts() {
-        System.out.println("inside delete");
         List<ServicePart> serviceParts = service.getServiceParts();
         for (ServicePart servicePart : serviceParts) {
-        System.out.println(servicePart.getName());
             this.servicePartService.delete(servicePart.getId());
         }
     }
 
     private void saveServiceParts() {
-        System.out.println(servicesList.size());
         for (ServicePartFx servicesListItem : servicesList) {
             ServicePart servicePart = new ServicePart();
             servicePart.setName(servicesListItem.serviceNameProperty().getValue());
@@ -188,8 +184,6 @@ public class ServiceReportController extends Controller{
             saveReportButton.setVisible(false);
             reportTextField.setText(service.getServiceReport().getDescription());
             if (service.getServiceParts() != null) {
-                System.out.println("Wielkość listy po pobraniu z bazy:");
-                System.out.println(service.getServiceParts().size());
                 for (ServicePart part: service.getServiceParts()) {
                     ServicePartFx item = new ServicePartFx(part.getName(), Double.toString(part.getPrice()));
                     servicesList.add(item);
@@ -199,7 +193,6 @@ public class ServiceReportController extends Controller{
     }
 
     public void deleteServiceItem(ActionEvent actionEvent) {
-        System.out.println(actionEvent.toString());
         int selectedServiceId = servicesTableView.getSelectionModel().getSelectedIndex();
         servicesList.remove(selectedServiceId);
     }
