@@ -30,6 +30,6 @@ public class Main extends Application {
         DbManager dbManager = new DbManager();
         /**Uzupełnienie bazy przykładowymi danymi */
 
-//     dbManager.addSampleData();
+//    dbManager.addSampleData();
     }
 }
