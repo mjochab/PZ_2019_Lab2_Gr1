@@ -6,6 +6,7 @@
 <?import javafx.scene.control.TextArea?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -37,7 +38,15 @@
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
-            <Label text="Fault description:" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Fault description:" />
+                  <Button fx:id="editSaveDescButton" mnemonicParsing="false" onAction="#editSaveDesc" text="Edit" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
             <TextArea fx:id="faultDescTextArea" editable="false" promptText="no description" wrapText="true" />
             <Label text="Repair description" />
             <TextArea fx:id="repairDescTextArea" editable="false" promptText="no report" />
