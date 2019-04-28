@@ -139,7 +139,7 @@ public class MainWindowController extends Controller {
             /** przekazanie zaznaczonego serwisu */
             serviceDetailsController.setService(selected);
             /** wyswietlenie danych o serwisie */
-            serviceDetailsController.setData();
+            serviceDetailsController.setUpWindow();
 
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
             /** Ustawienie okna serviceDetails */

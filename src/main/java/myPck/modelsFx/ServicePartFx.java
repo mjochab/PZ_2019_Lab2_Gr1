@@ -3,12 +3,12 @@ package myPck.modelsFx;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 
-public class ServiceItem {
+public class ServicePartFx {
 
     private StringProperty serviceName = new SimpleStringProperty();
     private StringProperty price = new SimpleStringProperty();
 
-    public ServiceItem(String serviceName, String price) {
+    public ServicePartFx(String serviceName, String price) {
         this.serviceName.set(serviceName);
         this.price.set(price);
     }

@@ -9,7 +9,6 @@ import javafx.scene.control.TableView;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
-
 import java.util.List;
 
 public class AdminPanelController {

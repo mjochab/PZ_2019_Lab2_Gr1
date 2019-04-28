@@ -12,18 +12,25 @@ public class Service implements Serializable{
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
+
     @ManyToOne
     private Car car;
+
     @ManyToOne
     private Client client;
+
     @ManyToOne
     private Invoice invoice;
-    @ManyToOne
+
+    @OneToOne(mappedBy = "service")
     private ServiceReport serviceReport;
-    @OneToMany(mappedBy = "service")
+
+    @OneToMany(mappedBy = "service", fetch = FetchType.EAGER)
     private List<ServicePart> serviceParts;
+
     @OneToMany
     private List<InvoicePosition> invoicePositions;
+
     @Column(name = "description", length = 500, nullable = true)
     private String description;
 
@@ -34,10 +41,13 @@ public class Service implements Serializable{
     @Column(name="end_date", nullable = true, columnDefinition = "DATETIME")
     @Temporal(TemporalType.TIMESTAMP)
     private Date endDate;
+
     @Column(name = "status", length = 40, nullable = false)
     private String status;
+
     @ManyToOne
     private User creator;
+
     @ManyToOne
     private User mechanic;
 
@@ -78,7 +88,7 @@ public class Service implements Serializable{
     }
 
     public Invoice getInvoice() {
-        return invoice;
+        return this.invoice;
     }
 
     public void setInvoice(Invoice invoice) {
@@ -94,7 +104,7 @@ public class Service implements Serializable{
     }
 
     public List<ServicePart> getServiceParts() {
-        return serviceParts;
+        return this.serviceParts;
     }
 
     public void setServiceParts(List<ServicePart> serviceParts) {
