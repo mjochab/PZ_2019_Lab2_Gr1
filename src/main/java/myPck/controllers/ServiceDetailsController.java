@@ -6,7 +6,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import myPck.database.models.Service;
@@ -26,11 +25,11 @@ public class ServiceDetailsController extends Controller{
      * Pole z informacją o samochodzie
      */
     @FXML
-    private TextField carTextField;
+    private Label carLabel;
 
     @FXML
     //pole z informacją o kliencie
-    private TextField customerTextField;
+    private Label customerLabel;
     @FXML
     //etykieta inforująca o stanie zlecenia np: Done, in ServiceFx, not allocated
     private Label statusLabel;
@@ -104,8 +103,8 @@ public class ServiceDetailsController extends Controller{
     public void setData(){
 
         faultDescTextArea.setText(this.service.getDescription());
-        carTextField.setText(this.service.getCar());
-        customerTextField.setText(this.service.getClient());
+        carLabel.setText(this.service.getCar());
+        customerLabel.setText(this.service.getClient());
         statusLabel.setText(this.service.getStatus());
         /** ustawienie koloru dla statusu */
         setCollorOfStatus();
