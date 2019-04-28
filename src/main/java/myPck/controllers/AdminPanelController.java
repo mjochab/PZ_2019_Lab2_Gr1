@@ -160,7 +160,7 @@ public class AdminPanelController extends Controller {
         this.loadUsers();
         this.setUpUsersList();
         this.convertUsersToUsersFx();
-        this.appendUsertoUserFx();
+
     }
 
     public void setUserNameList(ObservableList<String> userNameList) {
