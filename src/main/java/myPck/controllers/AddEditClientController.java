@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import myPck.controllers.utils.Validator;
@@ -15,6 +16,14 @@ import java.io.IOException;
 
 public class AddEditClientController extends Controller {
 
+    @FXML
+    private Label firstNameInfo;
+    @FXML
+    private Label lastNameInfo;
+    @FXML
+    private Label NIPnumberInfo;
+    @FXML
+    private Label addressInfo;
     @FXML
     private TextField firstNameField;
     @FXML
@@ -30,6 +39,7 @@ public class AddEditClientController extends Controller {
 
     @FXML
     void initialize() {
+        coverInfoLabels();
         Validator.setMaxLengthOfTextField(firstNameField, 200);
         Validator.setMaxLengthOfTextField(lastNameField, 200);
         Validator.setMaxLengthOfTextField(addressField, 50);
@@ -51,7 +61,12 @@ public class AddEditClientController extends Controller {
     private ClientFx convertClientToClientFx(Client client) {
         return new ClientFx(client.getFirstName(), client.getLastName(), client.getNipNumber(), client.getAddress());
     }
-
+    void coverInfoLabels(){
+        firstNameInfo.setVisible(false);
+        lastNameInfo.setVisible(false);
+        addressInfo.setVisible(false);
+        NIPnumberInfo.setVisible(false);
+    }
     private void setFieldsBinding() {
         firstNameField.textProperty().bindBidirectional(clientFx.firstNameProperty());
         lastNameField.textProperty().bindBidirectional(clientFx.lastNameProperty());
@@ -80,7 +95,12 @@ public class AddEditClientController extends Controller {
         String nipNumber = client.getNipNumber();
         String address = client.getAddress();
         if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length() != 10) {
-            System.out.println("Error");
+            coverInfoLabels();
+            if(firstName.isEmpty()) firstNameInfo.setVisible(true);
+            if(lastName.isEmpty()) lastNameInfo.setVisible(true);
+            if(address.isEmpty()) addressInfo.setVisible(true);
+            if(nipNumber.isEmpty()) NIPnumberInfo.setVisible(true);
+            if(nipNumber.length() !=10) NIPnumberInfo.setVisible(true);
         } else {
             /** zapis do bazy danych */
             clientService.update(client);
@@ -96,7 +116,12 @@ public class AddEditClientController extends Controller {
         String address = addressField.getText();
 
         if (firstName.isEmpty() || lastName.isEmpty() || address.isEmpty() || nipNumber.isEmpty() || nipNumber.length() != 10) {
-            System.out.println("Error");
+            coverInfoLabels();
+            if(firstName.isEmpty()) firstNameInfo.setVisible(true);
+            if(lastName.isEmpty()) lastNameInfo.setVisible(true);
+            if(address.isEmpty()) addressInfo.setVisible(true);
+            if(nipNumber.isEmpty()) NIPnumberInfo.setVisible(true);
+            if(nipNumber.length() !=10) NIPnumberInfo.setVisible(true);
         } else {
             this.client = new Client(firstName, lastName, nipNumber, address);
             clientService.persist(this.client);
@@ -104,7 +129,6 @@ public class AddEditClientController extends Controller {
             backButton.fire();
         }
     }
-
     @FXML
     void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));

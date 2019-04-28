@@ -14,10 +14,11 @@
    <children>
       <AnchorPane prefHeight="320.0" prefWidth="531.0">
          <children>
-            <GridPane alignment="CENTER" hgap="10.0" layoutX="84.0" layoutY="121.0" prefHeight="258.0" prefWidth="533.0" vgap="10.0">
+            <GridPane alignment="CENTER" hgap="10.0" layoutX="32.0" layoutY="121.0" prefHeight="258.0" prefWidth="644.0" vgap="10.0">
               <columnConstraints>
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="247.0" />
-                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="409.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="323.0" minWidth="10.0" prefWidth="186.0" />
+                <ColumnConstraints halignment="RIGHT" hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="321.0" />
+                  <ColumnConstraints halignment="LEFT" hgrow="SOMETIMES" maxWidth="409.0" minWidth="10.0" prefWidth="123.0" />
               </columnConstraints>
               <rowConstraints>
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
@@ -37,6 +38,10 @@
                   <TextField fx:id="addressField" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                   <Button fx:id="saveButton" mnemonicParsing="false" onAction="#save" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                   <Button fx:id="backButton" mnemonicParsing="false" onAction="#back" text="Cancel" GridPane.rowIndex="4" />
+                  <Label fx:id="firstNameInfo" text="incorrect value" textFill="RED" GridPane.columnIndex="2" />
+                  <Label fx:id="lastNameInfo" text="incorrect value" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                  <Label fx:id="NIPnumberInfo" text="incorrect value" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                  <Label fx:id="addressInfo" text="incorrect value" textFill="RED" GridPane.columnIndex="2" GridPane.rowIndex="3" />
                </children>
                <opaqueInsets>
                   <Insets />
