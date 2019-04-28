@@ -83,7 +83,7 @@ public class AdminPanelController extends Controller {
                 System.out.println("Usunięto");
                 userNameList.clear();
                 loadUsers();
-                appendUsertoUserFx();
+//                appendUsertoUserFx();
             }else{
                 System.out.println("Nie usnięto");
             }
@@ -96,13 +96,13 @@ public class AdminPanelController extends Controller {
         mainStackPaneController.loadMainWindow();
     }
 
-    private void appendUsertoUserFx() {
-        if(!usersList.isEmpty()){
-            for(User user : usersList){
-               userNameList.add(user.toString());
-            }
-        }
-    }
+//    private void appendUsertoUserFx() {
+//        if(!usersList.isEmpty()){
+//            for(User user : usersList){
+//               userNameList.add(user.toString());
+//            }
+//        }
+//    }
 
 
     /**
@@ -160,7 +160,7 @@ public class AdminPanelController extends Controller {
         this.loadUsers();
         this.setUpUsersList();
         this.convertUsersToUsersFx();
-        this.appendUsertoUserFx();
+//        this.appendUsertoUserFx();
     }
 
     public void setUserNameList(ObservableList<String> userNameList) {

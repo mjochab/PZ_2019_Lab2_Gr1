@@ -9,10 +9,8 @@ import myPck.database.utils.DbManager;
 
 public class Main extends Application {
 
-
     public static void main(String[] args) {
         launch(args);
-
     }
 
     public void start(Stage primaryStage) throws Exception {
@@ -25,11 +23,9 @@ public class Main extends Application {
 
         primaryStage.show();
 
-
         /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
         DbManager dbManager = new DbManager();
         /**Uzupełnienie bazy przykładowymi danymi */
-
-//    dbManager.addSampleData();
+        dbManager.addSampleData();
     }
 }

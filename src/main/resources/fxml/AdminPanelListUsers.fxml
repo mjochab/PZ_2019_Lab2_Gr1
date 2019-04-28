@@ -17,7 +17,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AdminPanelController">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="myPck.controllers.AdminPanelController">
 
         <children>
             <StackPane layoutX="26.0" layoutY="14.0" prefHeight="445.0" prefWidth="500.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -38,8 +38,8 @@
                                  <contextMenu>
                                     <ContextMenu>
                                       <items>
-                                        <MenuItem fx:id="editUser" mnemonicParsing="false" onAction="#editUser" text="Unspecified Action" />
-                                          <MenuItem fx:id="deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Unspecified Action" />
+                                        <MenuItem fx:id="editUser" mnemonicParsing="false" onAction="#editUser" text="Edit" />
+                                          <MenuItem fx:id="deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Delete" />
                                       </items>
                                     </ContextMenu>
                                  </contextMenu>
