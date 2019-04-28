@@ -38,8 +38,8 @@
                                  <contextMenu>
                                     <ContextMenu>
                                       <items>
-                                        <MenuItem fx:id="editUser" mnemonicParsing="false" onAction="#editUser" text="Unspecified Action" />
-                                          <MenuItem fx:id="deleteUser" mnemonicParsing="false" onAction="#deleteUser" text="Unspecified Action" />
+                                        <MenuItem fx:id="editUserMenuItem" mnemonicParsing="false" onAction="#editUser" text="Unspecified Action" />
+                                          <MenuItem fx:id="deleteUserMenuItem" mnemonicParsing="false" onAction="#deleteUser" text="Unspecified Action" />
                                       </items>
                                     </ContextMenu>
                                  </contextMenu>

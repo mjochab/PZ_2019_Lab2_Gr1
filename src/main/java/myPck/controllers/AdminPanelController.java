@@ -6,6 +6,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.Pane;
@@ -34,6 +35,10 @@ public class AdminPanelController extends Controller {
     @FXML
     public TableColumn<UserFx, String> roleColumn;
     @FXML
+    public  MenuItem editUserMenuItem;
+    @FXML
+    public MenuItem deleteUserMenuItem;
+    @FXML
     public Button addUserButton;
     @FXML
     public Button cancelButton;
@@ -54,6 +59,7 @@ public class AdminPanelController extends Controller {
      *
      * @param actionEvent
      */
+    @FXML
     public void addUser(ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AdminPanelListUsers.fxml"));
         Pane pane = loader.load();
@@ -61,6 +67,7 @@ public class AdminPanelController extends Controller {
         adminPanelController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(pane);
     }
+    @FXML
     public void editUser(ActionEvent actionEvent) throws IOException {
         if (usersList.isEmpty()) {
             int id = usersTableView.getSelectionModel().getSelectedIndex();
