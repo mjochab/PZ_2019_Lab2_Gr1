@@ -57,22 +57,22 @@ public class ServiceDetailsController extends Controller {
     @FXML
     private Button backButton;
 
+    public Button editReportButton;
+
     /**
      * Metoda ładuje widok podglądu usługi i przekazuje główny kontroler.
      *
      * @param event
      */
     @FXML
-    void loadServiceReportView(ActionEvent event) {
-
-        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddServiceReport.fxml"));
-        Pane pane = null;
+    void loadAddServiceReportView(ActionEvent event) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceReport.fxml"));
+        Pane pane;
         try {
             pane = loader.load();
-
             ServiceReportController serviceReportController = loader.getController();
             serviceReportController.setMainStackPaneController(mainStackPaneController);
-
+            serviceReportController.setService(this.service);
             mainStackPaneController.setScreen(pane);
         } catch (IOException e) {
             e.printStackTrace();
@@ -104,10 +104,16 @@ public class ServiceDetailsController extends Controller {
             default:
                 addReportButton.setVisible(false);
         }
+    }
 
+    private void manageButtons() {
+        if (this.service.getServiceReport() != null) {
+            addReportButton.setVisible(false);
+            editReportButton.setVisible(true);
+        }
     }
     /**
-     * Wypełnia formatki w oknie przykładowymi danymi
+     * Wypełnia okno danymi i ustawia odpowiedni przycisk
      */
     public void setData() {
 
@@ -115,6 +121,9 @@ public class ServiceDetailsController extends Controller {
         carLabel.setText(this.service.getCar());
         customerLabel.setText(this.service.getClient());
         statusLabel.setText(this.service.getStatus());
+        if (this.service.getServiceReport() != null) {
+            repairDescTextArea.setText(this.service.getServiceReport().getDescription());
+        }
         /** ustawienie koloru dla statusu */
         setCollorOfStatus();
         if (service.getStatus().equals("Not allocated")) {
@@ -122,6 +131,7 @@ public class ServiceDetailsController extends Controller {
         } else {
             editSaveDescButton.setVisible(false);
         }
+
     }
 
     /**
@@ -137,9 +147,25 @@ public class ServiceDetailsController extends Controller {
             statusLabel.setTextFill(Color.web("#ff0000"));
         }
         if (s == "No allocated") {
+
             statusLabel.setTextFill(Color.web("#ffbf00"));
         }
+    }
 
+    public void loadEditServiceReportView(ActionEvent actionEvent) {
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/ServiceReport.fxml"));
+        Pane pane;
+        try {
+            pane = loader.load();
+            ServiceReportController serviceReportController = loader.getController();
+            serviceReportController.setMainStackPaneController(mainStackPaneController);
+            serviceReportController.setEditMode(true);
+            serviceReportController.setService(this.service);
+            serviceReportController.setUpWindow();
+            mainStackPaneController.setScreen(pane);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML

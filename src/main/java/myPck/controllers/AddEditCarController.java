@@ -4,6 +4,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import myPck.controllers.utils.Validator;
@@ -15,6 +16,14 @@ import java.io.IOException;
 
 public class AddEditCarController extends Controller {
 
+    @FXML
+    private Label infoModel;
+    @FXML
+    private Label infoBrand;
+    @FXML
+    private Label infoType;
+    @FXML
+    private Label infoDate;
     @FXML
     private TextField modelField;
     @FXML
@@ -30,6 +39,7 @@ public class AddEditCarController extends Controller {
 
     @FXML
     void initialize() {
+        coverInfoLabels();
         Validator.setMaxLengthOfTextField(modelField, 100);
         Validator.setMaxLengthOfTextField(brandField, 100);
         Validator.setMaxLengthOfTextField(typeField, 100);
@@ -59,19 +69,29 @@ public class AddEditCarController extends Controller {
         typeField.textProperty().bindBidirectional(carFx.TypeProperty());
         productionDate.textProperty().bindBidirectional(carFx.ProductionsDateProperty());
     }
-
+    void coverInfoLabels(){
+        infoBrand.setVisible(false);
+        infoDate.setVisible(false);
+        infoModel.setVisible(false);
+        infoType.setVisible(false);
+    }
     void edit() {
         car.setModel(carFx.getModel());
         car.setBrand(carFx.getBrand());
         car.setType(carFx.getType());
         car.setPrductionsDate(carFx.getProductionsDate());
-        String Model = car.getModel();
-        String Brand = car.getBrand();
-        String Type = car.getType();
+        String model = car.getModel();
+        String brand = car.getBrand();
+        String type = car.getType();
         String ProductionsDate = car.getPrductionsDate().toString();
 
-        if (Model.isEmpty() || Brand.isEmpty() || Type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() != 4) {
-            System.out.println("Error");
+        if (model.isEmpty() || brand.isEmpty() || type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() != 4) {
+            coverInfoLabels();
+            if(model.isEmpty()) infoModel.setVisible(true);
+            if(brand.isEmpty()) infoBrand.setVisible(true);
+            if(type.isEmpty()) infoType.setVisible(true);
+            if(ProductionsDate.isEmpty()) infoDate.setVisible(true);
+            if(ProductionsDate.length() !=4) infoDate.setVisible(true);
         } else {
             carService.update(car);
             backButton.fire();
@@ -84,7 +104,12 @@ public class AddEditCarController extends Controller {
         String type = typeField.getText();
         String ProductionsDate = productionDate.getText();
         if (model.isEmpty() || brand.isEmpty() || type.isEmpty() || ProductionsDate.isEmpty() || ProductionsDate.length() != 4) {
-            System.out.println("Error");
+            coverInfoLabels();
+            if(model.isEmpty()) infoModel.setVisible(true);
+            if(brand.isEmpty()) infoBrand.setVisible(true);
+            if(type.isEmpty()) infoType.setVisible(true);
+            if(ProductionsDate.isEmpty()) infoDate.setVisible(true);
+            if(ProductionsDate.length() !=4) infoDate.setVisible(true);
         } else {
             this.car = new Car(model, brand, type, ProductionsDate);
             carService.persist(this.car);

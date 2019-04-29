@@ -48,7 +48,7 @@ public class DbManager {
                 "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
                 " In quis risus ante. Donec et sapien massa."
         };
-
+        Car lonelyCar = this.populateCar(carModels[0], carBrands[0], carTypes[0]);
         clearDatabase();
 
         for (int i = 0; i <=numberOfRows; i++) {
@@ -63,12 +63,12 @@ public class DbManager {
     }
     public void clearDatabase(){
         //kolejność usuwania jest ważna!
-        this.serviceService.deleteAll();
         this.carService.deleteAll();
         this.userService.deleteAll();
         this.clientService.deleteAll();
         this.invoiceService.deleteAll();
         this.serviceReportService.deleteAll();
+        this.serviceService.deleteAll();
     }
 
     public Service populateService(Car car, Client client) {
@@ -94,14 +94,14 @@ public class DbManager {
     }
 
     public Client populateClient(String firstName, String lastName) {
-        Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
+        Client client = new Client(firstName,  lastName, "1234567890", "Rzeszów Pigonia 1");
         this.clientService.persist(client);
 
         return client;
     }
 
     public User populateUser(String firstName, String lastName, int index) {
-        User user = new User("email@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
+        User user = new User("email" + index + "@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
         this.userService.persist(user);
 
         return user;
