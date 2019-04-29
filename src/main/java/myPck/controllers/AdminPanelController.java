@@ -4,18 +4,23 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+
 import java.util.List;
+
+import static myPck.utils.Password.hashPassword;
 
 public class AdminPanelController {
 
     private UserService userService;
     private List<User> usersList;
+    private User selectedUser = null;
 
+    @FXML
+    private TabPane tabPane;
     @FXML
     public TableView<UserFx> usersTableView;
     @FXML
@@ -26,6 +31,31 @@ public class AdminPanelController {
     public TableColumn<UserFx, String> lastNameColumn;
     @FXML
     public TableColumn<UserFx, String> roleColumn;
+    @FXML
+    private TextField firstNameField;
+
+    @FXML
+    private TextField lastNameField;
+
+    @FXML
+    private Tab addEditUserTab;
+
+    @FXML
+    private TextField loginField;
+
+    @FXML
+    private PasswordField pass1Field;
+
+    @FXML
+    private PasswordField pass2Field;
+
+    @FXML
+    private ComboBox<?> roleComboBox;
+
+    @FXML
+    private Button saveButton;
+
+
 
     /** Lista zawierająca użytkowników Fx*/
     private ObservableList<UserFx> usersFxList;
@@ -42,10 +72,60 @@ public class AdminPanelController {
      *
      * @param actionEvent
      */
-    public void addUser(ActionEvent actionEvent) {
+    public void addNewUser() {
+        String name = firstNameField.getText();
+        String surname = lastNameField.getText();
+        String pass1 = pass1Field.getText();
+        String pass2 = pass2Field.getText();
+        String login = loginField.getText();
+        String role = "A";
+        if(pass1.equals(pass2)){
+            User newUser = new User();
+            newUser.setLogin(login);
+            newUser.setFirstName(name);
+            newUser.setLastName(surname);
+            newUser.setPassword(hashPassword(pass1));
+            newUser.setRole(role);
+            newUser.setEmail("email@");
+            userService.persist(newUser);
+        }
 
     }
-
+    public void editUser(){
+        String name = firstNameField.getText();
+        String surname = lastNameField.getText();
+        String pass1 = pass1Field.getText();
+        String pass2 = pass2Field.getText();
+        String login = loginField.getText();
+        String role = "A";
+        if(pass1.equals(pass2)){
+            selectedUser.setLogin(login);
+            selectedUser.setFirstName(name);
+            selectedUser.setLastName(surname);
+            selectedUser.setPassword(hashPassword(pass1));
+            selectedUser.setRole(role);
+            selectedUser.setEmail("email@");
+            userService.update(selectedUser);
+            selectedUser = null;
+        }
+    }
+    @FXML
+    void saveUser(ActionEvent event) {
+        if(selectedUser!=null){
+            editUser();
+        }
+        else{
+            addNewUser();
+        }
+        this.loadUsers();
+        this.setUpUsersList();
+        this.convertUsersToUsersFx();
+        firstNameField.setText("");
+        lastNameField.setText("");
+        pass1Field.setText("");
+        pass2Field.setText("");
+        loginField.setText("");
+    }
     /**
      * Metoda pobiera użytkowników z bazy danych.
      */
@@ -84,4 +164,40 @@ public class AdminPanelController {
         this.setUpUsersList();
         this.convertUsersToUsersFx();
     }
+    @FXML
+    void deleteUser(ActionEvent event) {
+        if (!usersFxList.isEmpty()){
+            int id = usersTableView.getSelectionModel().getSelectedIndex();
+            User selected = usersList.get(id);
+
+            boolean isDelete = userService.delete(selected.getId());
+
+            if (isDelete){
+                System.out.println("Usunięto");
+                usersList.clear();
+                loadUsers();
+                usersFxList.clear();
+                convertUsersToUsersFx();
+            }else {
+
+            }
+        }
+    }
+
+    @FXML
+    void editUser(ActionEvent event) {
+        if (!usersFxList.isEmpty()){
+            int id = usersTableView.getSelectionModel().getSelectedIndex();
+            selectedUser = usersList.get(id);
+            addEditUserTab.setText("Edit");
+            tabPane.getSelectionModel().selectLast();
+            firstNameField.setText(selectedUser.getFirstName());
+            lastNameField.setText(selectedUser.getLastName());
+            loginField.setText(selectedUser.getLogin());
+            }else {
+
+            }
+
+    }
+
 }

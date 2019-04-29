@@ -48,7 +48,7 @@ public class DbManager {
                 "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
                 " In quis risus ante. Donec et sapien massa."
         };
-        Car lonelyCar = this.populateCar(carModels[0], carBrands[0], carTypes[0]);
+        //Car lonelyCar = this.populateCar(carModels[0], carBrands[0], carTypes[0]);
         clearDatabase();
 
         for (int i = 0; i <=numberOfRows; i++) {
