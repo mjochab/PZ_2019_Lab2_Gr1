@@ -6,10 +6,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
 import myPck.database.models.Service;
+import myPck.services.ServiceService;
 
 import java.io.IOException;
 
@@ -18,7 +18,9 @@ public class ServiceDetailsController extends Controller {
     /**
      * opisywany serwis
      */
-    private Service service;
+    boolean editMode = false;
+    private Service service = null;
+    private ServiceService serviceService;
 
     public void setService(Service service) {
         this.service = service;
@@ -28,11 +30,12 @@ public class ServiceDetailsController extends Controller {
      * Pole z informacją o samochodzie
      */
     @FXML
-    private TextField carTextField;
-
+    private Label carLabel;
+    @FXML
+    private Button editSaveDescButton;
     @FXML
     //pole z informacją o kliencie
-    private TextField customerTextField;
+    private Label customerLabel;
     @FXML
     //etykieta inforująca o stanie zlecenia np: Done, in ServiceFx, not allocated
     private Label statusLabel;
@@ -90,6 +93,8 @@ public class ServiceDetailsController extends Controller {
 
     @FXML
     void initialize() {
+        serviceService = new ServiceService();
+
         //ukrywanie elementów dla kont bez uprawnień
         switch (mainStackPaneController.accountType) {
             case ALL:
@@ -107,21 +112,26 @@ public class ServiceDetailsController extends Controller {
             editReportButton.setVisible(true);
         }
     }
-
     /**
      * Wypełnia okno danymi i ustawia odpowiedni przycisk
      */
-    public void setUpWindow() {
+    public void setData() {
+
         faultDescTextArea.setText(this.service.getDescription());
-        carTextField.setText(this.service.getCar());
-        customerTextField.setText(this.service.getClient());
+        carLabel.setText(this.service.getCar());
+        customerLabel.setText(this.service.getClient());
         statusLabel.setText(this.service.getStatus());
         if (this.service.getServiceReport() != null) {
             repairDescTextArea.setText(this.service.getServiceReport().getDescription());
         }
         /** ustawienie koloru dla statusu */
         setCollorOfStatus();
-        manageButtons();
+        if (service.getStatus().equals("Not allocated")) {
+            editSaveDescButton.setVisible(true);
+        } else {
+            editSaveDescButton.setVisible(false);
+        }
+
     }
 
     /**
@@ -130,13 +140,14 @@ public class ServiceDetailsController extends Controller {
     private void setCollorOfStatus() {
         String s = statusLabel.getText();
 
-        if (s.equals("Done")) {
+        if (s == "Done") {
             statusLabel.setTextFill(Color.web("#00ff00"));
         }
-        if (s.equals("In service")) {
+        if (s == "In service") {
             statusLabel.setTextFill(Color.web("#ff0000"));
         }
-        if (s.equals("No allocated")) {
+        if (s == "No allocated") {
+
             statusLabel.setTextFill(Color.web("#ffbf00"));
         }
     }
@@ -154,6 +165,24 @@ public class ServiceDetailsController extends Controller {
             mainStackPaneController.setScreen(pane);
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    @FXML
+    void editSaveDesc(ActionEvent event) {
+
+        if (editMode == false) {
+            System.out.println("test");
+            faultDescTextArea.setEditable(true);
+            faultDescTextArea.requestFocus();
+            editSaveDescButton.setText("Save");
+            editMode = true;
+        } else {
+            service.setDescription(faultDescTextArea.getText());
+            serviceService.update(service);
+            editSaveDescButton.setText("Edit");
+            faultDescTextArea.setEditable(false);
+            editMode = false;
         }
     }
 }

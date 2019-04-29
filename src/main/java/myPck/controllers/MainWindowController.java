@@ -93,7 +93,7 @@ public class MainWindowController extends Controller {
      * @throws IOException
      */
     @FXML
-    void addServicesTest(ActionEvent event) throws IOException {
+    void addService(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
         StackPane stackPane = loader.load();
 
@@ -103,13 +103,32 @@ public class MainWindowController extends Controller {
         /** Ustawienie okna AddService */
         mainStackPaneController.setScreen(stackPane);
     }
+    @FXML
+    void deleteService(ActionEvent event){
+        if (!servicesFxList.isEmpty()) {
+            int id = servicesTableView.getSelectionModel().getSelectedIndex();
+            Service selected = servicesList.get(id);
+
+            boolean isDelete = serviceService.delete(selected.getId());
+
+            if (isDelete) {
+                System.out.println("Usunięto");
+                servicesList.clear();
+                loadServices();
+                servicesFxList.clear();
+                appendServiceToServiceFx();
+            } else {
+                System.out.println("Nie usunięto");
+            }
+        }
+    }
 
     /**
      * generowanie faktury
      * @param event
      */
     @FXML
-    void invoicePDFTest(ActionEvent event) {
+    void invoicePDF(ActionEvent event) {
         ServiceFx service;
         try {
             /** sprawdza czy zaznaczono jakiś element w TableView */
@@ -139,7 +158,7 @@ public class MainWindowController extends Controller {
             /** przekazanie zaznaczonego serwisu */
             serviceDetailsController.setService(selected);
             /** wyswietlenie danych o serwisie */
-            serviceDetailsController.setUpWindow();
+            serviceDetailsController.setData();
 
             serviceDetailsController.setMainStackPaneController(mainStackPaneController);
             /** Ustawienie okna serviceDetails */
@@ -180,7 +199,7 @@ public class MainWindowController extends Controller {
 
         /** zarządzanie dostępem przycisków */
         buttonManagment();
-        appendUsersToUsersFx();
+        appendServiceToServiceFx();
         searchField.setVisible(false);
         searchButton.setVisible(false);
         /** ukrywanie elementów dla kont bez uprawnień */
@@ -223,7 +242,7 @@ public class MainWindowController extends Controller {
     /**
      * Metoda zamienia użytkwonika na użytkownika Fx i dodaje go do tablicy servicesFxList
      */
-    public void appendUsersToUsersFx() {
+    public void appendServiceToServiceFx() {
         if (!servicesList.isEmpty()) {
             for (Service service : servicesList) {
                 ServiceFx serviceFx = new ServiceFx(service.getCar(), service.getClient(), service.getStatus());
@@ -269,7 +288,7 @@ public class MainWindowController extends Controller {
                 servicesList.add(service);
             }
         }
-        appendUsersToUsersFx();
+        appendServiceToServiceFx();
     }
 
     @FXML
@@ -296,7 +315,7 @@ public class MainWindowController extends Controller {
         searchField.setVisible(false);
 
         servicesList = new ArrayList<>(servicesListCopy);
-        appendUsersToUsersFx();
+        appendServiceToServiceFx();
     }
 
     private void showStatus(String status) {
@@ -308,7 +327,7 @@ public class MainWindowController extends Controller {
                 servicesList.add(service);
             }
         }
-        appendUsersToUsersFx();
+        appendServiceToServiceFx();
     }
 
     private void showSearched() {

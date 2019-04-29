@@ -9,8 +9,10 @@ import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import myPck.database.models.Car;
 import myPck.database.models.Client;
+import myPck.database.models.Service;
 import myPck.services.CarService;
 import myPck.services.ClientService;
+import myPck.services.ServiceService;
 
 import java.io.IOException;
 import java.util.List;
@@ -23,9 +25,11 @@ public class AddServiceController extends Controller {
     private ObservableList<String> clientNameList;
     private CarService carService;
     private ClientService clientService;
+    private ServiceService serviceService;
     private Object ArrayIndex;
 
     public AddServiceController() {
+        serviceService = new ServiceService();
         carService = new CarService();
         clientService = new ClientService();
     }
@@ -53,6 +57,8 @@ public class AddServiceController extends Controller {
     @FXML
     private Button cancelButton;
     @FXML
+    private TextArea descTextArea;
+    @FXML
     void addNewCar(ActionEvent event) throws IOException {
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
             Pane pane = loader.load();
@@ -72,12 +78,22 @@ public class AddServiceController extends Controller {
 
     @FXML
     void saveService(ActionEvent event) throws IOException {
-       // String car = carsListView.getSelectionModel().getSelectedItem();
-        //String customer= customersListView.getSelectionModel().getSelectedItem();
-        //String status = "No allocated";
-        //ServiceFx newServiece = new ServiceFx(car, customer, status);
+        /** pobranie id wybranego elemntu */
+        int idCustomer = customersListView.getSelectionModel().getSelectedIndex();
+        /** zaznaczony klient */
+        Client selectedCustomer = clientList.get(idCustomer);
 
+        /** pobranie id wybranego elemntu */
+        int idCar = carsListView.getSelectionModel().getSelectedIndex();
+        /** zaznaczony klient */
+        Car selectedCar = carList.get(idCar);
+
+
+        String status = "Not allocated";
+        Service newService = new Service(selectedCustomer,selectedCar,status);
+        newService.setDescription(descTextArea.getText());
         System.out.println("Zapisuje zlecenie");
+        serviceService.persist(newService);
         //System.out.println(newServiece.toString());
         mainStackPaneController.loadMainWindow();
     }

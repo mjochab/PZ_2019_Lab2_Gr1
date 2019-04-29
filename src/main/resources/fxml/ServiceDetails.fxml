@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TextArea?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -29,16 +29,24 @@
                <children>
                   <Label text="Car: " GridPane.columnIndex="2" />
                   <Label text="Customer: " GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                  <TextField fx:id="carTextField" editable="false" GridPane.columnIndex="3" />
-                  <TextField fx:id="customerTextField" editable="false" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                   <Label text="status: " />
                   <Label fx:id="statusLabel" text="Done" textFill="#11ee1c" GridPane.columnIndex="1" />
+                  <Label fx:id="carLabel" text="carLabel" GridPane.columnIndex="3" />
+                  <Label fx:id="customerLabel" text="customerLabel" GridPane.columnIndex="3" GridPane.rowIndex="1" />
                </children>
                <padding>
                   <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                </padding>
             </GridPane>
-            <Label text="Fault description:" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+               <children>
+                  <Label text="Fault description:" />
+                  <Button fx:id="editSaveDescButton" mnemonicParsing="false" onAction="#editSaveDesc" text="Edit" />
+               </children>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+            </HBox>
             <TextArea fx:id="faultDescTextArea" editable="false" promptText="no description" wrapText="true" />
             <Label text="Repair description" />
             <TextArea fx:id="repairDescTextArea" editable="false" promptText="no report" />

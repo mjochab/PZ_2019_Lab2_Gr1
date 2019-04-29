@@ -64,11 +64,11 @@ public class ServiceService {
      * Metoda usuwa z bazy danych serwis o podanym id.
      * @param long id
      */
-    public void delete(long id) {
+    public boolean delete(long id) {
         serviceDao.openCurrentSessionwithTransaction();
         Service service = serviceDao.findById(id);
         serviceDao.delete(service);
-        serviceDao.closeCurrentSessionwithTransaction();
+        return serviceDao.closeCurrentSessionwithTransaction();
     }
 
     /**
