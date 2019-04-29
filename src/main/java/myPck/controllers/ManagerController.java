@@ -1,47 +1,72 @@
 package myPck.controllers;
 
-import java.net.URL;
-import java.util.ResourceBundle;
+
+import java.util.List;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.layout.BorderPane;
+import myPck.database.models.Service;
+import myPck.modelsFx.ServiceFx;
+import myPck.services.ServiceService;
 
 public class ManagerController {
 
-    @FXML
-    private ResourceBundle resources;
+    private List<Service> servicesList;
+    private ServiceService serviceService;
+    private ObservableList<ServiceFx> servicesFxList;
 
-    @FXML
-    private URL location;
+    public ManagerController() {
+        this.serviceService = new ServiceService();
+    }
 
     @FXML
     private BorderPane borderPane;
 
     @FXML
-    private TableView<?> servicesTableView;
+    private TableView<ServiceFx> servicesTableView;
 
     @FXML
-    private TableColumn<?, ?> carColumn;
+    private TableColumn<ServiceFx, String> carColumn;
 
     @FXML
-    private TableColumn<?, ?> clientColumn;
+    private TableColumn<ServiceFx, String> clientColumn;
 
     @FXML
-    private TableColumn<?, ?> mechanicColumn;
+    private TableColumn<ServiceFx, String> mechanicColumn;
 
     @FXML
     private ComboBox<?> mechanicComboBox;
 
     @FXML
     void initialize() {
-        assert borderPane != null : "fx:id=\"borderPane\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
-        assert servicesTableView != null : "fx:id=\"servicesTableView\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
-        assert carColumn != null : "fx:id=\"carColumn\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
-        assert clientColumn != null : "fx:id=\"clientColumn\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
-        assert mechanicColumn != null : "fx:id=\"mechanicColumn\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
-        assert mechanicComboBox != null : "fx:id=\"mechanicComboBox\" was not injected: check your FXML file 'ManagerPanel.fxml'.";
+        this.setUpColumns();
+        this.setUpServiceList();
+        this.loadServices();
+        this.appendUsersToUsersFx();
 
+    }
+    private void setUpColumns() {
+        carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
+        clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
+        mechanicColumn.setCellValueFactory(cellData-> cellData.getValue().statusProperty());
+    }
+    private void setUpServiceList() {
+        servicesFxList = FXCollections.observableArrayList();
+        servicesTableView.setItems(this.servicesFxList);
+    }
+    public void loadServices() {
+        servicesList = serviceService.findAll();
+    }
+    public void appendUsersToUsersFx() {
+        if (!servicesList.isEmpty()) {
+            for (Service service : servicesList) {
+                ServiceFx serviceFx = new ServiceFx(service.getCar(), service.getClient(), service.getStatus());
+                servicesFxList.add(serviceFx);
+            }
+        }
     }
 }

@@ -6,34 +6,38 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
 import javafx.scene.paint.Color;
-import myPck.Service;
+import myPck.database.models.Service;
+import myPck.services.ServiceService;
 
 import java.io.IOException;
 
-public class ServiceDetailsController {
+public class ServiceDetailsController extends Controller {
 
-    //instancja kontrolera zewnętrzenego okna (rodzica)
-    private MainStackPaneController mainStackPaneController;
+    /**
+     * opisywany serwis
+     */
+    boolean editMode = false;
+    private Service service = null;
+    private ServiceService serviceService;
 
-    //funkcja ustawiająca kontroller
-    public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
-        this.mainStackPaneController = mainStackPaneController;
+    public void setService(Service service) {
+        this.service = service;
     }
 
     /**
      * Pole z informacją o samochodzie
      */
     @FXML
-    private TextField carTextField;
-
+    private Label carLabel;
+    @FXML
+    private Button editSaveDescButton;
     @FXML
     //pole z informacją o kliencie
-    private TextField customerTextField;
+    private Label customerLabel;
     @FXML
-    //etykieta inforująca o stanie zlecenia np: Done, in Service, not allocated
+    //etykieta inforująca o stanie zlecenia np: Done, in ServiceFx, not allocated
     private Label statusLabel;
 
     @FXML
@@ -55,6 +59,7 @@ public class ServiceDetailsController {
 
     /**
      * Metoda ładuje widok podglądu usługi i przekazuje główny kontroler.
+     *
      * @param event
      */
     @FXML
@@ -76,6 +81,7 @@ public class ServiceDetailsController {
 
     /**
      * ładuje główne okno aplikacji
+     *
      * @param event
      * @throws IOException
      */
@@ -87,75 +93,70 @@ public class ServiceDetailsController {
 
     @FXML
     void initialize() {
-        //wypełnienie pól przykładowymi danymi
-        setSampleData();
+        serviceService = new ServiceService();
 
         //ukrywanie elementów dla kont bez uprawnień
-        switch (mainStackPaneController.ACCOUNT){
+        switch (mainStackPaneController.accountType) {
+            case ALL:
             case M:
                 addReportButton.setVisible(true);
                 break;
-                default:
-                    addReportButton.setVisible(false);
+            default:
+                addReportButton.setVisible(false);
         }
 
     }
-
     /**
      * Wypełnia formatki w oknie przykładowymi danymi
      */
-    private void setSampleData(){
+    public void setData() {
 
-        String sampleDesc = "Lorem ipsum dolor sit amet, consectetur adipiscing elit." +
-                " Nam non volutpat nibh, vel tempor dolor. In at dui nec mauris imperdiet" +
-                " dictum vitae ac odio. In quis nunc at quam rutrum placerat tristique sit" +
-                " amet turpis. Nulla facilisi. In ullamcorper vehicula est vel egestas. Quisque" +
-                " ac nibh eu velit volutpat luctus. Vivamus imperdiet est eget dolor interdum, nec" +
-                " maximus risus facilisis. Etiam auctor mi urna, id commodo ligula condimentum" +
-                " porttitor. Phasellus ut pharetra lectus, eget auctor elit. Donec eget semper dui." +
-                " Sed ut justo consequat, consequat metus id, tincidunt quam." +
-                " Suspendisse luctus ante sodales, euismod tellus fringilla, venenatis velit." +
-                " Duis ex nulla, eleifend ac velit ac, porta sagittis orci. Sed quis dui nibh.Sed" +
-                " neque nisi, egestas sit amet venenatis eget, ultricies id felis. Etiam efficitur" +
-                " tortor eget nibh malesuada, vitae volutpat massa finibus. Pellentesque a sodales " +
-                "libero. Ut non lacinia nulla. Donec in dui ipsum. Pellentesque et viverra tortor." +
-                " Curabitur posuere magna at suscipit aliquet. Duis risus tellus, laoreet id tempus " +
-                "a, vehicula sed enim. Nullam leo diam, imperdiet sed orci sit amet, convallis finib" +
-                "us tortor. Phasellus non tristique eros, sed malesuada dui. Duis scelerisque erat ve" +
-                "l lectus tempor hendrerit. Interdum et malesuada fames ac ante ipsum primis in fauci" +
-                "bus. Mauris dapibus dolor eget mauris placerat sollicitudin. Cras posuere mattis neq" +
-                "ue, vel finibus risus.Morbi ut justo porta, fermentum urna vitae, semper enim. Duis e" +
-                "u elementum felis. Cras dapibus augue at iaculis rhoncus. Donec eget augue risus. Mor" +
-                "bi justo purus, gravida quis odio et, imperdiet pellentesque justo. Praesent sem ligu" +
-                "la, ornare non ex id, placerat volutpat tortor. Morbi id tellus at tellus eleifend gra" +
-                "vida sit amet et nisl. Curabitur dapibus sem sit amet mauris cursus scelerisque. Fusce " +
-                "at posuere nisl, vel facilisis erat. Proin ut justo at justo sollicitudin convallis vel non nibh.";
-
-        Service service = new Service("Jagura FX", "Jan Kowalski", "Done");
-
-        faultDescTextArea.setText(sampleDesc);
-        carTextField.setText(service.getCar());
-        customerTextField.setText(service.getClient());
-        statusLabel.setText(service.getStatus());
-        //ustawienie koloru dla statusu
+        faultDescTextArea.setText(this.service.getDescription());
+        carLabel.setText(this.service.getCar());
+        customerLabel.setText(this.service.getClient());
+        statusLabel.setText(this.service.getStatus());
+        /** ustawienie koloru dla statusu */
         setCollorOfStatus();
+        if (service.getStatus().equals("Not allocated")) {
+            editSaveDescButton.setVisible(true);
+        } else {
+            editSaveDescButton.setVisible(false);
+        }
     }
 
     /**
      * Ustawia kolor dla obiektu statusLabel
      */
-    private void setCollorOfStatus(){
+    private void setCollorOfStatus() {
         String s = statusLabel.getText();
 
-        if(s=="Done"){
+        if (s == "Done") {
             statusLabel.setTextFill(Color.web("#00ff00"));
         }
-        if(s=="In repair"){
+        if (s == "In service") {
             statusLabel.setTextFill(Color.web("#ff0000"));
         }
-        if(s=="No allocated"){
+        if (s == "No allocated") {
             statusLabel.setTextFill(Color.web("#ffbf00"));
         }
 
+    }
+
+    @FXML
+    void editSaveDesc(ActionEvent event) {
+
+        if (editMode == false) {
+            System.out.println("test");
+            faultDescTextArea.setEditable(true);
+            faultDescTextArea.requestFocus();
+            editSaveDescButton.setText("Save");
+            editMode = true;
+        } else {
+            service.setDescription(faultDescTextArea.getText());
+            serviceService.update(service);
+            editSaveDescButton.setText("Edit");
+            faultDescTextArea.setEditable(false);
+            editMode = false;
+        }
     }
 }
