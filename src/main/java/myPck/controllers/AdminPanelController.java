@@ -20,6 +20,8 @@ public class AdminPanelController {
     private User selectedUser = null;
 
     @FXML
+    private TabPane tabPane;
+    @FXML
     public TableView<UserFx> usersTableView;
     @FXML
     public TableColumn<UserFx, String> loginColumn;
@@ -34,6 +36,9 @@ public class AdminPanelController {
 
     @FXML
     private TextField lastNameField;
+
+    @FXML
+    private Tab addEditUserTab;
 
     @FXML
     private TextField loginField;
@@ -106,7 +111,20 @@ public class AdminPanelController {
     }
     @FXML
     void saveUser(ActionEvent event) {
-        addNewUser();
+        if(selectedUser!=null){
+            editUser();
+        }
+        else{
+            addNewUser();
+        }
+        this.loadUsers();
+        this.setUpUsersList();
+        this.convertUsersToUsersFx();
+        firstNameField.setText("");
+        lastNameField.setText("");
+        pass1Field.setText("");
+        pass2Field.setText("");
+        loginField.setText("");
     }
     /**
      * Metoda pobiera użytkowników z bazy danych.
@@ -146,4 +164,40 @@ public class AdminPanelController {
         this.setUpUsersList();
         this.convertUsersToUsersFx();
     }
+    @FXML
+    void deleteUser(ActionEvent event) {
+        if (!usersFxList.isEmpty()){
+            int id = usersTableView.getSelectionModel().getSelectedIndex();
+            User selected = usersList.get(id);
+
+            boolean isDelete = userService.delete(selected.getId());
+
+            if (isDelete){
+                System.out.println("Usunięto");
+                usersList.clear();
+                loadUsers();
+                usersFxList.clear();
+                convertUsersToUsersFx();
+            }else {
+
+            }
+        }
+    }
+
+    @FXML
+    void editUser(ActionEvent event) {
+        if (!usersFxList.isEmpty()){
+            int id = usersTableView.getSelectionModel().getSelectedIndex();
+            selectedUser = usersList.get(id);
+            addEditUserTab.setText("Edit");
+            tabPane.getSelectionModel().selectLast();
+            firstNameField.setText(selectedUser.getFirstName());
+            lastNameField.setText(selectedUser.getLastName());
+            loginField.setText(selectedUser.getLogin());
+            }else {
+
+            }
+
+    }
+
 }

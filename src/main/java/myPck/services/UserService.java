@@ -65,11 +65,11 @@ public class UserService {
      * Metoda usuwa z bazy danych użytkownika o podanym id.
      * @param long id
      */
-    public void delete(long id) {
+    public boolean delete(long id) {
         userDao.openCurrentSessionwithTransaction();
         User user = userDao.findById(id);
         userDao.delete(user);
-        userDao.closeCurrentSessionwithTransaction();
+        return userDao.closeCurrentSessionwithTransaction();
     }
 
     /**
