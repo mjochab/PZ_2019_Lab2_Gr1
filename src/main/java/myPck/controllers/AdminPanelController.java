@@ -4,11 +4,11 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+
 import java.util.List;
 
 public class AdminPanelController {
@@ -26,6 +26,28 @@ public class AdminPanelController {
     public TableColumn<UserFx, String> lastNameColumn;
     @FXML
     public TableColumn<UserFx, String> roleColumn;
+    @FXML
+    private TextField firstNameField;
+
+    @FXML
+    private TextField lastNameField;
+
+    @FXML
+    private TextField loginField;
+
+    @FXML
+    private PasswordField pass1Field;
+
+    @FXML
+    private PasswordField pass2Field;
+
+    @FXML
+    private ComboBox<?> roleComboBox;
+
+    @FXML
+    private Button saveButton;
+
+
 
     /** Lista zawierająca użytkowników Fx*/
     private ObservableList<UserFx> usersFxList;
@@ -42,10 +64,13 @@ public class AdminPanelController {
      *
      * @param actionEvent
      */
-    public void addUser(ActionEvent actionEvent) {
+    public void addUser() {
 
     }
+    @FXML
+    void saveUser(ActionEvent event) {
 
+    }
     /**
      * Metoda pobiera użytkowników z bazy danych.
      */
