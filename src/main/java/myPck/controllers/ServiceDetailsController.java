@@ -126,6 +126,7 @@ public class ServiceDetailsController extends Controller {
         }
         /** ustawienie koloru dla statusu */
         setCollorOfStatus();
+        manageButtons();
         if (service.getStatus().equals("Not allocated")) {
             editSaveDescButton.setVisible(true);
         } else {
@@ -140,14 +141,13 @@ public class ServiceDetailsController extends Controller {
     private void setCollorOfStatus() {
         String s = statusLabel.getText();
 
-        if (s == "Done") {
-            statusLabel.setTextFill(Color.web("#00ff00"));
+        if (s.equals("Done")) {
+              statusLabel.setTextFill(Color.web("#00ff00"));
         }
-        if (s == "In service") {
+        if (s.equals("In service")) {
             statusLabel.setTextFill(Color.web("#ff0000"));
         }
-        if (s == "No allocated") {
-
+        if (s.equals("No allocated")) {
             statusLabel.setTextFill(Color.web("#ffbf00"));
         }
     }
