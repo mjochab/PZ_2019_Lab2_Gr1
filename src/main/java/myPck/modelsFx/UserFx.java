@@ -35,6 +35,7 @@ public class UserFx {
         return login;
     }
 
+
     public StringProperty roleProperty() {
         return role;
     }

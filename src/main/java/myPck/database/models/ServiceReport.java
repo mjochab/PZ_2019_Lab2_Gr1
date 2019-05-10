@@ -39,4 +39,12 @@ public class ServiceReport implements Serializable {
     public void setDescription(String description) {
         this.description = description;
     }
+
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    public Service getService() {
+        return this.service;
+    }
 }

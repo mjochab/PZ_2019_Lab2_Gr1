@@ -34,11 +34,11 @@ public class DbManager {
         String[] carModels = {"A6", "E220", "C4", "XP"};
         String[] carBrands = {"Audi", "Mercedes", "Jaguar", "Clio"};
         String[] carTypes = {"Sedan", "Combi", "Sedan", "Combi"};
-        String [] carProductionsDate ={"1992","1993"};
+        String[] carProductionsDate = {"1992", "1993"};
         String[] dateInvoice = {"2018-07-03", "2014-03-21", "2017-03-21", "2019-03-21"};
         int[] priceInvoice = {850, 1200, 355, 457};
-        int[] amountInvoice = {200,100,300,400};
-        Date[] dateOfInvoice = {new Date(2009,3,12), new Date(2014,8,20), new Date(), new Date()};
+        int[] amountInvoice = {200, 100, 300, 400};
+        Date[] dateOfInvoice = {new Date(2009, 3, 12), new Date(2014, 8, 20), new Date(), new Date()};
 
         String[] loremIpsum = {
                 "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
@@ -48,7 +48,7 @@ public class DbManager {
                 "Vivamus vitae nisi eget nisl sagittis mollis in id diam. Sed iaculis fringilla turpis in tempor.",
                 " In quis risus ante. Donec et sapien massa."
         };
-
+//        Car lonelyCar = this.populateCar(carModels[0], carBrands[0], carTypes[0]);
         clearDatabase();
 
         for (int i = 0; i <=numberOfRows; i++) {
@@ -61,15 +61,18 @@ public class DbManager {
             ServiceReport serviceReport = this.populateServiceReport(loremIpsum[0]);
         }
     }
+
     public void clearDatabase(){
         //kolejność usuwania jest ważna!
-        this.serviceService.deleteAll();
         this.carService.deleteAll();
         this.userService.deleteAll();
         this.clientService.deleteAll();
         this.invoiceService.deleteAll();
         this.serviceReportService.deleteAll();
+        this.serviceService.deleteAll();
     }
+
+
 
     public Service populateService(Car car, Client client) {
         Service service = new Service(client, car, "In service");
@@ -94,23 +97,27 @@ public class DbManager {
     }
 
     public Client populateClient(String firstName, String lastName) {
-        Client client = new Client(firstName,  lastName, "323232", "Rzeszów Pigonia 1");
+        Client client = new Client(firstName,  lastName, "1234567890", "Rzeszów Pigonia 1");
         this.clientService.persist(client);
 
         return client;
     }
 
     public User populateUser(String firstName, String lastName, int index) {
-        User user = new User("email@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
+        User user = new User("email" + index + "@o2.pl", firstName, lastName, "login" + index, hashPassword("password"), "A");
         this.userService.persist(user);
 
         return user;
     }
-    public Car populateCar(String model, String brand, String type,String ProductionsDate) {
-        Car car = new Car(model, brand, type,ProductionsDate);
-        this.carService.persist(car);
-        return car;
-    }
+
+
+        public Car populateCar (String model, String brand, String type, String ProductionsDate){
+            Car car = new Car(model, brand, type, ProductionsDate);
+            this.carService.persist(car);
+            return car;
+        }
+
+
     public InvoicePosition populateInvoicePosition(int price, String name)
     {
          InvoicePosition invoicePosition = new InvoicePosition(name, price);
@@ -125,3 +132,5 @@ public class DbManager {
         return  serviceReport;
     }
 }
+
+
