@@ -32,6 +32,8 @@ public class AdminPanelController {
     @FXML
     public TableColumn<UserFx, String> roleColumn;
     @FXML
+    public TableColumn<UserFx, String> emailColumn;
+    @FXML
     private TextField firstNameField;
 
     @FXML
@@ -50,14 +52,20 @@ public class AdminPanelController {
     private PasswordField pass2Field;
 
     @FXML
-    private ComboBox<?> roleComboBox;
+    private TextField emailfield;
+
+    @FXML
+    private ComboBox<String> roleComboBox;
 
     @FXML
     private Button saveButton;
 
+    private boolean editMode = false;
+    private ObservableList<String> roles = FXCollections.observableArrayList("M", "K", "ALL", "A");
 
-
-    /** Lista zawierająca użytkowników Fx*/
+    /**
+     * Lista zawierająca użytkowników Fx
+     */
     private ObservableList<UserFx> usersFxList;
 
     /**
@@ -69,54 +77,45 @@ public class AdminPanelController {
 
     /**
      * Metoda dodaje nowego użytkownika do listy.
-     *
-     * @param actionEvent
      */
-    public void addNewUser() {
+    public void saveUser() {
         String name = firstNameField.getText();
         String surname = lastNameField.getText();
         String pass1 = pass1Field.getText();
         String pass2 = pass2Field.getText();
         String login = loginField.getText();
-        String role = "A";
-        if(pass1.equals(pass2)){
-            User newUser = new User();
-            newUser.setLogin(login);
-            newUser.setFirstName(name);
-            newUser.setLastName(surname);
-            newUser.setPassword(hashPassword(pass1));
-            newUser.setRole(role);
-            newUser.setEmail("email@");
-            userService.persist(newUser);
+        String email = emailfield.getText();
+        String role = roleComboBox.getValue();
+        System.out.println(role);
+        if (pass1.equals(pass2)) {
+            if (editMode) {
+                selectedUser.setLogin(login);
+                selectedUser.setFirstName(name);
+                selectedUser.setLastName(surname);
+                selectedUser.setPassword(hashPassword(pass1));
+                selectedUser.setRole(role);
+                selectedUser.setEmail(email);
+                userService.update(selectedUser);
+                selectedUser = null;
+                addEditUserTab.setText("New User");
+            } else {
+                if (role != null ) {
+                    User newUser = new User();
+                    newUser.setLogin(login);
+                    newUser.setFirstName(name);
+                    newUser.setLastName(surname);
+                    newUser.setPassword(hashPassword(pass1));
+                    newUser.setEmail(email);
+                    newUser.setRole(role);
+                    userService.persist(newUser);
+                }
+            }
         }
+    }
 
-    }
-    public void editUser(){
-        String name = firstNameField.getText();
-        String surname = lastNameField.getText();
-        String pass1 = pass1Field.getText();
-        String pass2 = pass2Field.getText();
-        String login = loginField.getText();
-        String role = "A";
-        if(pass1.equals(pass2)){
-            selectedUser.setLogin(login);
-            selectedUser.setFirstName(name);
-            selectedUser.setLastName(surname);
-            selectedUser.setPassword(hashPassword(pass1));
-            selectedUser.setRole(role);
-            selectedUser.setEmail("email@");
-            userService.update(selectedUser);
-            selectedUser = null;
-        }
-    }
     @FXML
     void saveUser(ActionEvent event) {
-        if(selectedUser!=null){
-            editUser();
-        }
-        else{
-            addNewUser();
-        }
+        saveUser();
         this.loadUsers();
         this.setUpUsersList();
         this.convertUsersToUsersFx();
@@ -125,7 +124,9 @@ public class AdminPanelController {
         pass1Field.setText("");
         pass2Field.setText("");
         loginField.setText("");
+        emailfield.setText("");
     }
+
     /**
      * Metoda pobiera użytkowników z bazy danych.
      */
@@ -153,7 +154,9 @@ public class AdminPanelController {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         roleColumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
+        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 
+        this.roleComboBox.setItems(roles);
         usersFxList = FXCollections.observableArrayList();
         usersTableView.setItems(this.usersFxList);
     }
@@ -164,29 +167,28 @@ public class AdminPanelController {
         this.setUpUsersList();
         this.convertUsersToUsersFx();
     }
+
     @FXML
     void deleteUser(ActionEvent event) {
-        if (!usersFxList.isEmpty()){
+        if (!usersFxList.isEmpty()) {
             int id = usersTableView.getSelectionModel().getSelectedIndex();
             User selected = usersList.get(id);
 
             boolean isDelete = userService.delete(selected.getId());
 
-            if (isDelete){
-                System.out.println("Usunięto");
+            if (isDelete) {
                 usersList.clear();
                 loadUsers();
                 usersFxList.clear();
                 convertUsersToUsersFx();
-            }else {
-
             }
         }
     }
 
     @FXML
     void editUser(ActionEvent event) {
-        if (!usersFxList.isEmpty()){
+        if (!usersFxList.isEmpty()) {
+            this.editMode = true;
             int id = usersTableView.getSelectionModel().getSelectedIndex();
             selectedUser = usersList.get(id);
             addEditUserTab.setText("Edit");
@@ -194,10 +196,7 @@ public class AdminPanelController {
             firstNameField.setText(selectedUser.getFirstName());
             lastNameField.setText(selectedUser.getLastName());
             loginField.setText(selectedUser.getLogin());
-            }else {
-
-            }
-
+            emailfield.setText(selectedUser.getEmail());
+        }
     }
-
 }

@@ -3,6 +3,8 @@ package myPck.controllers.utils;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
+import javafx.scene.input.KeyCombination;
+
 
 public class Validator {
     public static void convertTextFieldToNumberField(TextField textField){
@@ -21,4 +23,5 @@ public class Validator {
             if(textField.getText().length() >= length) event.consume();
         });
     }
+
 }
