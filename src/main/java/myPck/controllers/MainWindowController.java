@@ -3,11 +3,13 @@ package myPck.controllers;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
 import myPck.database.models.Service;
+import myPck.database.models.User;
 import myPck.modelsFx.ServiceFx;
 import myPck.services.ServiceService;
 
@@ -21,7 +23,7 @@ public class MainWindowController extends Controller {
      * Serwis Zleceń
      */
     private ServiceService serviceService;
-
+    public User user;
     /**
      * Konstruktor MainWindowControlle i inicjalizacja Serwisu zleceń
      */
@@ -334,5 +336,18 @@ public class MainWindowController extends Controller {
         searchButton.setVisible(true);
         searchField.setVisible(true);
         searchField.setText("");
+    }
+
+    public void loadUser(Event event) {
+        System.out.println("test");
+        mainStackPaneController.getUser();
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser(){
+        return this.user;
     }
 }

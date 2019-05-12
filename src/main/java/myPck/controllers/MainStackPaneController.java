@@ -27,7 +27,7 @@ public class MainStackPaneController {
      */
     @FXML
     private StackPane mainStackPane;
-    private User user;
+    public User user;
 
     /**
      * Funkcja wymieniająca okienka w mainStackPane
@@ -49,6 +49,7 @@ public class MainStackPaneController {
         MainWindowController mainWindowController = loader.getController();
         mainWindowController.setMainStackPaneController(this);
         this.setAccountType();
+        mainWindowController.setUser(this.user);
         setScreen(stackPane);
     }
 
@@ -64,7 +65,7 @@ public class MainStackPaneController {
         Pane pane = loader.load();
         LogPanelController logPanelController = loader.getController();
         logPanelController.setMainStackPaneController(this);
-        accountType = accountTypes.ALL; //TODO Usunąć tą linie przed publikacja aplikacji
+//        accountType = accountTypes.ALL; //TODO Usunąć tą linie przed publikacja aplikacji
         setScreen(pane);
     }
 
@@ -76,11 +77,15 @@ public class MainStackPaneController {
         this.user = user;
     }
 
+    protected User getUser() {
+        return this.user;
+    }
+
     /**
      * Metoda ustawiająza typ konta
      */
     protected void setAccountType() {
-//        accountType = accountType.valueOf(this.user.getRole());
+        accountType = accountType.valueOf(this.user.getRole());
         /** TODO: odkomentować linie wyżej przed publikacja aplikacji*/
     }
 }

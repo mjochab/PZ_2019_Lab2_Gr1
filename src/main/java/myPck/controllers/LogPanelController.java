@@ -41,16 +41,12 @@ public class LogPanelController extends Controller {
 
     @FXML
     void login(ActionEvent event) throws IOException {
-        mainStackPaneController.loadMainWindow();
-    }
-}
+//        mainStackPaneController.loadMainWindow();
         /** Kod poniżej działa, został zakomentowany dla wygody debugowania aplikacji */
 
-//        String login = loginField.getText();
-  //      String password = passField.getText();
+        String login = loginField.getText();
+        String password = passField.getText();
 
-
-/*
         if (!login.isEmpty() && !password.isEmpty()) {
             errorLabel.setVisible(false);
             User user = userService.findByLogin(login);
@@ -72,4 +68,3 @@ public class LogPanelController extends Controller {
         }
     }
 }
-*/
