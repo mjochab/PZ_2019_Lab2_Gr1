@@ -64,7 +64,6 @@ public class ManagerController {
     private void setUpColumns() {
         carColumn.setCellValueFactory(cellData-> cellData.getValue().carProperty());
         clientColumn.setCellValueFactory(cellData-> cellData.getValue().clientProperty());
-        mechanicColumn.setCellValueFactory(cellData-> cellData.getValue().mechanicProperty());
     }
 
     private void setUpServiceList() {
