@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import myPck.controllers.utils.Validator;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
@@ -32,6 +33,8 @@ public class AdminPanelController {
     @FXML
     public TableColumn<UserFx, String> roleColumn;
     @FXML
+    public TableColumn<UserFx, String> emailColumn;
+    @FXML
     private TextField firstNameField;
 
     @FXML
@@ -48,6 +51,9 @@ public class AdminPanelController {
 
     @FXML
     private PasswordField pass2Field;
+
+    @FXML
+    private TextField emailfield;
 
     @FXML
     private ComboBox<?> roleComboBox;
@@ -77,6 +83,7 @@ public class AdminPanelController {
         String pass1 = pass1Field.getText();
         String pass2 = pass2Field.getText();
         String login = loginField.getText();
+        String email = emailfield.getText();
         String role = "A";
         if(pass1.equals(pass2)){
             User newUser = new User();
@@ -84,10 +91,12 @@ public class AdminPanelController {
             newUser.setFirstName(name);
             newUser.setLastName(surname);
             newUser.setPassword(hashPassword(pass1));
+            newUser.setEmail(email);
             newUser.setRole(role);
-            newUser.setEmail("email@");
+
             userService.persist(newUser);
         }
+
 
     }
     public void editUser(){
@@ -96,6 +105,7 @@ public class AdminPanelController {
         String pass1 = pass1Field.getText();
         String pass2 = pass2Field.getText();
         String login = loginField.getText();
+        String email = emailfield.getText();
         String role = "A";
         if(pass1.equals(pass2)){
             selectedUser.setLogin(login);
@@ -103,7 +113,7 @@ public class AdminPanelController {
             selectedUser.setLastName(surname);
             selectedUser.setPassword(hashPassword(pass1));
             selectedUser.setRole(role);
-            selectedUser.setEmail("email@");
+            selectedUser.setEmail(email);
             userService.update(selectedUser);
             selectedUser = null;
         }
@@ -124,6 +134,7 @@ public class AdminPanelController {
         pass1Field.setText("");
         pass2Field.setText("");
         loginField.setText("");
+        emailfield.setText("");
     }
     /**
      * Metoda pobiera użytkowników z bazy danych.
@@ -152,6 +163,7 @@ public class AdminPanelController {
         firstNameColumn.setCellValueFactory(cellData -> cellData.getValue().firstNameProperty());
         lastNameColumn.setCellValueFactory(cellData -> cellData.getValue().lastNameProperty());
         roleColumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
+        emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 
         usersFxList = FXCollections.observableArrayList();
         usersTableView.setItems(this.usersFxList);
@@ -193,6 +205,7 @@ public class AdminPanelController {
             firstNameField.setText(selectedUser.getFirstName());
             lastNameField.setText(selectedUser.getLastName());
             loginField.setText(selectedUser.getLogin());
+            emailfield.setText(selectedUser.getEmail());
             }else {
 
             }
