@@ -86,7 +86,6 @@ public class AdminPanelController {
         String login = loginField.getText();
         String email = emailfield.getText();
         String role = roleComboBox.getValue();
-        System.out.println(role);
         if (pass1.equals(pass2)) {
             if (editMode) {
                 selectedUser.setLogin(login);

@@ -35,8 +35,19 @@ public class UserFx {
         return login;
     }
 
-
     public StringProperty roleProperty() {
         return role;
     }
+//
+//    public String userProperty() {
+//        return firstName + " " + lastName;
+//    }
+//
+//    public String getRole() {
+//        return role.get();
+//    }
+//
+//    public void setRole(String value) {
+//        role.set(value);
+//    }
 }
