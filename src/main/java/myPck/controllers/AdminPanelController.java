@@ -70,7 +70,6 @@ public class AdminPanelController {
     /**
      * Metoda dodaje nowego użytkownika do listy.
      *
-     * @param actionEvent
      */
     public void addNewUser() {
         String name = firstNameField.getText();
