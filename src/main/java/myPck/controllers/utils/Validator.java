@@ -4,8 +4,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
-import java.util.regex.Pattern;
-
 
 public class Validator {
     public static void convertTextFieldToNumberField(TextField textField) {
@@ -34,6 +32,6 @@ public class Validator {
         return firstName.matches("[A-Z][a-zA-Z]*");
     }
     public static boolean validateEmail(String firstName) {
-        return firstName.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        return firstName.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$");
     }
 }
