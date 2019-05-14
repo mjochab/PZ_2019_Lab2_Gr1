@@ -68,4 +68,18 @@ public class UserDao extends SessionManager implements Dao<User> {
 
         return null;
     }
+
+    public List<User> findAllByRole(String role) {
+        List<User> users = (List<User>) getCurrentSession()
+                .createQuery("from User WHERE role = :role")
+                .setParameter("role", role)
+                .list();
+
+        if (users != null) {
+            return users;
+        }
+
+        return null;
+    }
+
 }

@@ -94,4 +94,12 @@ public class UserService {
 
         return user;
     }
+
+    public List<User> findAllByRole(String role) {
+        userDao.openCurrentSession();
+        List<User> users = userDao.findAllByRole(role);
+        userDao.closeCurrentSession();
+
+        return users;
+    }
 }

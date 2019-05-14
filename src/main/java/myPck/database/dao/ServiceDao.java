@@ -45,4 +45,9 @@ public class ServiceDao extends SessionManager implements Dao<Service> {
             delete(entity);
         }
     }
+
+    public List<Service> findNotAllocated() {
+        List<Service> services = (List<Service>) getCurrentSession().createQuery("from Service WHERE status = 'Not allocated'").list();
+        return services;
+    }
 }

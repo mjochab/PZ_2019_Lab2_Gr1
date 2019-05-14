@@ -79,4 +79,12 @@ public class ServiceService {
         serviceDao.deleteAll();
         serviceDao.closeCurrentSessionwithTransaction();
     }
+
+    public List<Service> findNotAllocated() {
+        serviceDao.openCurrentSession();
+        List<Service> services = serviceDao.findNotAllocated();
+        serviceDao.closeCurrentSession();
+
+        return services;
+    }
 }
