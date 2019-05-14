@@ -7,5 +7,4 @@ public abstract class Controller {
     public void setMainStackPaneController(MainStackPaneController mainStackPaneController) {
         this.mainStackPaneController = mainStackPaneController;
     }
-
 }
