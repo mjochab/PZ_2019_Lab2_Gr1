@@ -4,6 +4,8 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.scene.control.TextField;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Validator {
     public static void convertTextFieldToNumberField(TextField textField) {
@@ -28,10 +30,18 @@ public class Validator {
         return firstName.matches("[A-Z][a-zA-Z]*");
     }
 
-    public static boolean validateLastName(String firstName) {
-        return firstName.matches("[A-Z][a-zA-Z]*");
+    public static boolean validateLastName(String lastName) {
+        return lastName.matches("[A-Z][a-zA-Z]*");
     }
-    public static boolean validateEmail(String firstName) {
-        return firstName.matches("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$");
+
+    public static boolean validatePassword(String password) {
+        Pattern pattern = Pattern.compile("((?=.*[a-z])(?=.*\\d)(?=.*[A-Z])(?=.*[@#$%!]).{8,40})");
+        Matcher matcher = pattern.matcher(password);
+
+        return matcher.matches();
+    }
+
+    public static boolean validateEmail(String email) {
+        return email.matches("\\b^[a-z][.\\w]+@[a-z0-9]+\\.[a-z]{2,3}\\b(.[a-z]{2})?$");
     }
 }

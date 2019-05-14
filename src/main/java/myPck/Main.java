@@ -9,14 +9,11 @@ import myPck.database.utils.DbManager;
 
 public class Main extends Application {
 
-
     public static void main(String[] args) {
         launch(args);
-
     }
 
     public void start(Stage primaryStage) throws Exception {
-
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/MainStackPane.fxml"));
         StackPane stackPane = loader.load();
         Scene scene = new Scene(stackPane, 700, 500);
@@ -25,11 +22,9 @@ public class Main extends Application {
 
         primaryStage.show();
 
-
         /** Instancja DbManagera potrzebna to uzupełnienia bazy danymi.**/
         DbManager dbManager = new DbManager();
         /**Uzupełnienie bazy przykładowymi danymi */
-
 //        dbManager.addSampleData();
     }
 }

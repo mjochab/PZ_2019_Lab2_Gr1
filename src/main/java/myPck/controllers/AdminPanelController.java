@@ -75,10 +75,11 @@ public class AdminPanelController {
         userService = new UserService();
     }
 
+    @FXML
     /**
-     * Metoda dodaje nowego użytkownika do listy.
+     * Metoda dodaje użytkownika lub edytuje jego dane
      */
-    public void saveUser() {
+    void saveUser(ActionEvent event) {
         String name = firstNameField.getText();
         String surname = lastNameField.getText();
         String pass1 = pass1Field.getText();
@@ -98,7 +99,7 @@ public class AdminPanelController {
                 selectedUser = null;
                 addEditUserTab.setText("New User");
             } else {
-                if (role != null ) {
+                if (role != null) {
                     User newUser = new User();
                     newUser.setLogin(login);
                     newUser.setFirstName(name);
@@ -109,21 +110,17 @@ public class AdminPanelController {
                     userService.persist(newUser);
                 }
             }
-        }
-    }
+            this.loadUsers();
+            this.setUpUsersList();
+            this.convertUsersToUsersFx();
 
-    @FXML
-    void saveUser(ActionEvent event) {
-        saveUser();
-        this.loadUsers();
-        this.setUpUsersList();
-        this.convertUsersToUsersFx();
-        firstNameField.setText("");
-        lastNameField.setText("");
-        pass1Field.setText("");
-        pass2Field.setText("");
-        loginField.setText("");
-        emailfield.setText("");
+            firstNameField.setText("");
+            lastNameField.setText("");
+            pass1Field.setText("");
+            pass2Field.setText("");
+            loginField.setText("");
+            emailfield.setText("");
+        }
     }
 
     /**
