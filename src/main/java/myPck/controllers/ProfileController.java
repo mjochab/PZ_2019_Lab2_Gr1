@@ -7,10 +7,16 @@ import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
+import javafx.scene.paint.Color;
 import myPck.controllers.utils.Validator;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+
+import java.util.HashMap;
+
+import static myPck.utils.Password.hashPassword;
+import static myPck.utils.Session.getCurrentUser;
 
 public class ProfileController extends Controller {
 
@@ -42,67 +48,95 @@ public class ProfileController extends Controller {
     private Button saveButton;
 
     @FXML
+
+    /**
+     * Metoda zapisuje zmienne do HashMapy, następnie sprawdza prawidłowość danych,
+     * jeżeli są poprawne to dane użytkownika zostają zmienione
+     */
     void save(ActionEvent event) {
-        System.out.println("Zmieniono dane");
-        infoLabel.setVisible(false);
-//        System.out.println(firstNameField);
-        String firstName = firstNameField.getText();
-        String lastName = lastNameField.getText();
-        String email = emailTextField.getText();
-        String password = pass1Field.getText();
-        if (!Validator.validateFirstName(firstName)) {
-            infoLabel.setText("First name is incorrect");
-            System.out.println("wrong");
+        HashMap<String, String> formData = new HashMap<String, String>();
+        formData.put("login", loginField.getText());
+        formData.put("firstName", firstNameField.getText());
+        formData.put("lastName", lastNameField.getText());
+        formData.put("email", emailTextField.getText());
+        formData.put("password", pass1Field.getText());
+
+        if (isInputValid(formData)) {
+            this.user.setFirstName(formData.get("firstName"));
+            this.user.setLastName(formData.get("lastName"));
+            this.user.setEmail(formData.get("email"));
+            this.user.setLogin(formData.get("login"));
+            this.user.setPassword(hashPassword(formData.get("password")));
+            this.userService.update(this.user);
+
+            infoLabel.setText("Data has been changed");
+            infoLabel.setTextFill(Color.web("#007600"));
             infoLabel.setVisible(true);
         }
-//        else if (!Validator.validateFirstName(firstName)) {
-//
-//        } else if (!Validator.validateFirstName(firstName)) {
-//
-//        }
-       
-//        this.user.setEmail(email);
-//        this.user.setFirstName(firstName);
-//        this.user.setLastName(lastName);
-//        this.user.setPassword(password);
-//        this.userService.update(this.user);
+    }
+
+    /**
+     * Metoda sprawdza czy wszystkie pola są prawidłowe i wyświetla komunikaty
+     *
+     * @param data
+     * @return
+     */
+    private boolean isInputValid(HashMap<String, String> data) {
+        infoLabel.setVisible(false);
+        infoLabel.setTextFill(Color.web("#ff0000"));
+
+        if (!Validator.validateFirstName(data.get("firstName"))) {
+            infoLabel.setText("First name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        } else if (!Validator.validateLastName(data.get("lastName"))) {
+            infoLabel.setText("Last name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        } else if (!Validator.validateEmail(data.get("email"))) {
+            infoLabel.setText("Email address is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        } else if (!Validator.validatePassword(pass1Field.getText())) {
+            infoLabel.setText("Password is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        } else if (!pass1Field.getText().equals(pass2Field.getText())) {
+            infoLabel.setText("Passwords does not match");
+            infoLabel.setVisible(true);
+
+            return false;
+        }
+
+        return true;
     }
 
     @FXML
     void initialize() {
-//        User user = getUser();
-//        this.user = new User();
-//        this.user.setFirstName("Jan");
-//        this.user.setLastName("Kowalski");
-//        this.user.setEmail("sdg@gmail.com");
-//        this.user.setLogin("JanK");
-//        this.user = this.getUser();
-//        this.getUser();
-//        convertUserToUserFx();
-//        setUpUser();
-        System.out.println("init");
+        convertUserToUserFx();
+        setUpUser();
     }
 
-
     public ProfileController() {
-        super();
         userService = new UserService();
-//        this.user = mainStackPaneController.getUser();
-        System.out.println("inicjalizacja");
-        System.out.println(mainStackPaneController);
+        user = getCurrentUser();
     }
 
     public void convertUserToUserFx() {
         userFx = new UserFx(user.getEmail(), user.getFirstName(), user.getLastName(), user.getLogin(), user.getRole());
     }
 
+    /**
+     * Metoda ustawia odpowiednie typy w polach
+     */
     public void setUpUser() {
         firstNameField.textProperty().bindBidirectional(userFx.firstNameProperty());
         lastNameField.textProperty().bindBidirectional(userFx.lastNameProperty());
         loginField.textProperty().bindBidirectional(userFx.loginProperty());
-    }
-
-    public void getUser() {
-        System.out.println(mainStackPaneController);
+        emailTextField.textProperty().bindBidirectional(userFx.emailProperty());
     }
 }
