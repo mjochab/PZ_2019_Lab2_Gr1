@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.controllers.utils.Validator;
+import myPck.utils.Validator;
 import myPck.database.models.Client;
 import myPck.modelsFx.ClientFx;
 import myPck.services.ClientService;

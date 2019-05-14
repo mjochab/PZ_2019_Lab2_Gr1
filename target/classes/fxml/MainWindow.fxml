@@ -64,7 +64,7 @@
             </top>
             </BorderPane>
         </Tab>
-        <Tab fx:id="profileTab" onSelectionChanged="#loadUser" text="Profile">
+        <Tab fx:id="profileTab" text="Profile">
             <fx:include source="Profile.fxml" />
         </Tab>
         <Tab fx:id="adminPanelTab" text="Admin panel">
