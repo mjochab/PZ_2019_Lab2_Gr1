@@ -1,5 +1,6 @@
 package myPck.controllers;
 
+import com.itextpdf.text.DocumentException;
 import com.rejman.Invoice;
 import com.rejman.Person;
 import com.rejman.PositonOfInvoice;
@@ -10,13 +11,18 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
 import javafx.scene.layout.StackPane;
+import myPck.database.models.Client;
 import myPck.database.models.Service;
+import myPck.database.models.ServicePart;
 import myPck.database.models.User;
 import myPck.modelsFx.ServiceFx;
 import myPck.services.ServiceService;
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 
 public class MainWindowController extends Controller {
@@ -132,13 +138,36 @@ public class MainWindowController extends Controller {
      * @param event
      */
     @FXML
-    void invoicePDF(ActionEvent event) {
-        Person buyer = new Person("tst","Ser","Wer");
-        Person dealer = new Person("sdf","sdf","Sdf");
-        PositonOfInvoice[] positonOfInvoices = new PositonOfInvoice[2];
-        positonOfInvoices[0] = new PositonOfInvoice("rsr",100);
-        positonOfInvoices[1] = new PositonOfInvoice("ddd",200);
-        //Invoice invoice = new Invoice("tytul",dealer,buyer,positonOfInvoices);
+    void invoicePDF(ActionEvent event) throws FileNotFoundException, DocumentException {
+        String path = "invoices/";
+        Date now = new Date();
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTime(now);
+        String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+        //Dane firmy wystawiającej fakture
+        Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
+        Person buyer;
+        Service selected;
+        try{
+            int id = servicesTableView.getSelectionModel().getSelectedIndex();
+            selected = servicesList.get(id);
+            Client client = selected.getClientInstance();
+            String name = client.getFirstName()+" "+client.getLastName();
+            buyer = new Person(name,client.getAddress(),client.getNipNumber());
+            List<ServicePart> list = selected.getServiceParts();
+            PositonOfInvoice[] rows = new PositonOfInvoice[list.size()];
+
+            for(int i=0;i<rows.length;i++){
+                rows[i] = new PositonOfInvoice(list.get(i).getName(), list.get(i).getPrice());
+            }
+            Invoice invoice = new Invoice(title,dealer,buyer,rows);
+            path+=title+" "+name+".pdf";
+            invoice.createDocument(path);
+
+        }catch(Exception ex){
+
+        }
+
 
     }
 

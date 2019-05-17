@@ -75,6 +75,10 @@ public class Service implements Serializable{
         return client.getFirstName() + " " + client.getLastName();
     }
 
+    public Client getClientInstance(){
+        return this.client;
+    };
+
     public String getStatus() {
         return status;
     }
