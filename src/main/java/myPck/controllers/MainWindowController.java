@@ -25,9 +25,7 @@ import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
+import java.util.*;
 import java.util.List;
 
 public class MainWindowController extends Controller {
@@ -193,13 +191,18 @@ public class MainWindowController extends Controller {
                 path+=title+" "+name+".pdf";
                 invoice.createDocument(path);
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                Alert alert = new Alert(Alert.AlertType.NONE);
                 alert.setTitle("Information");
                 alert.setHeaderText("Invoice was created.");
-                alert.setContentText(title);
+                alert.setContentText("Open the invoice.");
+                ButtonType yes = new ButtonType("Yes");
+                ButtonType no = new ButtonType("No");
+                alert.getButtonTypes().addAll(yes, no);
+                Optional<ButtonType> option = alert.showAndWait();
+                if (option.get() == yes) {
+                    openInvoice(path);
+                }
 
-                alert.showAndWait();
-                openInvoice(path);
 
             }else{
                 Alert alert = new Alert(Alert.AlertType.WARNING);
