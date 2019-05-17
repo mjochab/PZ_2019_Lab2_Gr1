@@ -1,5 +1,8 @@
 package myPck.controllers;
 
+import com.rejman.Invoice;
+import com.rejman.Person;
+import com.rejman.PositonOfInvoice;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -130,15 +133,13 @@ public class MainWindowController extends Controller {
      */
     @FXML
     void invoicePDF(ActionEvent event) {
-        ServiceFx service;
-        try {
-            /** sprawdza czy zaznaczono jakiś element w TableView */
-            service = servicesTableView.getSelectionModel().getSelectedItem();
-            System.out.println("Generuje PDF dla:");
-            System.out.println(service.getCar());
-        } catch (Exception e) {
-            System.out.println("Nie wybrano niczego");
-        }
+        Person buyer = new Person("tst","Ser","Wer");
+        Person dealer = new Person("sdf","sdf","Sdf");
+        PositonOfInvoice[] positonOfInvoices = new PositonOfInvoice[2];
+        positonOfInvoices[0] = new PositonOfInvoice("rsr",100);
+        positonOfInvoices[1] = new PositonOfInvoice("ddd",200);
+        //Invoice invoice = new Invoice("tytul",dealer,buyer,positonOfInvoices);
+
     }
 
     /**
