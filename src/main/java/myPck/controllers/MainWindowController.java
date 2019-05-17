@@ -10,6 +10,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import myPck.database.models.Client;
 import myPck.database.models.Service;
@@ -19,6 +21,8 @@ import myPck.modelsFx.ServiceFx;
 import myPck.services.InvoiceService;
 import myPck.services.ServiceService;
 
+import java.awt.*;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -165,27 +169,48 @@ public class MainWindowController extends Controller {
             int id = servicesTableView.getSelectionModel().getSelectedIndex();
             selected = servicesList.get(id);
 
-            String path = "invoices/";
-            Date date = setInvoiceDate(selected);
-            Calendar calendar = Calendar.getInstance();
-            calendar.setTime(date);
-            String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
-            //Dane firmy wystawiającej fakture
-            Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
-            Person buyer;
+            if(selected.getStatus().equals("Done")){
 
-            Client client = selected.getClientInstance();
-            String name = client.getFirstName()+" "+client.getLastName();
-            buyer = new Person(name,client.getAddress(),client.getNipNumber());
-            List<ServicePart> list = selected.getServiceParts();
-            PositonOfInvoice[] rows = new PositonOfInvoice[list.size()];
+                String path = "invoices/";
+                Date date = setInvoiceDate(selected);
+                Calendar calendar = Calendar.getInstance();
+                calendar.setTime(date);
+                String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+                //Dane firmy wystawiającej fakture
+                Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
+                Person buyer;
 
-            for(int i=0;i<rows.length;i++){
-                rows[i] = new PositonOfInvoice(list.get(i).getName(), list.get(i).getPrice());
+                Client client = selected.getClientInstance();
+                String name = client.getFirstName()+" "+client.getLastName();
+                buyer = new Person(name,client.getAddress(),client.getNipNumber());
+                List<ServicePart> list = selected.getServiceParts();
+                PositonOfInvoice[] rows = new PositonOfInvoice[list.size()];
+
+                for(int i=0;i<rows.length;i++){
+                    rows[i] = new PositonOfInvoice(list.get(i).getName(), list.get(i).getPrice());
+                }
+                Invoice invoice = new Invoice(title,dealer,buyer,rows);
+                path+=title+" "+name+".pdf";
+                invoice.createDocument(path);
+
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.setTitle("Information");
+                alert.setHeaderText("Invoice was created.");
+                alert.setContentText(title);
+
+                alert.showAndWait();
+                openInvoice(path);
+
+            }else{
+                Alert alert = new Alert(Alert.AlertType.WARNING);
+                alert.setTitle("Information");
+                alert.setHeaderText("Invoice can't be generated for this service.");
+                alert.setContentText("The service has got to be done.");
+
+                alert.showAndWait();
             }
-            Invoice invoice = new Invoice(title,dealer,buyer,rows);
-            path+=title+" "+name+".pdf";
-            invoice.createDocument(path);
+
+
 
         }catch(Exception ex){
 
@@ -193,7 +218,16 @@ public class MainWindowController extends Controller {
 
 
     }
-
+    private void openInvoice(String path){
+        if (Desktop.isDesktopSupported()) {
+            try {
+                File myFile = new File(path);
+                Desktop.getDesktop().open(myFile);
+            } catch (IOException ex) {
+                // no application registered for PDFs
+            }
+        }
+    }
     /**
      * @param event
      * @throws IOException
