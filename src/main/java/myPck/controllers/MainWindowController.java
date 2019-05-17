@@ -16,6 +16,7 @@ import myPck.database.models.Service;
 import myPck.database.models.ServicePart;
 import myPck.database.models.User;
 import myPck.modelsFx.ServiceFx;
+import myPck.services.InvoiceService;
 import myPck.services.ServiceService;
 
 import java.io.FileNotFoundException;
@@ -31,12 +32,14 @@ public class MainWindowController extends Controller {
      * Serwis Zleceń
      */
     private ServiceService serviceService;
+    private InvoiceService invoiceService;
     public User user;
     /**
      * Konstruktor MainWindowControlle i inicjalizacja Serwisu zleceń
      */
     public MainWindowController() {
         this.serviceService = new ServiceService();
+        this.invoiceService = new InvoiceService();
     }
 
     /**
@@ -137,20 +140,40 @@ public class MainWindowController extends Controller {
      * generowanie faktury
      * @param event
      */
+
+    private Date setInvoiceDate(Service service){
+        myPck.database.models.Invoice invoice = service.getInvoice();
+        if(invoice==null){
+            Date date =  new Date();
+            invoice = new myPck.database.models.Invoice();
+            invoice.setDate_of_issue(date);
+            service.setInvoice(invoice);
+            invoiceService.persist(invoice);
+            serviceService.update(service);
+            return date;
+        }else{
+            return invoice.getDate_of_issue();
+        }
+    }
     @FXML
     void invoicePDF(ActionEvent event) throws FileNotFoundException, DocumentException {
-        String path = "invoices/";
-        Date now = new Date();
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTime(now);
-        String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
-        //Dane firmy wystawiającej fakture
-        Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
-        Person buyer;
         Service selected;
+
+
+
         try{
             int id = servicesTableView.getSelectionModel().getSelectedIndex();
             selected = servicesList.get(id);
+
+            String path = "invoices/";
+            Date date = setInvoiceDate(selected);
+            Calendar calendar = Calendar.getInstance();
+            calendar.setTime(date);
+            String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
+            //Dane firmy wystawiającej fakture
+            Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
+            Person buyer;
+
             Client client = selected.getClientInstance();
             String name = client.getFirstName()+" "+client.getLastName();
             buyer = new Person(name,client.getAddress(),client.getNipNumber());
