@@ -5,10 +5,12 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import myPck.database.models.Company;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
 
+import java.io.IOException;
 import java.util.List;
 
 import static myPck.utils.Password.hashPassword;
@@ -19,6 +21,12 @@ public class AdminPanelController {
     private List<User> usersList;
     private User selectedUser = null;
 
+    @FXML
+    private TextField companyNameTextField;
+    @FXML
+    private TextField companyAddressTextField;
+    @FXML
+    private TextField companyNipTextField;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -158,12 +166,18 @@ public class AdminPanelController {
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException, ClassNotFoundException {
         this.loadUsers();
         this.setUpUsersList();
         this.convertUsersToUsersFx();
+        this.setCompanyData();
     }
-
+    private void setCompanyData() throws IOException, ClassNotFoundException {
+        Company company = Company.readObjectFromFile("company.txt");
+        companyNameTextField.setText(company.getName());
+        companyAddressTextField.setText(company.getAddress());
+        companyNipTextField.setText(company.getNip());
+    }
     @FXML
     void deleteUser(ActionEvent event) {
         if (!usersFxList.isEmpty()) {
@@ -188,11 +202,19 @@ public class AdminPanelController {
             int id = usersTableView.getSelectionModel().getSelectedIndex();
             selectedUser = usersList.get(id);
             addEditUserTab.setText("Edit");
-            tabPane.getSelectionModel().selectLast();
+            tabPane.getSelectionModel().select(1);
             firstNameField.setText(selectedUser.getFirstName());
             lastNameField.setText(selectedUser.getLastName());
             loginField.setText(selectedUser.getLogin());
             emailfield.setText(selectedUser.getEmail());
         }
+    }
+    @FXML
+    void saveCompany(ActionEvent event) throws IOException {
+        String name = companyNameTextField.getText();
+        String address = companyAddressTextField.getText();
+        String nip = companyNipTextField.getText();
+        Company company = new Company(name,address,nip);
+        company.writeToFile("company.txt");
     }
 }

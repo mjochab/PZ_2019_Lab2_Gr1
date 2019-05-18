@@ -13,10 +13,7 @@ import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.database.models.Client;
-import myPck.database.models.Service;
-import myPck.database.models.ServicePart;
-import myPck.database.models.User;
+import myPck.database.models.*;
 import myPck.modelsFx.ServiceFx;
 import myPck.services.InvoiceService;
 import myPck.services.ServiceService;
@@ -158,9 +155,9 @@ public class MainWindowController extends Controller {
         }
     }
     @FXML
-    void invoicePDF(ActionEvent event) throws FileNotFoundException, DocumentException {
+    void invoicePDF(ActionEvent event) throws IOException, DocumentException, ClassNotFoundException {
         Service selected;
-
+        Company company = Company.readObjectFromFile("company.txt");
 
 
         try{
@@ -175,7 +172,8 @@ public class MainWindowController extends Controller {
                 calendar.setTime(date);
                 String title = "invoice "+calendar.get(Calendar.YEAR)+"-"+(calendar.get(Calendar.MONTH)+1)+"-"+calendar.get(Calendar.DAY_OF_MONTH);
                 //Dane firmy wystawiającej fakture
-                Person dealer = new Person("Nazwa firmy","Rejtana 45, 35-345 Rzeszów","5364728394");
+
+                Person dealer = new Person(company.getName(),company.getAddress(),company.getNip());
                 Person buyer;
 
                 Client client = selected.getClientInstance();
