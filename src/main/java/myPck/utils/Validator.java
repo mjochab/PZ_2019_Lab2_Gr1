@@ -1,4 +1,4 @@
-package myPck.controllers.utils;
+package myPck.utils;
 
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;

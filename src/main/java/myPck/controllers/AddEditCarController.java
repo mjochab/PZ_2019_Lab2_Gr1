@@ -7,7 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.controllers.utils.Validator;
+import myPck.utils.Validator;
 import myPck.database.models.Car;
 import myPck.modelsFx.CarFx;
 import myPck.services.CarService;
