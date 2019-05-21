@@ -80,6 +80,7 @@ public class UserService {
         userDao.deleteAll();
         userDao.closeCurrentSessionwithTransaction();
     }
+
     public User findByEmail(String email){
         userDao.openCurrentSession();
         User user = userDao.findByEmail(email);

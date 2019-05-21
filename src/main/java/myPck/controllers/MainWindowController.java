@@ -99,8 +99,8 @@ public class MainWindowController extends Controller {
         StackPane stackPane = loader.load();
 
         /** przekazanie kontrolera (głównego okna) do okienka AddService */
-        AddServiceController addServiceController = loader.getController();
-        addServiceController.setMainStackPaneController(mainStackPaneController);
+        ServiceController serviceController = loader.getController();
+        serviceController.setMainStackPaneController(mainStackPaneController);
         /** Ustawienie okna AddService */
         mainStackPaneController.setScreen(stackPane);
     }
