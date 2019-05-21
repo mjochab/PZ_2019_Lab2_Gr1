@@ -100,14 +100,14 @@ public class AdminPanelController {
                 addEditUserTab.setText("New User");
             } else {
                 if (role != null) {
-//                    User newUser = new User(email, name, surname);
-//                    newUser.setLogin(login);
-//                    newUser.setFirstName(name);
-//                    newUser.setLastName(surname);
-//                    newUser.setPassword(hashPassword(pass1));
-//                    newUser.setEmail(email);
-//                    newUser.setRole(role);
-//                    userService.persist(newUser);
+                    User newUser = new User();
+                    newUser.setLogin(login);
+                    newUser.setFirstName(name);
+                    newUser.setLastName(surname);
+                    newUser.setPassword(hashPassword(pass1));
+                    newUser.setEmail(email);
+                    newUser.setRole(role);
+                    userService.persist(newUser);
                 }
             }
             this.loadUsers();
