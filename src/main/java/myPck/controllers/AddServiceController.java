@@ -200,12 +200,12 @@ public class AddServiceController extends Controller {
                 appendClientToClientFx();
             } else {
 
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText("Can not be deleted");
-                alert.setContentText("This client is associated witch a service.");
-
-                alert.showAndWait();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Information");
+//                alert.setHeaderText("Can not be deleted");
+//                alert.setContentText("This client is associated witch a service.");
+//
+//                alert.showAndWait();
             }
         }
     }
@@ -224,12 +224,12 @@ public class AddServiceController extends Controller {
                 carNameList.clear();
                 appendCarToCarFx();
             }else {
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.setTitle("Information");
-                alert.setHeaderText("Can not be deleted");
-                alert.setContentText("This car is associated witch a service.");
-
-                alert.showAndWait();
+//                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+//                alert.setTitle("Information");
+//                alert.setHeaderText("Can not be deleted");
+//                alert.setContentText("This car is associated witch a service.");
+//
+//                alert.showAndWait();
             }
         }
     }
