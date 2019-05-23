@@ -83,6 +83,7 @@
                                     <Button fx:id="saveButton" mnemonicParsing="false" onAction="#saveUser" text="Save" GridPane.columnIndex="1" GridPane.rowIndex="7" />
                                     <Label text="Email" GridPane.rowIndex="5" />
                                     <TextField fx:id="emailfield" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                    <Label fx:id="infoLabel" text="Error label" textFill="RED" visible="false" GridPane.rowIndex="7" />
                                                 </children>
                                             </GridPane>
                                         </children></AnchorPane>

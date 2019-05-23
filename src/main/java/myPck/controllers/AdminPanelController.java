@@ -5,10 +5,13 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.paint.Color;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+import myPck.utils.Validator;
 
+import java.util.HashMap;
 import java.util.List;
 
 import static myPck.utils.Password.hashPassword;
@@ -17,7 +20,10 @@ public class AdminPanelController {
 
     private UserService userService;
     private List<User> usersList;
-    private User selectedUser = null;
+    public Label infoLabel;
+    private User selectedUser1;
+    private User user;
+
 
     @FXML
     private TabPane tabPane;
@@ -89,14 +95,14 @@ public class AdminPanelController {
         String role = roleComboBox.getValue();
         if (pass1.equals(pass2)) {
             if (editMode) {
-                selectedUser.setLogin(login);
-                selectedUser.setFirstName(name);
-                selectedUser.setLastName(surname);
-                selectedUser.setPassword(hashPassword(pass1));
-                selectedUser.setRole(role);
-                selectedUser.setEmail(email);
-                userService.update(selectedUser);
-                selectedUser = null;
+                selectedUser1.setLogin(login);
+                selectedUser1.setFirstName(name);
+                selectedUser1.setLastName(surname);
+                selectedUser1.setPassword(hashPassword(pass1));
+                selectedUser1.setRole(role);
+                selectedUser1.setEmail(email);
+                userService.update(selectedUser1);
+                selectedUser1 = null;
                 addEditUserTab.setText("New User");
             } else {
                 if (role != null) {
@@ -121,8 +127,60 @@ public class AdminPanelController {
             loginField.setText("");
             emailfield.setText("");
         }
+        HashMap<String, String> formData = new HashMap<String,String>();
+        formData.put("login", loginField.getText());
+        formData.put("firstName",firstNameField.getText());
+        formData.put("lastName", lastNameField.getText());
+        formData.put("email", emailfield.getText());
+        formData.put("password", pass1Field.getText());
+
+        if (isInputValid(formData)){
+            this.user.setFirstName(formData.get("firstName"));
+            this.user.setLastName(formData.get("lastName"));
+            this.user.setEmail(formData.get("email"));
+            this.user.setLogin(formData.get("login"));
+            this.user.setPassword(hashPassword(formData.get("password")));
+            this.userService.update(this.user);
+
+            infoLabel.setText("Data has been changed");
+            infoLabel.setTextFill(Color.web("#007600"));
+            infoLabel.setVisible(true);
+        }
+
     }
 
+    private boolean isInputValid(HashMap<String,String> data){
+        infoLabel.setVisible(false);
+        infoLabel.setTextFill(Color.web("#ff0000"));
+
+        if (!Validator.validateFirstName(data.get("firstName"))){
+            infoLabel.setText("First name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateLastName(data.get("lastName"))){
+            infoLabel.setText("Last name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateEmail(data.get("email"))){
+            infoLabel.setText("Email address is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validatePassword(pass1Field.getText())){
+            infoLabel.setText("Password is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!pass1Field.getText().equals(pass2Field.getText())){
+            infoLabel.setText("Passwords does not match");
+            infoLabel.setVisible(true);
+
+            return false;
+        }
+        return true;
+    }
     /**
      * Metoda pobiera użytkowników z bazy danych.
      */
@@ -186,13 +244,13 @@ public class AdminPanelController {
         if (!usersFxList.isEmpty()) {
             this.editMode = true;
             int id = usersTableView.getSelectionModel().getSelectedIndex();
-            selectedUser = usersList.get(id);
+            selectedUser1 = usersList.get(id);
             addEditUserTab.setText("Edit");
             tabPane.getSelectionModel().selectLast();
-            firstNameField.setText(selectedUser.getFirstName());
-            lastNameField.setText(selectedUser.getLastName());
-            loginField.setText(selectedUser.getLogin());
-            emailfield.setText(selectedUser.getEmail());
+            firstNameField.setText(selectedUser1.getFirstName());
+            lastNameField.setText(selectedUser1.getLastName());
+            loginField.setText(selectedUser1.getLogin());
+            emailfield.setText(selectedUser1.getEmail());
         }
     }
 }
