@@ -17,7 +17,7 @@ import myPck.services.ServiceService;
 import java.io.IOException;
 import java.util.List;
 
-public class AddServiceController extends Controller {
+public class ServiceController extends Controller {
 
     private List<Car> carList;
     private List<Client> clientList;
@@ -26,9 +26,8 @@ public class AddServiceController extends Controller {
     private CarService carService;
     private ClientService clientService;
     private ServiceService serviceService;
-    private Object ArrayIndex;
 
-    public AddServiceController() {
+    public ServiceController() {
         serviceService = new ServiceService();
         carService = new CarService();
         clientService = new ClientService();
@@ -43,7 +42,7 @@ public class AddServiceController extends Controller {
     @FXML
     private MenuItem editCarMenuItem;
     @FXML
-    private  MenuItem deleteCarMenuItem;
+    private MenuItem deleteCarMenuItem;
     @FXML
     private Button addNewCustomerButton;
     @FXML
@@ -58,23 +57,21 @@ public class AddServiceController extends Controller {
     private Button cancelButton;
     @FXML
     private TextArea descTextArea;
+
     @FXML
     void addNewCar(ActionEvent event) throws IOException {
-            FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
-            Pane pane = loader.load();
-            AddEditCarController addEditCarController = loader.getController();
-            addEditCarController.setMainStackPaneController(mainStackPaneController);
-            mainStackPaneController.setScreen(pane);
-        }
+        FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
+        Pane pane = loader.load();
+        CarController carController = loader.getController();
+        carController.setMainStackPaneController(mainStackPaneController);
+        mainStackPaneController.setScreen(pane);
+    }
 
     @FXML
     void cancel(ActionEvent event) throws IOException {
         System.out.println("Anuluje tworzenie zlecenia");
         mainStackPaneController.loadMainWindow();
     }
-
-
-
 
     @FXML
     void saveService(ActionEvent event) throws IOException {
@@ -88,13 +85,10 @@ public class AddServiceController extends Controller {
         /** zaznaczony klient */
         Car selectedCar = carList.get(idCar);
 
-
         String status = "Not allocated";
-        Service newService = new Service(selectedCustomer,selectedCar,status);
+        Service newService = new Service(selectedCustomer, selectedCar, status);
         newService.setDescription(descTextArea.getText());
-        System.out.println("Zapisuje zlecenie");
         serviceService.persist(newService);
-        //System.out.println(newServiece.toString());
         mainStackPaneController.loadMainWindow();
     }
 
@@ -102,11 +96,10 @@ public class AddServiceController extends Controller {
     void initialize() {
         setUpCarList();
         setUpClientList();
-        loadCar();
+        loadCars();
         appendCarToCarFx();
         loadClient();
         appendClientToClientFx();
-
     }
 
     private void setUpCarList() {
@@ -118,7 +111,6 @@ public class AddServiceController extends Controller {
         clientNameList = FXCollections.observableArrayList();
         customersListView.setItems(this.clientNameList);
     }
-
 
 
     public void loadClient() {
@@ -151,13 +143,14 @@ public class AddServiceController extends Controller {
             /** ładowanie widou EditClient */
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditClient.fxml"));
             Pane pane = loader.load();
-            AddEditClientController addEditClientController = loader.getController();
-            addEditClientController.setMainStackPaneController(mainStackPaneController);
+            ClientController clientController = loader.getController();
+            clientController.setMainStackPaneController(mainStackPaneController);
             mainStackPaneController.setScreen(pane);
             /** wysłanie zaznaczonego klienta do widoku EditClient */
-            addEditClientController.setClient(selected);
+            clientController.setClient(selected);
         }
     }
+
     @FXML
     void editCar(ActionEvent event) throws IOException {
         if (!carNameList.isEmpty()) {
@@ -168,19 +161,20 @@ public class AddServiceController extends Controller {
             /** ładowanie widou EditClient */
             FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditCar.fxml"));
             Pane pane = loader.load();
-            AddEditCarController addEditCarController = loader.getController();
-            addEditCarController.setMainStackPaneController(mainStackPaneController);
+            CarController carController = loader.getController();
+            carController.setMainStackPaneController(mainStackPaneController);
             mainStackPaneController.setScreen(pane);
             /** wysłanie zaznaczonego klienta do widoku EditClient */
-            addEditCarController.setCar(selected);
+            carController.setCar(selected);
         }
     }
+
     @FXML
     void addNewClient(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddEditClient.fxml"));
         Pane pane = loader.load();
-        AddEditClientController addEditClientController = loader.getController();
-        addEditClientController.setMainStackPaneController(mainStackPaneController);
+        ClientController clientController = loader.getController();
+        clientController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(pane);
     }
 
@@ -193,13 +187,11 @@ public class AddServiceController extends Controller {
             boolean isDelete = clientService.delete(selected.getId());
 
             if (isDelete) {
-                System.out.println("Usunięto");
                 clientList.clear();
                 loadClient();
                 clientNameList.clear();
                 appendClientToClientFx();
             } else {
-
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText("Can not be deleted");
@@ -209,21 +201,20 @@ public class AddServiceController extends Controller {
             }
         }
     }
+
     @FXML
-    void deleteCar (ActionEvent event) {
-        if (!carNameList.isEmpty()){
+    void deleteCar(ActionEvent event) {
+        if (!carNameList.isEmpty()) {
             int id = carsListView.getSelectionModel().getSelectedIndex();
             Car selected = carList.get(id);
-
             boolean isDelete = carService.delete(selected.getId());
 
-            if (isDelete){
-                System.out.println("Usunięto");
+            if (isDelete) {
                 carList.clear();
-                loadCar();
+                loadCars();
                 carNameList.clear();
                 appendCarToCarFx();
-            }else {
+            } else {
                 Alert alert = new Alert(Alert.AlertType.INFORMATION);
                 alert.setTitle("Information");
                 alert.setHeaderText("Can not be deleted");
@@ -234,7 +225,10 @@ public class AddServiceController extends Controller {
         }
     }
 
-    private void loadCar() {
+    /**
+     * Metoda pobiera samochody z bazy danych.
+     */
+    private void loadCars() {
         carList = carService.findAll();
     }
 }

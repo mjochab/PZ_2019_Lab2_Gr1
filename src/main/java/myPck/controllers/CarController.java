@@ -7,14 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.controllers.utils.Validator;
+import myPck.utils.Validator;
 import myPck.database.models.Car;
 import myPck.modelsFx.CarFx;
 import myPck.services.CarService;
 
 import java.io.IOException;
 
-public class AddEditCarController extends Controller {
+public class CarController extends Controller {
 
     @FXML
     private Label infoModel;
@@ -131,8 +131,8 @@ public class AddEditCarController extends Controller {
     void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
         StackPane stackPane = loader.load();
-        AddServiceController addServiceController = loader.getController();
-        addServiceController.setMainStackPaneController(mainStackPaneController);
+        ServiceController serviceController = loader.getController();
+        serviceController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(stackPane);
     }
 }

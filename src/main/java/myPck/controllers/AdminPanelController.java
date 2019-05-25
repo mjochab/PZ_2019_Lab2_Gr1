@@ -6,11 +6,15 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import myPck.database.models.Company;
+import javafx.scene.paint.Color;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+import myPck.utils.Validator;
+
 
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import static myPck.utils.Password.hashPassword;
@@ -19,7 +23,10 @@ public class AdminPanelController {
 
     private UserService userService;
     private List<User> usersList;
-    private User selectedUser = null;
+    public Label infoLabel;
+    private User selectedUser;
+
+
 
     @FXML
     private TextField companyNameTextField;
@@ -95,18 +102,43 @@ public class AdminPanelController {
         String login = loginField.getText();
         String email = emailfield.getText();
         String role = roleComboBox.getValue();
-        if (pass1.equals(pass2)) {
+
+        HashMap<String, String> formData = new HashMap<String, String>();
+        formData.put("login", login);
+        formData.put("firstName", name);
+        formData.put("lastName", surname);
+        formData.put("email", email);
+        formData.put("password", pass1);
+        formData.put("password2",pass2);
+
+
+        if (isInputValid(formData)) {
+            selectedUser.setLogin(login);
+            selectedUser.setFirstName(name);
+            selectedUser.setLastName(surname);
+            selectedUser.setEmail(email);
+            selectedUser.setPassword(hashPassword(pass1));
+            selectedUser.setPassword(hashPassword(pass2));
+            userService.update(selectedUser);
+            selectedUser = null;
+            addEditUserTab.setText("New User");
+
+            infoLabel.setText("Data has been changed");
+            infoLabel.setTextFill(Color.web("#007600"));
+            infoLabel.setVisible(true);
+        }
+
             if (editMode) {
                 selectedUser.setLogin(login);
                 selectedUser.setFirstName(name);
                 selectedUser.setLastName(surname);
-                selectedUser.setPassword(hashPassword(pass1));
-                selectedUser.setRole(role);
                 selectedUser.setEmail(email);
+                selectedUser.setPassword(hashPassword(pass1));
+                selectedUser.setPassword(hashPassword(pass2));
                 userService.update(selectedUser);
                 selectedUser = null;
                 addEditUserTab.setText("New User");
-            } else {
+            }
                 if (role != null) {
                     User newUser = new User();
                     newUser.setLogin(login);
@@ -117,20 +149,50 @@ public class AdminPanelController {
                     newUser.setRole(role);
                     userService.persist(newUser);
                 }
+
+                this.loadUsers();
+                this.setUpUsersList();
+                this.convertUsersToUsersFx();
+
+                firstNameField.setText("");
+                lastNameField.setText("");
+                pass1Field.setText("");
+                pass2Field.setText("");
+                loginField.setText("");
+                emailfield.setText("");
             }
-            this.loadUsers();
-            this.setUpUsersList();
-            this.convertUsersToUsersFx();
+    private boolean isInputValid(HashMap<String,String> data){
+        infoLabel.setVisible(false);
+        infoLabel.setTextFill(Color.web("#ff0000"));
 
-            firstNameField.setText("");
-            lastNameField.setText("");
-            pass1Field.setText("");
-            pass2Field.setText("");
-            loginField.setText("");
-            emailfield.setText("");
+        if (!Validator.validateFirstName(data.get("firstName"))){
+            infoLabel.setText("First name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateLastName(data.get("lastName"))){
+            infoLabel.setText("Last name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateEmail(data.get("email"))){
+            infoLabel.setText("Email address is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validatePassword(pass1Field.getText())){
+            infoLabel.setText("Password is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!pass1Field.getText().equals(pass2Field.getText())){
+            infoLabel.setText("Passwords does not match");
+            infoLabel.setVisible(true);
+
+            return false;
         }
+        return true;
     }
-
     /**
      * Metoda pobiera użytkowników z bazy danych.
      */

@@ -8,7 +8,7 @@ import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
-import myPck.controllers.utils.Validator;
+import myPck.utils.Validator;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;

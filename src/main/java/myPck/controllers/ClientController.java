@@ -7,14 +7,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.StackPane;
-import myPck.controllers.utils.Validator;
+import myPck.utils.Validator;
 import myPck.database.models.Client;
 import myPck.modelsFx.ClientFx;
 import myPck.services.ClientService;
 
 import java.io.IOException;
 
-public class AddEditClientController extends Controller {
+public class ClientController extends Controller {
 
     @FXML
     private Label firstNameInfo;
@@ -133,8 +133,8 @@ public class AddEditClientController extends Controller {
     void back(ActionEvent event) throws IOException {
         FXMLLoader loader = new FXMLLoader(this.getClass().getResource("/fxml/AddService.fxml"));
         StackPane stackPane = loader.load();
-        AddServiceController addServiceController = loader.getController();
-        addServiceController.setMainStackPaneController(mainStackPaneController);
+        ServiceController serviceController = loader.getController();
+        serviceController.setMainStackPaneController(mainStackPaneController);
         mainStackPaneController.setScreen(stackPane);
     }
 }
