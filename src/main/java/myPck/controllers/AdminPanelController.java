@@ -21,8 +21,8 @@ public class AdminPanelController {
     private UserService userService;
     private List<User> usersList;
     public Label infoLabel;
-    private User selectedUser1;
-    private User user;
+    private User selectedUser;
+
 
 
     @FXML
@@ -93,18 +93,43 @@ public class AdminPanelController {
         String login = loginField.getText();
         String email = emailfield.getText();
         String role = roleComboBox.getValue();
-        if (pass1.equals(pass2)) {
+
+        HashMap<String, String> formData = new HashMap<String, String>();
+        formData.put("login", login);
+        formData.put("firstName", name);
+        formData.put("lastName", surname);
+        formData.put("email", email);
+        formData.put("password", pass1);
+        formData.put("password2",pass2);
+
+
+        if (isInputValid(formData)) {
+            selectedUser.setLogin(login);
+            selectedUser.setFirstName(name);
+            selectedUser.setLastName(surname);
+            selectedUser.setEmail(email);
+            selectedUser.setPassword(hashPassword(pass1));
+            selectedUser.setPassword(hashPassword(pass2));
+            userService.update(selectedUser);
+            selectedUser = null;
+            addEditUserTab.setText("New User");
+
+            infoLabel.setText("Data has been changed");
+            infoLabel.setTextFill(Color.web("#007600"));
+            infoLabel.setVisible(true);
+        }
+
             if (editMode) {
-                selectedUser1.setLogin(login);
-                selectedUser1.setFirstName(name);
-                selectedUser1.setLastName(surname);
-                selectedUser1.setPassword(hashPassword(pass1));
-                selectedUser1.setRole(role);
-                selectedUser1.setEmail(email);
-                userService.update(selectedUser1);
-                selectedUser1 = null;
+                selectedUser.setLogin(login);
+                selectedUser.setFirstName(name);
+                selectedUser.setLastName(surname);
+                selectedUser.setEmail(email);
+                selectedUser.setPassword(hashPassword(pass1));
+                selectedUser.setPassword(hashPassword(pass2));
+                userService.update(selectedUser);
+                selectedUser = null;
                 addEditUserTab.setText("New User");
-            } else {
+            }
                 if (role != null) {
                     User newUser = new User();
                     newUser.setLogin(login);
@@ -115,40 +140,18 @@ public class AdminPanelController {
                     newUser.setRole(role);
                     userService.persist(newUser);
                 }
+
+                this.loadUsers();
+                this.setUpUsersList();
+                this.convertUsersToUsersFx();
+
+                firstNameField.setText("");
+                lastNameField.setText("");
+                pass1Field.setText("");
+                pass2Field.setText("");
+                loginField.setText("");
+                emailfield.setText("");
             }
-            this.loadUsers();
-            this.setUpUsersList();
-            this.convertUsersToUsersFx();
-
-            firstNameField.setText("");
-            lastNameField.setText("");
-            pass1Field.setText("");
-            pass2Field.setText("");
-            loginField.setText("");
-            emailfield.setText("");
-        }
-        HashMap<String, String> formData = new HashMap<String,String>();
-        formData.put("login", loginField.getText());
-        formData.put("firstName",firstNameField.getText());
-        formData.put("lastName", lastNameField.getText());
-        formData.put("email", emailfield.getText());
-        formData.put("password", pass1Field.getText());
-
-        if (isInputValid(formData)){
-            this.user.setFirstName(formData.get("firstName"));
-            this.user.setLastName(formData.get("lastName"));
-            this.user.setEmail(formData.get("email"));
-            this.user.setLogin(formData.get("login"));
-            this.user.setPassword(hashPassword(formData.get("password")));
-            this.userService.update(this.user);
-
-            infoLabel.setText("Data has been changed");
-            infoLabel.setTextFill(Color.web("#007600"));
-            infoLabel.setVisible(true);
-        }
-
-    }
-
     private boolean isInputValid(HashMap<String,String> data){
         infoLabel.setVisible(false);
         infoLabel.setTextFill(Color.web("#ff0000"));
@@ -244,13 +247,13 @@ public class AdminPanelController {
         if (!usersFxList.isEmpty()) {
             this.editMode = true;
             int id = usersTableView.getSelectionModel().getSelectedIndex();
-            selectedUser1 = usersList.get(id);
+            selectedUser = usersList.get(id);
             addEditUserTab.setText("Edit");
             tabPane.getSelectionModel().selectLast();
-            firstNameField.setText(selectedUser1.getFirstName());
-            lastNameField.setText(selectedUser1.getLastName());
-            loginField.setText(selectedUser1.getLogin());
-            emailfield.setText(selectedUser1.getEmail());
+            firstNameField.setText(selectedUser.getFirstName());
+            lastNameField.setText(selectedUser.getLastName());
+            loginField.setText(selectedUser.getLogin());
+            emailfield.setText(selectedUser.getEmail());
         }
     }
 }
