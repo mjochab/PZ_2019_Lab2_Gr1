@@ -28,3 +28,9 @@ target/
 # IntellJ IDEA
 .idea/
 *.iml
+
+# Other
+*.pdf
+
+# Exceptions
+!pdf.jar
