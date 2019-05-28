@@ -80,6 +80,7 @@ public class UserService {
         userDao.deleteAll();
         userDao.closeCurrentSessionwithTransaction();
     }
+
     public User findByEmail(String email){
         userDao.openCurrentSession();
         User user = userDao.findByEmail(email);
@@ -93,5 +94,13 @@ public class UserService {
         userDao.closeCurrentSession();
 
         return user;
+    }
+
+    public List<User> findAllByRole(String role) {
+        userDao.openCurrentSession();
+        List<User> users = userDao.findAllByRole(role);
+        userDao.closeCurrentSession();
+
+        return users;
     }
 }

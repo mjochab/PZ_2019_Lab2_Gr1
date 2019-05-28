@@ -5,11 +5,16 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
-import myPck.controllers.utils.Validator;
+import myPck.database.models.Company;
+import javafx.scene.paint.Color;
 import myPck.database.models.User;
 import myPck.modelsFx.UserFx;
 import myPck.services.UserService;
+import myPck.utils.Validator;
 
+
+import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
 
 import static myPck.utils.Password.hashPassword;
@@ -18,8 +23,17 @@ public class AdminPanelController {
 
     private UserService userService;
     private List<User> usersList;
-    private User selectedUser = null;
+    public Label infoLabel;
+    private User selectedUser;
 
+
+
+    @FXML
+    private TextField companyNameTextField;
+    @FXML
+    private TextField companyAddressTextField;
+    @FXML
+    private TextField companyNipTextField;
     @FXML
     private TabPane tabPane;
     @FXML
@@ -56,14 +70,17 @@ public class AdminPanelController {
     private TextField emailfield;
 
     @FXML
-    private ComboBox<?> roleComboBox;
+    private ComboBox<String> roleComboBox;
 
     @FXML
     private Button saveButton;
 
+    private boolean editMode = false;
+    private ObservableList<String> roles = FXCollections.observableArrayList("M", "K", "ALL", "A");
 
-
-    /** Lista zawierająca użytkowników Fx*/
+    /**
+     * Lista zawierająca użytkowników Fx
+     */
     private ObservableList<UserFx> usersFxList;
 
     /**
@@ -73,69 +90,108 @@ public class AdminPanelController {
         userService = new UserService();
     }
 
+    @FXML
     /**
-     * Metoda dodaje nowego użytkownika do listy.
-     *
-     * @param actionEvent
+     * Metoda dodaje użytkownika lub edytuje jego dane
      */
-    public void addNewUser() {
+    void saveUser(ActionEvent event) {
         String name = firstNameField.getText();
         String surname = lastNameField.getText();
         String pass1 = pass1Field.getText();
         String pass2 = pass2Field.getText();
         String login = loginField.getText();
         String email = emailfield.getText();
-        String role = "A";
-        if(pass1.equals(pass2)){
-            User newUser = new User();
-            newUser.setLogin(login);
-            newUser.setFirstName(name);
-            newUser.setLastName(surname);
-            newUser.setPassword(hashPassword(pass1));
-            newUser.setEmail(email);
-            newUser.setRole(role);
+        String role = roleComboBox.getValue();
 
-            userService.persist(newUser);
-        }
+        HashMap<String, String> formData = new HashMap<String, String>();
+        formData.put("login", login);
+        formData.put("firstName", name);
+        formData.put("lastName", surname);
+        formData.put("email", email);
+        formData.put("password", pass1);
+        formData.put("password2",pass2);
 
 
-    }
-    public void editUser(){
-        String name = firstNameField.getText();
-        String surname = lastNameField.getText();
-        String pass1 = pass1Field.getText();
-        String pass2 = pass2Field.getText();
-        String login = loginField.getText();
-        String email = emailfield.getText();
-        String role = "A";
-        if(pass1.equals(pass2)){
+        if (isInputValid(formData)) {
             selectedUser.setLogin(login);
             selectedUser.setFirstName(name);
             selectedUser.setLastName(surname);
-            selectedUser.setPassword(hashPassword(pass1));
-            selectedUser.setRole(role);
             selectedUser.setEmail(email);
+            selectedUser.setPassword(hashPassword(pass1));
+            selectedUser.setPassword(hashPassword(pass2));
             userService.update(selectedUser);
             selectedUser = null;
+            addEditUserTab.setText("New User");
+
+            infoLabel.setText("Data has been changed");
+            infoLabel.setTextFill(Color.web("#007600"));
+            infoLabel.setVisible(true);
         }
-    }
-    @FXML
-    void saveUser(ActionEvent event) {
-        if(selectedUser!=null){
-            editUser();
+
+            if (editMode) {
+                selectedUser.setLogin(login);
+                selectedUser.setFirstName(name);
+                selectedUser.setLastName(surname);
+                selectedUser.setEmail(email);
+                selectedUser.setPassword(hashPassword(pass1));
+                selectedUser.setPassword(hashPassword(pass2));
+                userService.update(selectedUser);
+                selectedUser = null;
+                addEditUserTab.setText("New User");
+            }
+                if (role != null) {
+                    User newUser = new User();
+                    newUser.setLogin(login);
+                    newUser.setFirstName(name);
+                    newUser.setLastName(surname);
+                    newUser.setPassword(hashPassword(pass1));
+                    newUser.setEmail(email);
+                    newUser.setRole(role);
+                    userService.persist(newUser);
+                }
+
+                this.loadUsers();
+                this.setUpUsersList();
+                this.convertUsersToUsersFx();
+
+                firstNameField.setText("");
+                lastNameField.setText("");
+                pass1Field.setText("");
+                pass2Field.setText("");
+                loginField.setText("");
+                emailfield.setText("");
+            }
+    private boolean isInputValid(HashMap<String,String> data){
+        infoLabel.setVisible(false);
+        infoLabel.setTextFill(Color.web("#ff0000"));
+
+        if (!Validator.validateFirstName(data.get("firstName"))){
+            infoLabel.setText("First name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateLastName(data.get("lastName"))){
+            infoLabel.setText("Last name is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validateEmail(data.get("email"))){
+            infoLabel.setText("Email address is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!Validator.validatePassword(pass1Field.getText())){
+            infoLabel.setText("Password is incorrect");
+            infoLabel.setVisible(true);
+
+            return false;
+        }else if (!pass1Field.getText().equals(pass2Field.getText())){
+            infoLabel.setText("Passwords does not match");
+            infoLabel.setVisible(true);
+
+            return false;
         }
-        else{
-            addNewUser();
-        }
-        this.loadUsers();
-        this.setUpUsersList();
-        this.convertUsersToUsersFx();
-        firstNameField.setText("");
-        lastNameField.setText("");
-        pass1Field.setText("");
-        pass2Field.setText("");
-        loginField.setText("");
-        emailfield.setText("");
+        return true;
     }
     /**
      * Metoda pobiera użytkowników z bazy danych.
@@ -166,51 +222,61 @@ public class AdminPanelController {
         roleColumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
         emailColumn.setCellValueFactory(cellData -> cellData.getValue().emailProperty());
 
+        this.roleComboBox.setItems(roles);
         usersFxList = FXCollections.observableArrayList();
         usersTableView.setItems(this.usersFxList);
     }
 
     @FXML
-    void initialize() {
+    void initialize() throws IOException, ClassNotFoundException {
         this.loadUsers();
         this.setUpUsersList();
         this.convertUsersToUsersFx();
+        this.setCompanyData();
+    }
+    private void setCompanyData() throws IOException, ClassNotFoundException {
+        Company company = Company.readObjectFromFile("company.txt");
+        companyNameTextField.setText(company.getName());
+        companyAddressTextField.setText(company.getAddress());
+        companyNipTextField.setText(company.getNip());
     }
     @FXML
     void deleteUser(ActionEvent event) {
-        if (!usersFxList.isEmpty()){
+        if (!usersFxList.isEmpty()) {
             int id = usersTableView.getSelectionModel().getSelectedIndex();
             User selected = usersList.get(id);
 
             boolean isDelete = userService.delete(selected.getId());
 
-            if (isDelete){
-                System.out.println("Usunięto");
+            if (isDelete) {
                 usersList.clear();
                 loadUsers();
                 usersFxList.clear();
                 convertUsersToUsersFx();
-            }else {
-
             }
         }
     }
 
     @FXML
     void editUser(ActionEvent event) {
-        if (!usersFxList.isEmpty()){
+        if (!usersFxList.isEmpty()) {
+            this.editMode = true;
             int id = usersTableView.getSelectionModel().getSelectedIndex();
             selectedUser = usersList.get(id);
             addEditUserTab.setText("Edit");
-            tabPane.getSelectionModel().selectLast();
+            tabPane.getSelectionModel().select(1);
             firstNameField.setText(selectedUser.getFirstName());
             lastNameField.setText(selectedUser.getLastName());
             loginField.setText(selectedUser.getLogin());
             emailfield.setText(selectedUser.getEmail());
-            }else {
-
-            }
-
+        }
     }
-
+    @FXML
+    void saveCompany(ActionEvent event) throws IOException {
+        String name = companyNameTextField.getText();
+        String address = companyAddressTextField.getText();
+        String nip = companyNipTextField.getText();
+        Company company = new Company(name,address,nip);
+        company.writeToFile("company.txt");
+    }
 }

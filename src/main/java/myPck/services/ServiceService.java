@@ -79,4 +79,16 @@ public class ServiceService {
         serviceDao.deleteAll();
         serviceDao.closeCurrentSessionwithTransaction();
     }
+
+    /**
+     * Metoda pobiera z bazy danych wszystkie zlecenia ze statusem "Not allocated"
+     * @return
+     */
+    public List<Service> findNotAllocated() {
+        serviceDao.openCurrentSession();
+        List<Service> services = serviceDao.findNotAllocated();
+        serviceDao.closeCurrentSession();
+
+        return services;
+    }
 }
